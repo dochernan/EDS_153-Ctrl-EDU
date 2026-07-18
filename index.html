@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CareerReady SHS</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="An interactive learning website that helps high school students use artificial intelligence responsibly, critically, safely, and ethically."
+    >
+
+    <title>AI Ready SHS | Responsible AI Use</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,41 +21,456 @@
 <body>
     <header class="site-header">
         <nav class="container navigation">
-            <a class="logo" href="index.html">CareerReady SHS</a>
+            <a class="logo" href="index.html">
+                AI Ready SHS
+            </a>
 
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="modules.html">Modules</a></li>
-                <li><a href="assessment.html">Assessment</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="about.html">About</a></li>
+            <button
+                class="menu-button"
+                id="menuButton"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks"
+            >
+                ☰
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li>
+                    <a class="active" href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="modules.html">Modules</a>
+                </li>
+
+                <li>
+                    <a href="assessment.html">Assessment</a>
+                </li>
+
+                <li>
+                    <a href="resources.html">Resources</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="eyebrow">
+                        SDG 4: Quality Education
+                    </p>
+
+                    <h1>
+                        Learn to use AI responsibly, not just conveniently.
+                    </h1>
+
+                    <p class="hero-description">
+                        Artificial intelligence can help students learn,
+                        research, create, and prepare for their future.
+                        However, using AI effectively also requires critical
+                        thinking, honesty, privacy awareness, and responsible
+                        decision-making.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button primary-button" href="modules.html">
+                            Start Learning
+                        </a>
+
+                        <a class="button secondary-button" href="#benefits">
+                            Explore the Benefits
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <p class="card-label">
+                        Responsible AI means:
+                    </p>
+
+                    <ul class="check-list">
+                        <li>Thinking before accepting an AI response</li>
+                        <li>Checking facts using credible sources</li>
+                        <li>Protecting personal and private information</li>
+                        <li>Avoiding plagiarism and academic dishonesty</li>
+                        <li>Recognizing bias, errors, and misinformation</li>
+                        <li>Using AI to support—not replace—learning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Responsible AI Matters -->
+        <section class="section">
             <div class="container">
-                <p class="eyebrow">SDG 4: Quality Education</p>
+                <div class="section-heading">
+                    <p class="eyebrow">Why it matters</p>
 
-                <h1>Prepare today for your future career.</h1>
+                    <h2>
+                        AI is becoming part of how students learn and work.
+                    </h2>
 
-                <p class="hero-description">
-                    Develop practical career skills, create professional
-                    application documents, prepare for interviews, and learn
-                    to use artificial intelligence responsibly.
+                    <p>
+                        High school students may already use AI to summarize
+                        readings, generate ideas, explain difficult lessons,
+                        edit writing, create images, or prepare presentations.
+                        These tools can be helpful, but their responses may
+                        also be incorrect, biased, incomplete, or misleading.
+                    </p>
+
+                    <p>
+                        Learning responsible AI use helps students remain
+                        active learners who question, verify, improve, and take
+                        ownership of their work.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Benefits -->
+        <section class="section alternate-section" id="benefits">
+            <div class="container">
+                <div class="section-heading centered-heading">
+                    <p class="eyebrow">Benefits for students</p>
+
+                    <h2>
+                        How responsible AI use prepares students for the future
+                    </h2>
+
+                    <p>
+                        Responsible AI education develops skills that students
+                        can apply in school, college, employment, and everyday
+                        digital life.
+                    </p>
+                </div>
+
+                <div class="card-grid">
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            01
+                        </div>
+
+                        <h3>Stronger critical thinking</h3>
+
+                        <p>
+                            Students learn to question AI-generated answers,
+                            identify unsupported claims, compare sources, and
+                            make informed decisions.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            02
+                        </div>
+
+                        <h3>Better learning support</h3>
+
+                        <p>
+                            AI can help explain difficult concepts, generate
+                            practice questions, provide feedback, and support
+                            personalized learning when used appropriately.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            03
+                        </div>
+
+                        <h3>Improved digital literacy</h3>
+
+                        <p>
+                            Students become more aware of how AI systems work,
+                            what information they collect, and why their
+                            outputs should not always be trusted immediately.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            04
+                        </div>
+
+                        <h3>Academic honesty</h3>
+
+                        <p>
+                            Students learn the difference between using AI for
+                            guidance and submitting AI-generated work as their
+                            own.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            05
+                        </div>
+
+                        <h3>Safer online behavior</h3>
+
+                        <p>
+                            Students learn to avoid sharing personal data,
+                            private documents, passwords, and sensitive
+                            information with AI platforms.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="card-icon" aria-hidden="true">
+                            06
+                        </div>
+
+                        <h3>Career readiness</h3>
+
+                        <p>
+                            Students develop practical AI skills for research,
+                            communication, problem-solving, résumé preparation,
+                            and future workplace tasks.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsible vs Irresponsible Use -->
+        <section class="section">
+            <div class="container">
+                <div class="section-heading centered-heading">
+                    <p class="eyebrow">Use AI wisely</p>
+
+                    <h2>
+                        Responsible use versus irresponsible use
+                    </h2>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>Responsible AI Use</h3>
+
+                        <ul>
+                            <li>
+                                Using AI to brainstorm ideas before writing
+                                independently
+                            </li>
+
+                            <li>
+                                Asking AI to explain a difficult concept
+                            </li>
+
+                            <li>
+                                Checking AI-generated facts using reliable
+                                sources
+                            </li>
+
+                            <li>
+                                Revising AI suggestions using your own voice
+                            </li>
+
+                            <li>
+                                Acknowledging AI assistance when required
+                            </li>
+
+                            <li>
+                                Protecting private and personal information
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>Irresponsible AI Use</h3>
+
+                        <ul>
+                            <li>
+                                Submitting AI-generated work without
+                                understanding it
+                            </li>
+
+                            <li>
+                                Copying complete answers and presenting them as
+                                original work
+                            </li>
+
+                            <li>
+                                Trusting every AI-generated statement
+                            </li>
+
+                            <li>
+                                Creating misleading images or false information
+                            </li>
+
+                            <li>
+                                Entering private information into public tools
+                            </li>
+
+                            <li>
+                                Using AI to harm, deceive, or embarrass others
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Journey -->
+        <section class="section alternate-section">
+            <div class="container">
+                <div class="section-heading centered-heading">
+                    <p class="eyebrow">Your learning journey</p>
+
+                    <h2>
+                        What students will learn
+                    </h2>
+                </div>
+
+                <div class="module-preview-grid">
+                    <article class="module-preview">
+                        <span class="module-number">Module 1</span>
+
+                        <h3>Understanding Artificial Intelligence</h3>
+
+                        <p>
+                            Learn what AI is, how it works, and where students
+                            encounter it in everyday life.
+                        </p>
+                    </article>
+
+                    <article class="module-preview">
+                        <span class="module-number">Module 2</span>
+
+                        <h3>Checking Accuracy and Bias</h3>
+
+                        <p>
+                            Practice evaluating AI responses, identifying
+                            misinformation, and verifying information.
+                        </p>
+                    </article>
+
+                    <article class="module-preview">
+                        <span class="module-number">Module 3</span>
+
+                        <h3>Academic Integrity</h3>
+
+                        <p>
+                            Understand plagiarism, authorship, transparency,
+                            and appropriate AI assistance.
+                        </p>
+                    </article>
+
+                    <article class="module-preview">
+                        <span class="module-number">Module 4</span>
+
+                        <h3>Privacy and Online Safety</h3>
+
+                        <p>
+                            Learn how to protect personal information and make
+                            safer choices when using AI platforms.
+                        </p>
+                    </article>
+
+                    <article class="module-preview">
+                        <span class="module-number">Module 5</span>
+
+                        <h3>Effective Prompting</h3>
+
+                        <p>
+                            Write clear prompts and improve AI responses
+                            without allowing AI to take over the learning task.
+                        </p>
+                    </article>
+
+                    <article class="module-preview">
+                        <span class="module-number">Module 6</span>
+
+                        <h3>AI for Career Readiness</h3>
+
+                        <p>
+                            Use AI responsibly for career exploration, résumé
+                            improvement, interview practice, and workplace
+                            preparation.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="modules.html">
+                        View All Modules
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsible AI Checklist -->
+        <section class="section">
+            <div class="container">
+                <div class="checklist-panel">
+                    <div>
+                        <p class="eyebrow">Before using an AI response</p>
+
+                        <h2>Pause, check, and take responsibility.</h2>
+
+                        <p>
+                            Students can use the following questions before
+                            accepting or submitting AI-assisted work.
+                        </p>
+                    </div>
+
+                    <ol class="numbered-checklist">
+                        <li>Do I understand the response?</li>
+                        <li>Have I checked whether it is accurate?</li>
+                        <li>Did I use credible sources to verify it?</li>
+                        <li>Does the final work reflect my own thinking?</li>
+                        <li>Did I protect personal information?</li>
+                        <li>Am I being honest about how I used AI?</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="call-to-action">
+            <div class="container call-to-action-content">
+                <p class="eyebrow">Be AI-ready</p>
+
+                <h2>
+                    Use artificial intelligence with skill, honesty, and
+                    responsibility.
+                </h2>
+
+                <p>
+                    Start building the knowledge and judgment needed to use AI
+                    effectively in school and in your future career.
                 </p>
 
-                <a class="button" href="modules.html">
-                    Start Learning
+                <a class="button light-button" href="assessment.html">
+                    Take the Initial Assessment
                 </a>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 CareerReady SHS</p>
+        <div class="container footer-content">
+            <div>
+                <strong>AI Ready SHS</strong>
+
+                <p>
+                    Promoting responsible AI use for quality education and
+                    future-ready learners.
+                </p>
+            </div>
+
+            <p>
+                &copy; 2026 AI Ready SHS
+            </p>
         </div>
     </footer>
 
