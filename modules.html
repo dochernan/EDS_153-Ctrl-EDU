@@ -2,27 +2,263 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Explore interactive modules on responsible AI use, critical thinking, academic integrity, privacy, and digital career preparation."
+        content="Explore the GABAY learning modules on responsible AI, fact-checking, academic integrity, privacy, and digital career readiness."
     >
 
-    <title>Learning Modules | AI Ready SHS</title>
+    <title>Modules | GABAY</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Minimalist module-page overrides aligned with the GABAY homepage */
+        .modules-hero {
+            min-height: 68vh;
+            display: grid;
+            align-items: center;
+            padding: 72px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 84% 16%, rgba(124, 92, 255, 0.13), transparent 27%),
+                radial-gradient(circle at 16% 80%, rgba(23, 78, 166, 0.08), transparent 24%),
+                linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+        }
+
+        .modules-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.75fr);
+            gap: 72px;
+        }
+
+        .modules-hero .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            padding: 7px 12px;
+            border: 1px solid rgba(23, 78, 166, 0.18);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(12px);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+        }
+
+        .modules-hero h1 {
+            max-width: 720px;
+            margin: 0;
+            font-size: clamp(2.35rem, 4.7vw, 4.35rem);
+            line-height: 1.03;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .modules-hero h1 span {
+            color: var(--primary, #174ea6);
+        }
+
+        .modules-hero .hero-description {
+            max-width: 650px;
+            margin: 24px 0 0;
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .journey-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .journey-line {
+            position: absolute;
+            width: 2px;
+            height: 270px;
+            background: linear-gradient(180deg, rgba(23, 78, 166, 0.12), #174ea6, rgba(124, 92, 255, 0.16));
+        }
+
+        .journey-node {
+            position: absolute;
+            left: 50%;
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+            transform: translateX(-50%);
+            border: 1px solid rgba(23, 78, 166, 0.14);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 16px 34px rgba(23, 32, 51, 0.10);
+            color: var(--primary, #174ea6);
+            font-weight: 800;
+        }
+
+        .journey-node:nth-of-type(2) { top: 22px; }
+        .journey-node:nth-of-type(3) { top: 88px; left: 34%; }
+        .journey-node:nth-of-type(4) { top: 154px; left: 66%; }
+        .journey-node:nth-of-type(5) { top: 220px; left: 34%; }
+        .journey-node:nth-of-type(6) { top: 286px; left: 66%; }
+        .journey-node:nth-of-type(7) { top: 352px; }
+
+        .journey-caption {
+            position: absolute;
+            right: 0;
+            bottom: -4px;
+            max-width: 170px;
+            padding: 11px 14px;
+            border: 1px solid rgba(23, 78, 166, 0.14);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 12px 30px rgba(23, 32, 51, 0.08);
+            color: var(--text-muted, #526079);
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
+        .module-preview-grid {
+            align-items: stretch;
+        }
+
+        .module-preview {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 290px;
+            overflow: hidden;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .module-preview::after {
+            content: "";
+            position: absolute;
+            inset: auto -35px -55px auto;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(23, 78, 166, 0.06);
+        }
+
+        .module-preview:hover {
+            transform: translateY(-6px);
+            border-color: rgba(23, 78, 166, 0.22);
+            box-shadow: 0 18px 42px rgba(23, 32, 51, 0.10);
+        }
+
+        .module-preview .card-icon {
+            width: 54px;
+            height: 54px;
+            margin-bottom: 20px;
+            border-radius: 17px;
+            font-size: 1.25rem;
+        }
+
+        .module-preview h3 {
+            font-size: 1.3rem;
+            line-height: 1.25;
+        }
+
+        .module-preview p {
+            flex: 1;
+        }
+
+        .module-link {
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            color: var(--primary, #174ea6);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .module-link:hover {
+            gap: 12px;
+        }
+
+        .path-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 44px;
+        }
+
+        .path-step {
+            padding: 22px;
+            border: 1px solid var(--border, #dfe5ee);
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .path-step strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary, #174ea6);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .path-step span {
+            color: var(--text-muted, #526079);
+            font-size: 0.92rem;
+        }
+
+        .module-banner {
+            margin-top: 58px;
+            padding: 44px;
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 86% 20%, rgba(255, 255, 255, 0.16), transparent 28%),
+                linear-gradient(135deg, #174ea6 0%, #6d55d8 100%);
+            color: #ffffff;
+            box-shadow: 0 28px 70px rgba(23, 78, 166, 0.20);
+        }
+
+        .module-banner .eyebrow {
+            color: #dce8ff;
+        }
+
+        .module-banner h2 {
+            max-width: 700px;
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.12;
+        }
+
+        .module-banner p {
+            max-width: 680px;
+            margin: 18px 0 28px;
+            color: #e8efff;
+        }
+
+        @media (max-width: 900px) {
+            .modules-hero { min-height: auto; padding: 64px 0; }
+            .modules-hero .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+            .journey-visual { min-height: 350px; }
+            .path-strip { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .modules-hero h1 { font-size: clamp(2.2rem, 12vw, 3.2rem); }
+            .modules-hero .hero-actions { gap: 10px; }
+            .modules-hero .hero-actions .button { width: 100%; text-align: center; }
+            .journey-visual { min-height: 330px; }
+            .journey-caption { right: 2%; }
+            .path-strip { grid-template-columns: 1fr; }
+            .module-banner { padding: 34px 24px; }
+        }
+    </style>
 </head>
 
 <body>
     <header class="site-header">
         <nav class="container navigation">
-            <a class="logo" href="index.html">
-                AI Ready SHS
+            <a class="logo" href="index.html" aria-label="GABAY home">
+                GABAY
             </a>
 
             <button
@@ -37,897 +273,161 @@
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-
-                <li>
-                    <a class="active" href="modules.html">Modules</a>
-                </li>
-
-                <li>
-                    <a href="assessment.html">Assessment</a>
-                </li>
-
-                <li>
-                    <a href="resources.html">Resources</a>
-                </li>
-
-                <li>
-                    <a href="about.html">About</a>
-                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="modules.html">Modules</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
+        <section class="modules-hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <p class="eyebrow">
-                        Your Responsible AI Learning Journey
-                    </p>
+                    <p class="eyebrow">GABAY Learning Path</p>
 
                     <h1>
-                        Learn how to use AI with confidence and responsibility.
+                        Build better AI habits.
+                        <span>One skill at a time.</span>
                     </h1>
 
                     <p class="hero-description">
-                        Build practical skills that will help you use artificial
-                        intelligence more effectively in school, online, and in
-                        your future career.
+                        Move through six focused modules designed to help you question AI outputs,
+                        protect your privacy, work with integrity, and prepare for an AI-shaped future.
                     </p>
 
                     <div class="hero-actions">
-                        <a
-                            class="button primary-button"
-                            href="#module1"
-                        >
-                            Start Module 1
+                        <a class="button primary-button" href="#module-list">
+                            Explore the Modules
                         </a>
 
-                        <a
-                            class="button secondary-button"
-                            href="assessment.html"
-                        >
+                        <a class="button secondary-button" href="assessment.html">
                             Take the Pre-Assessment
                         </a>
                     </div>
                 </div>
 
-                <div class="hero-card">
-                    <p
-                        style="
-                            font-size: 3.5rem;
-                            margin: 0 0 12px;
-                            text-align: center;
-                        "
-                        aria-hidden="true"
-                    >
-                        🤖✨
-                    </p>
-
-                    <p class="card-label">
-                        By completing the modules, you will learn to:
-                    </p>
-
-                    <ul class="check-list">
-                        <li>Question and evaluate AI-generated information</li>
-                        <li>Check facts using reliable sources</li>
-                        <li>Protect personal and private information</li>
-                        <li>Use AI honestly in academic work</li>
-                        <li>Communicate and solve problems effectively</li>
-                        <li>Apply AI responsibly in career preparation</li>
-                    </ul>
+                <div class="journey-visual" aria-label="Six-step GABAY learning journey">
+                    <div class="journey-line" aria-hidden="true"></div>
+                    <span class="journey-node" aria-label="Module 1">1</span>
+                    <span class="journey-node" aria-label="Module 2">2</span>
+                    <span class="journey-node" aria-label="Module 3">3</span>
+                    <span class="journey-node" aria-label="Module 4">4</span>
+                    <span class="journey-node" aria-label="Module 5">5</span>
+                    <span class="journey-node" aria-label="Module 6">6</span>
+                    <p class="journey-caption">Learn. Practice. Reflect. Apply.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Learning Path -->
-        <section class="section alternate-section">
+        <section class="section alternate-section" id="module-list">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">
-                        Your Learning Path
-                    </p>
+                    <p class="eyebrow">Choose Your Next Skill</p>
 
-                    <h2>
-                        Six modules. One responsible AI mindset.
-                    </h2>
+                    <h2>Six modules for responsible, future-ready AI use.</h2>
 
                     <p>
-                        Follow the modules in order or select a topic that you
-                        want to explore. Each module contains practical examples,
-                        interactive activities, and reflection questions.
+                        Start from the beginning or open the topic you need most. Each module is
+                        designed for quick learning, practical application, and meaningful reflection.
                     </p>
                 </div>
 
                 <div class="module-preview-grid">
-                    <!-- Module Card 1 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            🤖
-                        </div>
-
-                        <span class="module-number">
-                            Module 1
-                        </span>
-
-                        <h3>
-                            Understanding AI
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">01</div>
+                        <span class="module-number">Module 1</span>
+                        <h3>Understanding AI</h3>
                         <p>
-                            Discover how AI works, where you encounter it, and
-                            how it can support your learning.
+                            See how AI works, where it appears in everyday life, and why human judgment still matters.
                         </p>
-
-                        <a href="#module1">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-1.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
 
-                    <!-- Module Card 2 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            🔍
-                        </div>
-
-                        <span class="module-number">
-                            Module 2
-                        </span>
-
-                        <h3>
-                            Think Before You Trust
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">02</div>
+                        <span class="module-number">Module 2</span>
+                        <h3>Think Before You Trust</h3>
                         <p>
-                            Learn how to spot incorrect claims, unreliable
-                            sources, and misleading AI-generated information.
+                            Spot weak evidence, hallucinations, fabricated references, and misleading AI-generated claims.
                         </p>
-
-                        <a href="#module2">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-2.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
 
-                    <!-- Module Card 3 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            ✍️
-                        </div>
-
-                        <span class="module-number">
-                            Module 3
-                        </span>
-
-                        <h3>
-                            AI-Assisted Research and Writing
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">03</div>
+                        <span class="module-number">Module 3</span>
+                        <h3>Research and Writing</h3>
                         <p>
-                            Use AI to generate ideas, improve writing, and
-                            support research without losing your own voice.
+                            Use AI for ideas, structure, and feedback while keeping your own voice and thinking.
                         </p>
-
-                        <a href="#module3">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-3.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
 
-                    <!-- Module Card 4 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            ⚖️
-                        </div>
-
-                        <span class="module-number">
-                            Module 4
-                        </span>
-
-                        <h3>
-                            Academic Integrity
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">04</div>
+                        <span class="module-number">Module 4</span>
+                        <h3>Integrity and Transparency</h3>
                         <p>
-                            Understand when AI use becomes dishonest and how to
-                            acknowledge AI assistance properly.
+                            Know when AI use is acceptable, when disclosure is needed, and when a shortcut becomes dishonest.
                         </p>
-
-                        <a href="#module4">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-4.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
 
-                    <!-- Module Card 5 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            🔐
-                        </div>
-
-                        <span class="module-number">
-                            Module 5
-                        </span>
-
-                        <h3>
-                            Privacy and Online Safety
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">05</div>
+                        <span class="module-number">Module 5</span>
+                        <h3>Privacy and Safety</h3>
                         <p>
-                            Protect your personal data and make safer decisions
-                            when using AI platforms.
+                            Protect personal data, recognize digital risks, and make safer choices when using AI platforms.
                         </p>
-
-                        <a href="#module5">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-5.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
 
-                    <!-- Module Card 6 -->
                     <article class="module-preview">
-                        <div
-                            class="card-icon"
-                            aria-hidden="true"
-                        >
-                            💼
-                        </div>
-
-                        <span class="module-number">
-                            Module 6
-                        </span>
-
-                        <h3>
-                            AI for Career Preparation
-                        </h3>
-
+                        <div class="card-icon" aria-hidden="true">06</div>
+                        <span class="module-number">Module 6</span>
+                        <h3>AI for Career Readiness</h3>
                         <p>
-                            Use AI responsibly for career exploration, résumé
-                            improvement, communication, and interview practice.
+                            Apply AI responsibly to career exploration, résumés, professional messages, and interview practice.
                         </p>
-
-                        <a href="#module6">
-                            Explore this module →
-                        </a>
+                        <a class="module-link" href="module-6.html">Open module <span aria-hidden="true">→</span></a>
                     </article>
                 </div>
-            </div>
-        </section>
 
-        <!-- Module 1 -->
-        <section class="section" id="module1">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        🤖
+                <div class="path-strip" aria-label="GABAY learning process">
+                    <div class="path-step">
+                        <strong>01 · Learn</strong>
+                        <span>Explore a focused concept through concise multimedia content.</span>
                     </div>
 
-                    <p class="eyebrow">
-                        Module 1
-                    </p>
+                    <div class="path-step">
+                        <strong>02 · Practice</strong>
+                        <span>Apply what you learned through scenarios, checks, and guided tasks.</span>
+                    </div>
 
-                    <h2>
-                        Understanding AI in School and Everyday Life
-                    </h2>
+                    <div class="path-step">
+                        <strong>03 · Reflect</strong>
+                        <span>Connect the lesson to your current habits and decisions.</span>
+                    </div>
 
+                    <div class="path-step">
+                        <strong>04 · Apply</strong>
+                        <span>Use responsible AI strategies in school and career-related work.</span>
+                    </div>
+                </div>
+
+                <div class="module-banner">
+                    <p class="eyebrow">Begin Your GABAY Journey</p>
+                    <h2>Strong AI skills begin with better judgment.</h2>
                     <p>
-                        Artificial intelligence is already part of many tools
-                        you use every day. In this module, you will explore what
-                        AI can do, what its limitations are, and why human
-                        thinking remains essential.
+                        Complete the pre-assessment first, then work through the modules and compare
+                        how your understanding, confidence, and decision-making improve.
                     </p>
+                    <a class="button light-button" href="assessment.html">Take the Pre-Assessment</a>
                 </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>🎯 What You Will Learn</h3>
-
-                        <ul>
-                            <li>
-                                Explain AI and generative AI using simple
-                                examples.
-                            </li>
-
-                            <li>
-                                Identify common uses of AI in school and daily
-                                life.
-                            </li>
-
-                            <li>
-                                Describe the benefits and limitations of AI.
-                            </li>
-
-                            <li>
-                                Explain why AI should support, not replace,
-                                human thinking.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>🎮 What You Will Do</h3>
-
-                        <ul>
-                            <li>
-                                Identify AI tools you already encounter.
-                            </li>
-
-                            <li>
-                                Sort examples into AI benefits and risks.
-                            </li>
-
-                            <li>
-                                Watch a short introduction to generative AI.
-                            </li>
-
-                            <li>
-                                Reflect on how you currently use AI.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="#module2"
-                    >
-                        Continue to Module 2
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 2 -->
-        <section class="section alternate-section" id="module2">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        🔍
-                    </div>
-
-                    <p class="eyebrow">
-                        Module 2
-                    </p>
-
-                    <h2>
-                        Think Before You Trust
-                    </h2>
-
-                    <p>
-                        AI can provide answers quickly, but those answers are
-                        not always accurate. Learn how to pause, investigate,
-                        and verify information before accepting or sharing it.
-                    </p>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>🎯 What You Will Learn</h3>
-
-                        <ul>
-                            <li>
-                                Identify inaccurate or unsupported claims.
-                            </li>
-
-                            <li>
-                                Recognize AI hallucinations and fabricated
-                                references.
-                            </li>
-
-                            <li>
-                                Compare AI responses with credible sources.
-                            </li>
-
-                            <li>
-                                Apply the Stop–Check–Verify–Revise process.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>🧩 What You Will Do</h3>
-
-                        <ul>
-                            <li>
-                                Find errors in an AI-generated response.
-                            </li>
-
-                            <li>
-                                Compare reliable and unreliable sources.
-                            </li>
-
-                            <li>
-                                Complete a fact-checking challenge.
-                            </li>
-
-                            <li>
-                                Revise an inaccurate AI response.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="checklist-panel">
-                    <div>
-                        <p class="eyebrow">
-                            Verification Strategy
-                        </p>
-
-                        <h2>
-                            Stop before you copy.
-                        </h2>
-
-                        <p>
-                            Use this four-step process whenever AI provides
-                            information for school or personal use.
-                        </p>
-                    </div>
-
-                    <ol class="numbered-checklist">
-                        <li>Stop and read the response carefully.</li>
-                        <li>Check the claims, dates, and references.</li>
-                        <li>Verify the information using credible sources.</li>
-                        <li>Revise the response using your own judgment.</li>
-                    </ol>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="#module3"
-                    >
-                        Continue to Module 3
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 3 -->
-        <section class="section" id="module3">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        ✍️
-                    </div>
-
-                    <p class="eyebrow">
-                        Module 3
-                    </p>
-
-                    <h2>
-                        Responsible AI-Assisted Research and Writing
-                    </h2>
-
-                    <p>
-                        AI can help you brainstorm, organize ideas, and improve
-                        your writing. The final output, however, should still
-                        reflect your understanding, ideas, and personal voice.
-                    </p>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>🎯 What You Will Learn</h3>
-
-                        <ul>
-                            <li>
-                                Use AI to brainstorm and develop questions.
-                            </li>
-
-                            <li>
-                                Evaluate AI-generated outlines and summaries.
-                            </li>
-
-                            <li>
-                                Verify sources and factual claims.
-                            </li>
-
-                            <li>
-                                Revise AI suggestions using your own words.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>📝 What You Will Do</h3>
-
-                        <ul>
-                            <li>
-                                Improve an unclear or incomplete AI prompt.
-                            </li>
-
-                            <li>
-                                Revise an AI-generated paragraph.
-                            </li>
-
-                            <li>
-                                Identify unsupported citations.
-                            </li>
-
-                            <li>
-                                Compare original and AI-assisted writing.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="#module4"
-                    >
-                        Continue to Module 4
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 4 -->
-        <section class="section alternate-section" id="module4">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        ⚖️
-                    </div>
-
-                    <p class="eyebrow">
-                        Module 4
-                    </p>
-
-                    <h2>
-                        Academic Integrity and AI Transparency
-                    </h2>
-
-                    <p>
-                        Responsible AI use means being honest about how a tool
-                        helped you. Learn how to distinguish appropriate
-                        assistance from plagiarism, substitution, and dishonest
-                        submission.
-                    </p>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>✅ Responsible AI Use</h3>
-
-                        <ul>
-                            <li>
-                                Using AI to brainstorm possible ideas.
-                            </li>
-
-                            <li>
-                                Asking AI to explain a difficult concept.
-                            </li>
-
-                            <li>
-                                Checking and revising AI-generated suggestions.
-                            </li>
-
-                            <li>
-                                Acknowledging AI assistance when required.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>❌ Irresponsible AI Use</h3>
-
-                        <ul>
-                            <li>
-                                Copying an AI response without understanding it.
-                            </li>
-
-                            <li>
-                                Submitting AI-generated work as entirely your
-                                own.
-                            </li>
-
-                            <li>
-                                Inventing references, experiences, or data.
-                            </li>
-
-                            <li>
-                                Hiding AI use when disclosure is required.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="#module5"
-                    >
-                        Continue to Module 5
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 5 -->
-        <section class="section" id="module5">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        🔐
-                    </div>
-
-                    <p class="eyebrow">
-                        Module 5
-                    </p>
-
-                    <h2>
-                        Privacy, Safety, and Digital Responsibility
-                    </h2>
-
-                    <p>
-                        AI platforms may collect and process the information you
-                        provide. Learn what information should remain private
-                        and how to protect yourself and others online.
-                    </p>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>🟢 Safer to Share</h3>
-
-                        <ul>
-                            <li>
-                                General questions that do not identify you.
-                            </li>
-
-                            <li>
-                                Fictional examples and practice scenarios.
-                            </li>
-
-                            <li>
-                                Publicly available information.
-                            </li>
-
-                            <li>
-                                Schoolwork with private details removed.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>🔴 Keep Private</h3>
-
-                        <ul>
-                            <li>
-                                Passwords and account information.
-                            </li>
-
-                            <li>
-                                Home addresses and identification numbers.
-                            </li>
-
-                            <li>
-                                Private photos and confidential documents.
-                            </li>
-
-                            <li>
-                                Personal information belonging to other people.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="#module6"
-                    >
-                        Continue to Module 6
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Module 6 -->
-        <section class="section alternate-section" id="module6">
-            <div class="container">
-                <div class="section-heading">
-                    <div
-                        class="card-icon"
-                        aria-hidden="true"
-                    >
-                        💼
-                    </div>
-
-                    <p class="eyebrow">
-                        Module 6
-                    </p>
-
-                    <h2>
-                        Responsible AI for Career Preparation
-                    </h2>
-
-                    <p>
-                        AI can support your transition from school to the
-                        workplace. Learn how to use it for career exploration,
-                        professional communication, résumé preparation, and
-                        interview practice.
-                    </p>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>🎯 What You Will Learn</h3>
-
-                        <ul>
-                            <li>
-                                Use AI to explore possible careers.
-                            </li>
-
-                            <li>
-                                Improve a résumé without inventing qualifications.
-                            </li>
-
-                            <li>
-                                Draft professional emails and messages.
-                            </li>
-
-                            <li>
-                                Practice answering interview questions.
-                            </li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>💼 What You Will Do</h3>
-
-                        <ul>
-                            <li>
-                                Improve an AI-generated résumé profile.
-                            </li>
-
-                            <li>
-                                Revise an unprofessional email.
-                            </li>
-
-                            <li>
-                                Practice a mock interview response.
-                            </li>
-
-                            <li>
-                                Evaluate AI-generated career advice.
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final Performance Task -->
-        <section class="section">
-            <div class="container">
-                <div class="section-heading centered-heading">
-                    <p
-                        style="
-                            font-size: 3.5rem;
-                            margin: 0 0 12px;
-                        "
-                        aria-hidden="true"
-                    >
-                        🏆
-                    </p>
-
-                    <p class="eyebrow">
-                        Final Challenge
-                    </p>
-
-                    <h2>
-                        Create a responsible AI-assisted career output.
-                    </h2>
-
-                    <p>
-                        Apply what you learned by completing a career-related
-                        task with the support of an AI tool.
-                    </p>
-                </div>
-
-                <div class="checklist-panel">
-                    <div>
-                        <p class="eyebrow">
-                            Performance Task
-                        </p>
-
-                        <h2>
-                            Show your process, not only your final answer.
-                        </h2>
-
-                        <p>
-                            Your work should demonstrate that you used AI
-                            critically, honestly, safely, and responsibly.
-                        </p>
-                    </div>
-
-                    <ol class="numbered-checklist">
-                        <li>Select a career-related task.</li>
-                        <li>Write and save your original AI prompt.</li>
-                        <li>Review the initial AI-generated response.</li>
-                        <li>Verify important information.</li>
-                        <li>Revise the output using your own voice.</li>
-                        <li>Explain how you used AI responsibly.</li>
-                    </ol>
-                </div>
-
-                <div class="centered-action">
-                    <a
-                        class="button primary-button"
-                        href="assessment.html"
-                    >
-                        Go to the Assessment
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final Call to Action -->
-        <section class="call-to-action">
-            <div class="container call-to-action-content">
-                <p
-                    style="
-                        font-size: 3.5rem;
-                        margin: 0 0 12px;
-                    "
-                    aria-hidden="true"
-                >
-                    🚀
-                </p>
-
-                <p class="eyebrow">
-                    Ready to Begin?
-                </p>
-
-                <h2>
-                    Start building responsible AI habits today.
-                </h2>
-
-                <p>
-                    Complete the initial assessment before beginning the
-                    modules. You can compare your results after finishing the
-                    learning journey.
-                </p>
-
-                <a
-                    class="button light-button"
-                    href="assessment.html"
-                >
-                    Take the Pre-Assessment
-                </a>
             </div>
         </section>
     </main>
@@ -935,17 +435,11 @@
     <footer class="site-footer">
         <div class="container footer-content">
             <div>
-                <strong>AI Ready SHS</strong>
-
-                <p>
-                    Promoting responsible AI use for quality education and
-                    future-ready learners.
-                </p>
+                <strong>GABAY</strong>
+                <p>Growing AI Literacy, Balance, Accountability, and Youth Readiness.</p>
             </div>
 
-            <p>
-                &copy; 2026 AI Ready SHS
-            </p>
+            <p>&copy; 2026 GABAY</p>
         </div>
     </footer>
 
