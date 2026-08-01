@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Learn about KALASAG, a mobile-first educational multimedia website that helps Grade 12 students protect personal data, secure online accounts, recognize digital threats, and respond to privacy incidents."
+    >
+
+    <title>About | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-coral: #d96b65;
+            --kalasag-gold: #f2b134;
+            --kalasag-green: #2e7d5b;
+            --kalasag-blue: #527cc5;
+            --kalasag-purple: #6f63b8;
+            --kalasag-pale: #f5f8fa;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --success-bg: #eaf7f3;
+            --warning-bg: #fff5df;
+        }
+
+        .about-hero {
+            padding: 84px 0 70px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 18%, rgba(15,139,141,.14), transparent 29%),
+                radial-gradient(circle at 10% 88%, rgba(82,124,197,.09), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .about-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.12fr) minmax(300px, .68fr);
+            gap: 66px;
+            align-items: center;
+        }
+
+        .about-hero h1 {
+            max-width: 780px;
+            margin: 18px 0 0;
+            font-size: clamp(2.45rem, 5vw, 4.6rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .about-hero h1 span {
+            color: var(--kalasag-teal);
+        }
+
+        .about-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.3vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .about-visual {
+            position: relative;
+            min-height: 370px;
+            display: grid;
+            place-items: center;
+        }
+
+        .mission-shield {
+            position: relative;
+            width: 235px;
+            height: 270px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(150deg, var(--kalasag-navy), var(--kalasag-teal));
+            clip-path: polygon(50% 0%, 91% 16%, 84% 67%, 50% 100%, 16% 67%, 9% 16%);
+            filter: drop-shadow(0 30px 42px rgba(18,50,74,.26));
+        }
+
+        .mission-shield::before {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border: 1px solid rgba(255,255,255,.25);
+            clip-path: inherit;
+        }
+
+        .mission-shield strong {
+            position: relative;
+            display: block;
+            font-size: 2.55rem;
+            letter-spacing: -0.06em;
+        }
+
+        .mission-shield span {
+            position: relative;
+            display: block;
+            max-width: 130px;
+            margin: 10px auto 0;
+            font-size: .66rem;
+            font-weight: 800;
+            line-height: 1.45;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            opacity: .88;
+        }
+
+        .about-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,.96);
+            box-shadow: 0 12px 30px rgba(18,50,74,.10);
+            color: var(--kalasag-navy);
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .about-chip.one { top: 28px; left: 0; }
+        .about-chip.two { top: 86px; right: -6px; }
+        .about-chip.three { bottom: 58px; right: 0; }
+        .about-chip.four { bottom: 20px; left: 4px; }
+
+        .purpose-grid,
+        .principle-grid,
+        .team-grid,
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .purpose-card,
+        .principle-card,
+        .team-card,
+        .evidence-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 19px;
+            background: #ffffff;
+            box-shadow: 0 12px 34px rgba(18,50,74,.055);
+        }
+
+        .purpose-card h3,
+        .principle-card h3,
+        .team-card h3,
+        .evidence-card h3 {
+            margin: 15px 0 9px;
+            color: var(--kalasag-navy);
+        }
+
+        .purpose-card p,
+        .principle-card p,
+        .team-card p,
+        .evidence-card p {
+            margin-bottom: 0;
+            color: var(--kalasag-muted);
+            line-height: 1.65;
+        }
+
+        .brand-panel {
+            display: grid;
+            grid-template-columns: .72fr 1.28fr;
+            gap: 42px;
+            align-items: center;
+            padding: 42px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--kalasag-navy), #234f68);
+            color: #ffffff;
+        }
+
+        .brand-panel .eyebrow {
+            color: #bceced;
+        }
+
+        .brand-panel h2 {
+            margin: 10px 0 0;
+            color: #ffffff;
+        }
+
+        .brand-panel p {
+            color: rgba(255,255,255,.82);
+        }
+
+        .acronym-list {
+            display: grid;
+            gap: 11px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .acronym-list li {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 13px 15px;
+            border: 1px solid rgba(255,255,255,.16);
+            border-radius: 13px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .acronym-list strong {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: rgba(255,255,255,.14);
+            color: #ffffff;
+            font-size: 1.2rem;
+        }
+
+        .acronym-list span {
+            color: rgba(255,255,255,.9);
+            font-weight: 700;
+        }
+
+        .scope-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 24px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .scope-list li {
+            padding: 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font-weight: 750;
+        }
+
+        .scope-list li::before {
+            content: "✓";
+            margin-right: 9px;
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .evidence-card strong {
+            display: block;
+            color: var(--kalasag-teal);
+            font-size: 2rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .evidence-card span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-navy);
+            font-weight: 850;
+        }
+
+        .project-timeline {
+            display: grid;
+            gap: 18px;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 58px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .timeline-number {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: rgba(15,139,141,.11);
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .timeline-content {
+            padding: 22px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 17px;
+            background: #ffffff;
+        }
+
+        .timeline-content h3 {
+            margin: 0 0 8px;
+            color: var(--kalasag-navy);
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: var(--kalasag-muted);
+        }
+
+        .team-card {
+            min-height: 100%;
+        }
+
+        .team-role {
+            display: inline-flex;
+            margin-top: 3px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: var(--kalasag-pale);
+            color: var(--kalasag-teal);
+            font-size: .7rem;
+            font-weight: 900;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        .ethics-panel {
+            padding: 31px;
+            border-left: 5px solid var(--kalasag-gold);
+            border-radius: 16px;
+            background: var(--warning-bg);
+            color: #6e551d;
+        }
+
+        .ethics-panel h3 {
+            margin-top: 0;
+            color: #6e551d;
+        }
+
+        .reference-list {
+            margin: 0;
+            padding-left: 22px;
+        }
+
+        .reference-list li {
+            margin-bottom: 12px;
+            color: var(--kalasag-muted);
+            line-height: 1.65;
+        }
+
+        .reference-list strong {
+            color: var(--kalasag-navy);
+        }
+
+        @media (max-width: 950px) {
+            .about-hero .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .purpose-grid,
+            .principle-grid,
+            .team-grid,
+            .evidence-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .about-hero {
+                padding-top: 54px;
+            }
+
+            .about-hero .hero-grid,
+            .brand-panel,
+            .purpose-grid,
+            .principle-grid,
+            .team-grid,
+            .evidence-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-visual {
+                min-height: 325px;
+            }
+
+            .scope-list {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-panel {
+                padding: 30px 22px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 46px 1fr;
+                gap: 12px;
+            }
+
+            .timeline-number {
+                width: 42px;
+                height: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a class="active" href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="about-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">About the Project</p>
+
+                <h1>
+                    A learning shield for
+                    <span>everyday digital life.</span>
+                </h1>
+
+                <p class="hero-description">
+                    KALASAG is a mobile-first educational multimedia website
+                    designed to help Grade 12 learners protect personal data,
+                    secure online accounts, recognize digital threats, and
+                    respond safely when privacy or security incidents occur.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button primary-button" href="modules.html">
+                        Explore the Modules
+                    </a>
+
+                    <a class="button secondary-button" href="assessment.html">
+                        Take the Assessment
+                    </a>
+                </div>
+            </div>
+
+            <div class="about-visual" aria-label="KALASAG project shield">
+                <div class="mission-shield">
+                    <div>
+                        <strong>KALASAG</strong>
+                        <span>Protect identity, accounts, and information</span>
+                    </div>
+                </div>
+
+                <span class="about-chip one">Learner-centered</span>
+                <span class="about-chip two">Mobile-first</span>
+                <span class="about-chip three">Privacy-by-design</span>
+                <span class="about-chip four">Scenario-based</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Our Purpose</p>
+                <h2>From awareness to safer digital habits</h2>
+                <p>
+                    KALASAG focuses on practical decisions that learners can apply
+                    immediately in school, at home, and across online platforms.
+                </p>
+            </div>
+
+            <div class="purpose-grid">
+                <article class="purpose-card">
+                    <div class="card-icon">01</div>
+                    <h3>Protect personal data</h3>
+                    <p>
+                        Help learners distinguish public, personal, sensitive,
+                        and confidential information before sharing or uploading it.
+                    </p>
+                </article>
+
+                <article class="purpose-card">
+                    <div class="card-icon">02</div>
+                    <h3>Secure accounts</h3>
+                    <p>
+                        Build stronger habits involving passphrases, multi-factor
+                        authentication, account recovery, and device protection.
+                    </p>
+                </article>
+
+                <article class="purpose-card">
+                    <div class="card-icon">03</div>
+                    <h3>Recognize threats</h3>
+                    <p>
+                        Develop the judgment needed to identify phishing,
+                        impersonation, suspicious links, and social engineering.
+                    </p>
+                </article>
+
+                <article class="purpose-card">
+                    <div class="card-icon">04</div>
+                    <h3>Share with care</h3>
+                    <p>
+                        Encourage thoughtful decisions about audiences, app
+                        permissions, cloud files, photographs, and digital footprints.
+                    </p>
+                </article>
+
+                <article class="purpose-card">
+                    <div class="card-icon">05</div>
+                    <h3>Use AI more safely</h3>
+                    <p>
+                        Teach learners to minimize, anonymize, and protect personal
+                        or third-party information before prompting or uploading.
+                    </p>
+                </article>
+
+                <article class="purpose-card">
+                    <div class="card-icon">06</div>
+                    <h3>Respond and recover</h3>
+                    <p>
+                        Guide learners through calm, organized action after
+                        compromised accounts, lost devices, or accidental disclosures.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="brand-panel">
+                <div>
+                    <p class="eyebrow">What KALASAG Means</p>
+                    <h2>A name built around protection</h2>
+                    <p>
+                        “Kalasag” means shield. The name represents the knowledge,
+                        habits, and judgment learners need to protect themselves and
+                        others in digital spaces.
+                    </p>
+                </div>
+
+                <ul class="acronym-list">
+                    <li>
+                        <strong>K</strong>
+                        <span>Keeping</span>
+                    </li>
+
+                    <li>
+                        <strong>A</strong>
+                        <span>Accounts</span>
+                    </li>
+
+                    <li>
+                        <strong>L</strong>
+                        <span>Learner Data</span>
+                    </li>
+
+                    <li>
+                        <strong>A</strong>
+                        <span>And</span>
+                    </li>
+
+                    <li>
+                        <strong>S</strong>
+                        <span>Security Awareness</span>
+                    </li>
+
+                    <li>
+                        <strong>A</strong>
+                        <span>Guarded</span>
+                    </li>
+                </ul>
+            </div>
+
+            <p style="margin:14px 0 0;color:var(--kalasag-muted);font-size:.86rem;">
+                Project expansion: <strong>Keeping Accounts, Learner Data, and Security Awareness Guarded.</strong>
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Main Learning Objective</p>
+                <h2>What learners should be able to do</h2>
+            </div>
+
+            <div class="checklist-panel">
+                <div>
+                    <p class="eyebrow">Learning Outcome</p>
+
+                    <h2>
+                        Recognize risks and choose appropriate protective actions.
+                    </h2>
+
+                    <p>
+                        Given realistic online scenarios, Grade 12 learners will
+                        identify privacy and security threats, distinguish safe from
+                        unsafe digital practices, and select appropriate protective
+                        or corrective actions with at least 80% accuracy.
+                    </p>
+                </div>
+
+                <ol class="numbered-checklist">
+                    <li>Identify personal and sensitive data.</li>
+                    <li>Secure accounts and devices.</li>
+                    <li>Recognize phishing and manipulation.</li>
+                    <li>Make safer sharing decisions.</li>
+                    <li>Protect data when using AI tools.</li>
+                    <li>Respond appropriately to incidents.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Why This Project</p>
+                <h2>Designed from learner needs</h2>
+                <p>
+                    The original front-end analysis showed strong digital access and
+                    a clear concern about personal data and online security.
+                </p>
+            </div>
+
+            <div class="evidence-grid">
+                <article class="evidence-card">
+                    <strong>94.3%</strong>
+                    <span>Primarily use smartphones</span>
+                    <p>
+                        This supports a responsive, touch-friendly, mobile-first
+                        learning experience.
+                    </p>
+                </article>
+
+                <article class="evidence-card">
+                    <strong>97.1%</strong>
+                    <span>Believe a mobile module can help</span>
+                    <p>
+                        Learners are receptive to structured, interactive web-based
+                        instruction.
+                    </p>
+                </article>
+
+                <article class="evidence-card">
+                    <strong>40%</strong>
+                    <span>Selected privacy and security as a leading concern</span>
+                    <p>
+                        This finding supported the decision to narrow the project
+                        scope to data privacy and digital security.
+                    </p>
+                </article>
+            </div>
+
+            <div class="ethics-panel" style="margin-top:28px;">
+                <h3>Scope note</h3>
+                <p style="margin-bottom:0;">
+                    The initial survey covered responsible AI and future-ready
+                    skills more broadly. A focused privacy-and-security diagnostic
+                    is recommended before final implementation to identify specific
+                    misconceptions and behaviors involving passwords, phishing,
+                    app permissions, AI uploads, and incident reporting.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Project Scope</p>
+                <h2>What KALASAG covers</h2>
+            </div>
+
+            <ul class="scope-list">
+                <li>Personal, sensitive, and confidential information</li>
+                <li>Password, passphrase, and multi-factor authentication practices</li>
+                <li>Account recovery and active-session review</li>
+                <li>Phishing, scams, impersonation, and social engineering</li>
+                <li>Social-media audiences and digital footprints</li>
+                <li>App permissions, cloud files, and location sharing</li>
+                <li>Privacy when prompting or uploading to AI tools</li>
+                <li>Incident reporting, recovery, and personal action planning</li>
+            </ul>
+
+            <p style="margin-top:22px;color:var(--kalasag-muted);">
+                The first version does not attempt to teach advanced cybersecurity,
+                ethical hacking, network administration, malware analysis, or secure
+                software engineering. Its focus is practical learner awareness and
+                safer everyday behavior.
+            </p>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Design Principles</p>
+                <h2>How the learning experience was designed</h2>
+            </div>
+
+            <div class="principle-grid">
+                <article class="principle-card">
+                    <div class="card-icon">A</div>
+                    <h3>Mobile-first</h3>
+                    <p>
+                        Pages use responsive layouts, touch-friendly controls, short
+                        sections, and lightweight media.
+                    </p>
+                </article>
+
+                <article class="principle-card">
+                    <div class="card-icon">B</div>
+                    <h3>Learner-centered</h3>
+                    <p>
+                        Content uses realistic student situations rather than
+                        abstract technical explanations.
+                    </p>
+                </article>
+
+                <article class="principle-card">
+                    <div class="card-icon">C</div>
+                    <h3>Privacy-by-design</h3>
+                    <p>
+                        Activities do not request real credentials or sensitive
+                        information and use fictional examples.
+                    </p>
+                </article>
+
+                <article class="principle-card">
+                    <div class="card-icon">D</div>
+                    <h3>Scenario-based</h3>
+                    <p>
+                        Learners analyze decisions involving messages, accounts,
+                        files, applications, photographs, and AI tools.
+                    </p>
+                </article>
+
+                <article class="principle-card">
+                    <div class="card-icon">E</div>
+                    <h3>Accessible</h3>
+                    <p>
+                        The site uses readable typography, strong contrast, clear
+                        labels, keyboard-accessible controls, and concise language.
+                    </p>
+                </article>
+
+                <article class="principle-card">
+                    <div class="card-icon">F</div>
+                    <h3>Action-oriented</h3>
+                    <p>
+                        Lessons end with checklists, practice tasks, reflection, and
+                        concrete protective actions.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Development Journey</p>
+                <h2>How KALASAG was developed</h2>
+            </div>
+
+            <div class="project-timeline">
+                <article class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>Front-end analysis</h3>
+                        <p>
+                            The group examined learner characteristics, device access,
+                            AI use, digital confidence, concerns, and preferred learning
+                            experiences.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>Scope refinement</h3>
+                        <p>
+                            The project moved from broad responsible AI and career
+                            readiness to a focused learning experience on data privacy
+                            and digital security.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>Instructional design</h3>
+                        <p>
+                            Six modules were organized around knowledge, decisions,
+                            practice, immediate feedback, reflection, and application.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3>Web development</h3>
+                        <p>
+                            The front end was developed using HTML, CSS, and JavaScript,
+                            with GitHub and Vercel planned for collaboration and deployment.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h3>Evaluation and revision</h3>
+                        <p>
+                            The final output will undergo content review, usability
+                            testing, mobile testing, accessibility checking, and learner
+                            evaluation.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">The Project Team</p>
+                <h2>Ctrl+EDU</h2>
+                <p>
+                    KALASAG is a collaborative educational multimedia project for
+                    EDS 153.
+                </p>
+            </div>
+
+            <div class="team-grid">
+                <article class="team-card">
+                    <div class="card-icon">RL</div>
+                    <h3>Rosemarie Lontoc</h3>
+                    <span class="team-role">Guild Leader</span>
+                    <p>
+                        Project head responsible for coordination, task distribution,
+                        deadlines, and submission management.
+                    </p>
+                </article>
+
+                <article class="team-card">
+                    <div class="card-icon">JP</div>
+                    <h3>Jo Ann Pacquiao</h3>
+                    <span class="team-role">Lore Keeper</span>
+                    <p>
+                        Research and documentation lead responsible for references,
+                        front-end analysis details, and project documentation.
+                    </p>
+                </article>
+
+                <article class="team-card">
+                    <div class="card-icon">PN</div>
+                    <h3>Princess Aira R. Narciso</h3>
+                    <span class="team-role">Design Forge Master</span>
+                    <p>
+                        Design and layout lead responsible for visual direction,
+                        presentation design, and interface coherence.
+                    </p>
+                </article>
+
+                <article class="team-card">
+                    <div class="card-icon">HA</div>
+                    <h3>Hernan Alar</h3>
+                    <span class="team-role">Artifact Builder</span>
+                    <p>
+                        Technical and production lead responsible for web development,
+                        multimedia integration, and interactive features.
+                    </p>
+                </article>
+
+                <article class="team-card">
+                    <div class="card-icon">SM</div>
+                    <h3>Stephanie Magno</h3>
+                    <span class="team-role">Council Voice</span>
+                    <p>
+                        Presentation and communication lead responsible for clear,
+                        engaging, and polished project delivery.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Ethics and Privacy</p>
+                <h2>How KALASAG handles learner information</h2>
+            </div>
+
+            <div class="ethics-panel">
+                <h3>Privacy-conscious implementation</h3>
+
+                <p>
+                    KALASAG is designed as a front-end learning website. The current
+                    version does not require user registration and does not send
+                    assessment responses to a server.
+                </p>
+
+                <ul style="margin-bottom:0;">
+                    <li>No real passwords or verification codes should be entered.</li>
+                    <li>Activities use fictional or anonymized examples.</li>
+                    <li>Browser progress uses localStorage and remains device-specific.</li>
+                    <li>Only minimum necessary evaluation data should be collected.</li>
+                    <li>School procedures should guide incident reporting and support.</li>
+                    <li>Content should be reviewed regularly as risks and platforms change.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">References and Attribution</p>
+                <h2>Project foundations</h2>
+            </div>
+
+            <ul class="reference-list">
+                <li>
+                    <strong>Ctrl+EDU. (2026).</strong>
+                    Survey database for <em>Building Future-Ready Skills for Grade 12
+                    Students Through Responsible AI and Digital Career Preparation</em>
+                    [Unpublished dataset].
+                </li>
+
+                <li>
+                    <strong>Ctrl+EDU. (2026).</strong>
+                    EDS 153 shared document: Front-end analysis and design pitch
+                    working file [Unpublished course document].
+                </li>
+
+                <li>
+                    <strong>Republic Act No. 10173. (2012).</strong>
+                    Data Privacy Act of 2012.
+                </li>
+
+                <li>
+                    <strong>United Nations. (2015).</strong>
+                    <em>Transforming our world: The 2030 Agenda for Sustainable Development.</em>
+                </li>
+
+                <li>
+                    <strong>Course materials for EDS 153.</strong>
+                    Principles of educational multimedia design, development, and evaluation.
+                </li>
+
+                <li>
+                    <strong>AI-use disclosure.</strong>
+                    Generative AI was used to support initial ideation, organization,
+                    language refinement, and code drafting. Project proponents remain
+                    responsible for reviewing, validating, revising, and approving the
+                    final content and design.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container call-to-action-content">
+            <p class="eyebrow">Begin Your KALASAG Journey</p>
+
+            <h2>Protect what matters in your digital life.</h2>
+
+            <p>
+                Explore all six modules, apply the resource guides, and complete
+                the final assessment.
+            </p>
+
+            <div class="hero-actions" style="justify-content:center;">
+                <a class="button light-button" href="module1.html">
+                    Start Module 1
+                </a>
+
+                <a
+                    class="button secondary-button"
+                    href="resources.html"
+                    style="border-color:rgba(255,255,255,.65);color:#fff;"
+                >
+                    Open Resources
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
