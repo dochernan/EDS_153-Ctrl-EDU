@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="KALASAG resources for data privacy, account security, phishing, safe sharing, AI privacy, and incident response."
+    >
+
+    <title>Resources | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-coral: #d96b65;
+            --kalasag-gold: #f2b134;
+            --kalasag-green: #2e7d5b;
+            --kalasag-blue: #527cc5;
+            --kalasag-purple: #6f63b8;
+            --kalasag-pale: #f5f8fa;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --success-bg: #eaf7f3;
+            --warning-bg: #fff5df;
+            --danger-bg: #fff0ef;
+        }
+
+        .resources-hero {
+            padding: 82px 0 68px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 20%, rgba(82,124,197,.13), transparent 29%),
+                radial-gradient(circle at 8% 88%, rgba(15,139,141,.10), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .resources-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.12fr) minmax(300px, .68fr);
+            gap: 64px;
+            align-items: center;
+        }
+
+        .resources-hero h1 {
+            max-width: 780px;
+            margin: 18px 0 0;
+            font-size: clamp(2.45rem, 5vw, 4.55rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .resources-hero h1 span {
+            color: var(--kalasag-blue);
+        }
+
+        .resources-hero .hero-description {
+            max-width: 690px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.3vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .resource-visual {
+            position: relative;
+            min-height: 360px;
+            display: grid;
+            place-items: center;
+        }
+
+        .folder-stack {
+            position: relative;
+            width: 250px;
+            height: 220px;
+        }
+
+        .folder-card {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(18,50,74,.08);
+            border-radius: 26px;
+            background: #ffffff;
+            box-shadow: 0 28px 70px rgba(18,50,74,.16);
+        }
+
+        .folder-card:nth-child(1) {
+            transform: rotate(-8deg) translate(-18px, 16px);
+            background: #ecf2fb;
+        }
+
+        .folder-card:nth-child(2) {
+            transform: rotate(7deg) translate(18px, 12px);
+            background: #eef8f6;
+        }
+
+        .folder-card:nth-child(3) {
+            transform: rotate(0);
+            z-index: 3;
+        }
+
+        .folder-card strong {
+            display: block;
+            color: var(--kalasag-navy);
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+            text-align: center;
+        }
+
+        .folder-card span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-muted);
+            font-size: .78rem;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .resource-chip {
+            position: absolute;
+            z-index: 4;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,.96);
+            box-shadow: 0 12px 30px rgba(18,50,74,.10);
+            color: var(--kalasag-navy);
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .resource-chip.one { top: 24px; left: 0; }
+        .resource-chip.two { top: 78px; right: -5px; }
+        .resource-chip.three { bottom: 54px; right: 0; }
+        .resource-chip.four { bottom: 18px; left: 4px; }
+
+        .resource-filter-bar {
+            position: sticky;
+            top: 74px;
+            z-index: 50;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(10px);
+        }
+
+        .resource-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-button {
+            padding: 10px 14px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 999px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font: inherit;
+            font-size: .84rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .filter-button:hover,
+        .filter-button:focus,
+        .filter-button.active {
+            border-color: var(--kalasag-teal);
+            background: #eef9f7;
+            color: var(--kalasag-teal);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .resource-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            padding: 26px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 19px;
+            background: #ffffff;
+            box-shadow: 0 12px 34px rgba(18,50,74,.055);
+            transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(15,139,141,.35);
+            box-shadow: 0 20px 44px rgba(18,50,74,.09);
+        }
+
+        .resource-card[hidden] {
+            display: none;
+        }
+
+        .resource-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: rgba(82,124,197,.10);
+            color: var(--kalasag-blue);
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .resource-type {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: var(--kalasag-pale);
+            color: var(--kalasag-muted);
+            font-size: .68rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .resource-card h3 {
+            margin: 18px 0 9px;
+            color: var(--kalasag-navy);
+            font-size: 1.12rem;
+        }
+
+        .resource-card p {
+            margin: 0;
+            color: var(--kalasag-muted);
+            line-height: 1.65;
+        }
+
+        .resource-card ul {
+            margin: 16px 0 0;
+            padding-left: 20px;
+            color: var(--kalasag-muted);
+        }
+
+        .resource-card li {
+            margin-bottom: 7px;
+        }
+
+        .resource-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 22px;
+        }
+
+        .mini-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 9px 13px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 10px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font-size: .8rem;
+            font-weight: 850;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .mini-button.primary {
+            border-color: var(--kalasag-teal);
+            background: var(--kalasag-teal);
+            color: #ffffff;
+        }
+
+        .mini-button:hover,
+        .mini-button:focus {
+            transform: translateY(-1px);
+        }
+
+        .quick-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .quick-guide {
+            padding: 28px;
+            border-radius: 20px;
+            color: #ffffff;
+        }
+
+        .quick-guide h3 {
+            margin: 0 0 12px;
+            color: #ffffff;
+        }
+
+        .quick-guide p,
+        .quick-guide li {
+            color: rgba(255,255,255,.88);
+        }
+
+        .quick-guide.one {
+            background: linear-gradient(135deg, var(--kalasag-navy), #28526e);
+        }
+
+        .quick-guide.two {
+            background: linear-gradient(135deg, var(--kalasag-teal), #56b3aa);
+        }
+
+        .quick-guide ol,
+        .quick-guide ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .help-card {
+            padding: 25px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 17px;
+            background: #ffffff;
+        }
+
+        .help-card h3 {
+            margin: 12px 0 8px;
+            color: var(--kalasag-navy);
+        }
+
+        .help-card p {
+            color: var(--kalasag-muted);
+        }
+
+        .help-card .card-icon {
+            width: 44px;
+            height: 44px;
+        }
+
+        .notice-panel {
+            padding: 28px;
+            border-left: 5px solid var(--kalasag-gold);
+            border-radius: 15px;
+            background: var(--warning-bg);
+            color: #6f541c;
+        }
+
+        .resource-search {
+            width: 100%;
+            max-width: 520px;
+            padding: 14px 17px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 12px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+        }
+
+        .resource-search:focus {
+            outline: 3px solid rgba(15,139,141,.12);
+            border-color: var(--kalasag-teal);
+        }
+
+        .no-results {
+            display: none;
+            padding: 30px;
+            border: 1px dashed var(--kalasag-border);
+            border-radius: 16px;
+            color: var(--kalasag-muted);
+            text-align: center;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .print-sheet {
+            display: none;
+        }
+
+        @media print {
+            header,
+            footer,
+            .resources-hero,
+            .resource-filter-bar,
+            .section:not(.print-sheet) {
+                display: none !important;
+            }
+
+            .print-sheet {
+                display: block;
+                padding: 20px;
+                color: #000;
+            }
+
+            .print-sheet h1,
+            .print-sheet h2 {
+                color: #000;
+            }
+        }
+
+        @media (max-width: 930px) {
+            .resources-hero .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .resource-grid,
+            .help-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .resources-hero {
+                padding-top: 54px;
+            }
+
+            .resources-hero .hero-grid,
+            .resource-grid,
+            .quick-guide-grid,
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-visual {
+                min-height: 320px;
+            }
+
+            .resource-filter-bar {
+                top: 72px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a class="active" href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="resources-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">KALASAG Resource Library</p>
+
+                <h1>
+                    Keep the right guide
+                    <span>within reach.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Use these quick-reference tools to review safer habits,
+                    prepare for common digital risks, and apply what you learned
+                    across all six KALASAG modules.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#resourceLibrary">
+                        Browse Resources
+                    </a>
+
+                    <a class="button secondary-button" href="modules.html">
+                        Review Modules
+                    </a>
+                </div>
+            </div>
+
+            <div class="resource-visual" aria-label="Resource library illustration">
+                <div class="folder-stack">
+                    <div class="folder-card"></div>
+                    <div class="folder-card"></div>
+                    <div class="folder-card">
+                        <div>
+                            <strong>KALASAG</strong>
+                            <span>Privacy and security toolkit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="resource-chip one">Checklists</span>
+                <span class="resource-chip two">Quick guides</span>
+                <span class="resource-chip three">Incident help</span>
+                <span class="resource-chip four">Module links</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="resource-filter-bar" aria-label="Resource filters">
+        <div class="container">
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between;">
+                <div class="resource-filters">
+                    <button class="filter-button active" type="button" data-filter="all">
+                        All
+                    </button>
+                    <button class="filter-button" type="button" data-filter="privacy">
+                        Privacy
+                    </button>
+                    <button class="filter-button" type="button" data-filter="accounts">
+                        Accounts
+                    </button>
+                    <button class="filter-button" type="button" data-filter="phishing">
+                        Phishing
+                    </button>
+                    <button class="filter-button" type="button" data-filter="sharing">
+                        Sharing
+                    </button>
+                    <button class="filter-button" type="button" data-filter="ai">
+                        AI Privacy
+                    </button>
+                    <button class="filter-button" type="button" data-filter="incident">
+                        Incident Response
+                    </button>
+                </div>
+
+                <input
+                    class="resource-search"
+                    id="resourceSearch"
+                    type="search"
+                    placeholder="Search the resource library"
+                    aria-label="Search resources"
+                >
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="resourceLibrary">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Resource Library</p>
+                <h2>Review, practice, and apply</h2>
+                <p>
+                    Each resource connects to one or more KALASAG learning modules.
+                </p>
+            </div>
+
+            <div class="resource-grid" id="resourceGrid">
+                <article
+                    class="resource-card"
+                    data-category="privacy"
+                    data-search="personal data privacy identity information classification public sensitive confidential"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">01</div>
+                        <span class="resource-type">Checklist</span>
+                    </div>
+
+                    <h3>Personal Data Classification Guide</h3>
+
+                    <p>
+                        A quick guide for deciding whether information is public,
+                        personal, sensitive, or confidential.
+                    </p>
+
+                    <ul>
+                        <li>Ask whether the information identifies a person.</li>
+                        <li>Consider the harm caused by misuse or disclosure.</li>
+                        <li>Share only what is necessary for a clear purpose.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module1.html">
+                            Review Module 1
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Guide
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="accounts"
+                    data-search="password passphrase mfa multifactor authentication recovery account security"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">02</div>
+                        <span class="resource-type">Quick Guide</span>
+                    </div>
+
+                    <h3>Account Security Essentials</h3>
+
+                    <p>
+                        A practical reminder for strengthening important online
+                        accounts.
+                    </p>
+
+                    <ul>
+                        <li>Use a unique long passphrase.</li>
+                        <li>Enable multi-factor authentication.</li>
+                        <li>Review recovery details and active sessions.</li>
+                        <li>Never share verification codes.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module2.html">
+                            Review Module 2
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Guide
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="phishing"
+                    data-search="phishing scam social engineering suspicious message link qr code verification sender urgency"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">03</div>
+                        <span class="resource-type">Checklist</span>
+                    </div>
+
+                    <h3>Message Detective Checklist</h3>
+
+                    <p>
+                        Use this checklist before opening an unexpected link,
+                        file, QR code, or login page.
+                    </p>
+
+                    <ul>
+                        <li>Check the sender and destination.</li>
+                        <li>Notice urgency, secrecy, fear, or rewards.</li>
+                        <li>Verify through an official channel.</li>
+                        <li>Do not share passwords or codes.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module3.html">
+                            Review Module 3
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Checklist
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="sharing"
+                    data-search="safe sharing consent cloud permissions location social media photo app access digital footprint"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">04</div>
+                        <span class="resource-type">Decision Guide</span>
+                    </div>
+
+                    <h3>Share with Care</h3>
+
+                    <p>
+                        A short decision guide for posts, photographs, cloud files,
+                        app permissions, and location sharing.
+                    </p>
+
+                    <ul>
+                        <li>Who can access it?</li>
+                        <li>Does it include another person?</li>
+                        <li>Is location or private context visible?</li>
+                        <li>Can access be limited or removed?</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module4.html">
+                            Review Module 4
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Guide
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="ai"
+                    data-search="ai privacy prompt upload document anonymize identifiers confidential artificial intelligence"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">05</div>
+                        <span class="resource-type">Checklist</span>
+                    </div>
+
+                    <h3>Before You Prompt or Upload</h3>
+
+                    <p>
+                        A privacy check for information entered into AI tools.
+                    </p>
+
+                    <ul>
+                        <li>Remove names, IDs, addresses, and confidential details.</li>
+                        <li>Use fictional or generalized examples.</li>
+                        <li>Check school rules and permissions.</li>
+                        <li>Protect information belonging to other people.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module5.html">
+                            Review Module 5
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Checklist
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="incident"
+                    data-search="incident response account compromised breach recovery report evidence lost device accidental sharing"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">06</div>
+                        <span class="resource-type">Action Plan</span>
+                    </div>
+
+                    <h3>Incident Response Steps</h3>
+
+                    <p>
+                        A calm response guide for compromised accounts, leaked data,
+                        lost devices, and accidental sharing.
+                    </p>
+
+                    <ul>
+                        <li>Pause and stop risky activity.</li>
+                        <li>Protect the account, device, or file.</li>
+                        <li>Preserve useful evidence.</li>
+                        <li>Report, recover, and review.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module6.html">
+                            Review Module 6
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Action Plan
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="accounts incident"
+                    data-search="lost device phone laptop remote lock sign out recovery device security"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">07</div>
+                        <span class="resource-type">Quick Guide</span>
+                    </div>
+
+                    <h3>Lost Device Response</h3>
+
+                    <p>
+                        A short sequence for reducing risk after losing a phone,
+                        tablet, or laptop.
+                    </p>
+
+                    <ul>
+                        <li>Use official location or remote-lock tools.</li>
+                        <li>Sign out of important services remotely.</li>
+                        <li>Change exposed credentials.</li>
+                        <li>Report the loss to the appropriate person.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module6.html">
+                            Review Recovery Steps
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Guide
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="privacy sharing"
+                    data-search="digital footprint privacy audit social media posts tags location profile search"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">08</div>
+                        <span class="resource-type">Self-Audit</span>
+                    </div>
+
+                    <h3>Digital Footprint Review</h3>
+
+                    <p>
+                        Questions for reviewing what others may see, save, and infer
+                        from your online activity.
+                    </p>
+
+                    <ul>
+                        <li>What information is publicly visible?</li>
+                        <li>Which old posts, tags, or files need review?</li>
+                        <li>Are location and audience settings appropriate?</li>
+                        <li>Do your profiles reveal unnecessary details?</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="module4.html">
+                            Review Sharing Practices
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Audit
+                        </button>
+                    </div>
+                </article>
+
+                <article
+                    class="resource-card"
+                    data-category="incident phishing accounts"
+                    data-search="report help support teacher trusted adult school ict administrator platform"
+                >
+                    <div class="resource-card-top">
+                        <div class="resource-icon">09</div>
+                        <span class="resource-type">Support Guide</span>
+                    </div>
+
+                    <h3>Who Should I Contact?</h3>
+
+                    <p>
+                        A reminder that different incidents require different
+                        support channels.
+                    </p>
+
+                    <ul>
+                        <li>School account or file: teacher, adviser, or school ICT.</li>
+                        <li>Platform account: official account-recovery service.</li>
+                        <li>Threats or harassment: trusted adult and school support.</li>
+                        <li>Financial or identity harm: responsible adult and relevant provider.</li>
+                    </ul>
+
+                    <div class="resource-actions">
+                        <a class="mini-button primary" href="#trustedHelp">
+                            View Help Guide
+                        </a>
+
+                        <button class="mini-button print-trigger" type="button">
+                            Print Guide
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <p class="no-results" id="noResults">
+                No resource matches your current search or filter.
+            </p>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Fast Reference</p>
+                <h2>Two guides worth remembering</h2>
+            </div>
+
+            <div class="quick-guide-grid">
+                <article class="quick-guide one">
+                    <h3>Before sharing information</h3>
+                    <ol>
+                        <li>Pause and identify what the content reveals.</li>
+                        <li>Check whether another person is included.</li>
+                        <li>Choose the smallest appropriate audience.</li>
+                        <li>Remove unnecessary personal details.</li>
+                        <li>Confirm that access can be changed or revoked.</li>
+                    </ol>
+                </article>
+
+                <article class="quick-guide two">
+                    <h3>After a privacy or security incident</h3>
+                    <ol>
+                        <li>Stop the risky activity.</li>
+                        <li>Secure the account, file, or device.</li>
+                        <li>Preserve useful evidence.</li>
+                        <li>Report to the correct person or service.</li>
+                        <li>Recover, review, and improve protections.</li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="trustedHelp">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Trusted Help</p>
+                <h2>Know where to ask for support</h2>
+                <p>
+                    Replace the placeholders below with your school’s approved
+                    contacts and procedures before final deployment.
+                </p>
+            </div>
+
+            <div class="help-grid">
+                <article class="help-card">
+                    <div class="card-icon">01</div>
+                    <h3>Teacher or Class Adviser</h3>
+                    <p>
+                        For accidental sharing, class-related accounts, harmful
+                        messages, or concerns involving classmates.
+                    </p>
+                </article>
+
+                <article class="help-card">
+                    <div class="card-icon">02</div>
+                    <h3>School ICT or Administrator</h3>
+                    <p>
+                        For school accounts, devices, suspicious logins, lost access,
+                        or technical recovery.
+                    </p>
+                </article>
+
+                <article class="help-card">
+                    <div class="card-icon">03</div>
+                    <h3>Guidance or Student Support</h3>
+                    <p>
+                        For threats, harassment, impersonation, embarrassment, or
+                        emotional distress related to a digital incident.
+                    </p>
+                </article>
+
+                <article class="help-card">
+                    <div class="card-icon">04</div>
+                    <h3>Official Platform Support</h3>
+                    <p>
+                        Use only the official recovery, reporting, or help page of
+                        the affected service.
+                    </p>
+                </article>
+
+                <article class="help-card">
+                    <div class="card-icon">05</div>
+                    <h3>Parent, Guardian, or Trusted Adult</h3>
+                    <p>
+                        Ask for support when financial information, identity documents,
+                        threats, blackmail, or serious harm may be involved.
+                    </p>
+                </article>
+
+                <article class="help-card">
+                    <div class="card-icon">06</div>
+                    <h3>Data Privacy Contact</h3>
+                    <p>
+                        For unauthorized disclosure, misuse of personal data, or
+                        questions about how learner information is handled.
+                    </p>
+                </article>
+            </div>
+
+            <div class="notice-panel" style="margin-top:28px;">
+                <strong>Important:</strong>
+                KALASAG is an educational resource. It does not replace your school’s
+                official reporting procedures, technical support, safeguarding process,
+                or emergency response.
+            </div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container call-to-action-content">
+            <p class="eyebrow">Keep Learning</p>
+
+            <h2>Turn the guides into daily habits.</h2>
+
+            <p>
+                Review the modules, complete the assessment, and create your personal
+                KALASAG privacy and security action plan.
+            </p>
+
+            <div class="hero-actions" style="justify-content:center;">
+                <a class="button light-button" href="assessment.html">
+                    Take the Assessment
+                </a>
+
+                <a
+                    class="button secondary-button"
+                    href="modules.html"
+                    style="border-color:rgba(255,255,255,.65);color:#fff;"
+                >
+                    Review Modules
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="print-sheet" id="printSheet">
+        <h1>KALASAG Quick Reference</h1>
+
+        <h2>Before Sharing</h2>
+        <ol>
+            <li>Identify personal or sensitive information.</li>
+            <li>Check the audience and purpose.</li>
+            <li>Remove unnecessary details.</li>
+            <li>Ask consent when another person is involved.</li>
+            <li>Use the least access necessary.</li>
+        </ol>
+
+        <h2>Account Security</h2>
+        <ul>
+            <li>Use unique long passphrases.</li>
+            <li>Enable multi-factor authentication.</li>
+            <li>Review active sessions and recovery methods.</li>
+            <li>Never share passwords or verification codes.</li>
+        </ul>
+
+        <h2>Spot the Trap</h2>
+        <ul>
+            <li>Check the sender and destination.</li>
+            <li>Be cautious of urgency, secrecy, fear, or rewards.</li>
+            <li>Verify using an official channel.</li>
+            <li>Do not open unexpected files or login links.</li>
+        </ul>
+
+        <h2>Incident Response</h2>
+        <ol>
+            <li>Pause.</li>
+            <li>Protect.</li>
+            <li>Preserve evidence.</li>
+            <li>Report.</li>
+            <li>Recover and review.</li>
+        </ol>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+"use strict";
+
+const filterButtons = [...document.querySelectorAll(".filter-button")];
+const resourceCards = [...document.querySelectorAll(".resource-card")];
+const resourceSearch = document.getElementById("resourceSearch");
+const noResults = document.getElementById("noResults");
+const printButtons = [...document.querySelectorAll(".print-trigger")];
+
+let activeFilter = "all";
+
+function applyFilters() {
+    const query = resourceSearch.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    resourceCards.forEach(card => {
+        const categories = card.dataset.category.split(" ");
+        const searchable = card.dataset.search.toLowerCase();
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const body = card.textContent.toLowerCase();
+
+        const matchesFilter =
+            activeFilter === "all" || categories.includes(activeFilter);
+
+        const matchesSearch =
+            !query ||
+            searchable.includes(query) ||
+            title.includes(query) ||
+            body.includes(query);
+
+        const visible = matchesFilter && matchesSearch;
+        card.hidden = !visible;
+
+        if (visible) {
+            visibleCount += 1;
+        }
+    });
+
+    noResults.classList.toggle("show", visibleCount === 0);
+}
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+
+        filterButtons.forEach(item => {
+            item.classList.toggle("active", item === button);
+        });
+
+        applyFilters();
+    });
+});
+
+resourceSearch.addEventListener("input", applyFilters);
+
+printButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        window.print();
+    });
+});
+
+applyFilters();
+</script>
+</body>
+</html>
