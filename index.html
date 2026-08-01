@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="GABAY is a mobile-friendly learning app that helps senior high school students develop responsible AI habits, critical thinking, digital safety, and career-ready skills."
+        content="KALASAG is a mobile-first learning website that helps senior high school students protect personal data, secure online accounts, recognize digital threats, and respond safely to privacy incidents."
     >
 
-    <title>GABAY | Responsible AI for Future-Ready Youth</title>
+    <title>KALASAG | Protect Your Data. Secure Your Digital Life.</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* Minimalist homepage overrides */
+        /* KALASAG minimalist homepage overrides */
         .hero {
             min-height: 78vh;
             display: grid;
@@ -21,8 +21,9 @@
             padding: 72px 0 64px;
             overflow: hidden;
             background:
-                radial-gradient(circle at 82% 18%, rgba(23, 78, 166, 0.14), transparent 28%),
-                linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+                radial-gradient(circle at 84% 16%, rgba(15, 139, 141, 0.15), transparent 28%),
+                radial-gradient(circle at 16% 88%, rgba(18, 50, 74, 0.08), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f4f8f9 100%);
         }
 
         .hero-grid {
@@ -40,29 +41,29 @@
             gap: 8px;
             margin-bottom: 18px;
             padding: 7px 12px;
-            border: 1px solid rgba(23, 78, 166, 0.18);
+            border: 1px solid rgba(15, 139, 141, 0.2);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.76);
             backdrop-filter: blur(12px);
             font-size: 0.72rem;
             letter-spacing: 0.12em;
         }
 
         .hero h1 {
-            max-width: 700px;
+            max-width: 720px;
             margin: 0;
-            font-size: clamp(2.35rem, 4.7vw, 4.45rem);
+            font-size: clamp(2.3rem, 4.8vw, 4.55rem);
             line-height: 1.02;
             letter-spacing: -0.055em;
             text-wrap: balance;
         }
 
         .hero h1 .hero-accent {
-            color: var(--primary, #174ea6);
+            color: #0f8b8d;
         }
 
         .hero-description {
-            max-width: 640px;
+            max-width: 650px;
             margin: 24px 0 0;
             font-size: clamp(1rem, 1.25vw, 1.12rem);
             line-height: 1.75;
@@ -72,7 +73,7 @@
             margin-top: 30px;
         }
 
-        .hero-card.gabay-orbit {
+        .hero-card.kalasag-visual {
             position: relative;
             min-height: 390px;
             display: grid;
@@ -83,82 +84,159 @@
             box-shadow: none;
         }
 
-        .gabay-orbit::before,
-        .gabay-orbit::after {
-            content: "";
+        .shield-ring,
+        .shield-ring::before,
+        .shield-ring::after {
             position: absolute;
             border-radius: 50%;
+            content: "";
         }
 
-        .gabay-orbit::before {
+        .shield-ring {
             width: 320px;
             height: 320px;
-            border: 1px solid rgba(23, 78, 166, 0.18);
-            box-shadow: 0 0 80px rgba(23, 78, 166, 0.08);
+            border: 1px solid rgba(15, 139, 141, 0.2);
+            box-shadow: 0 0 80px rgba(15, 139, 141, 0.08);
         }
 
-        .gabay-orbit::after {
-            width: 220px;
-            height: 220px;
-            background: linear-gradient(145deg, #174ea6, #7c5cff);
-            box-shadow: 0 30px 80px rgba(23, 78, 166, 0.28);
+        .shield-ring::before {
+            inset: 44px;
+            border: 1px dashed rgba(18, 50, 74, 0.16);
         }
 
-        .gabay-mark {
+        .shield-ring::after {
+            inset: 92px;
+            background: rgba(15, 139, 141, 0.07);
+        }
+
+        .shield-mark {
             position: relative;
             z-index: 2;
-            color: #ffffff;
+            width: 190px;
+            height: 220px;
+            display: grid;
+            place-items: center;
             text-align: center;
+            color: #ffffff;
+            background: linear-gradient(150deg, #12324a 0%, #0f8b8d 100%);
+            clip-path: polygon(50% 0%, 91% 16%, 84% 67%, 50% 100%, 16% 67%, 9% 16%);
+            filter: drop-shadow(0 28px 38px rgba(18, 50, 74, 0.28));
         }
 
-        .gabay-mark strong {
+        .shield-mark strong {
             display: block;
-            font-size: 3rem;
+            margin-top: 8px;
+            font-size: 2.15rem;
             line-height: 1;
-            letter-spacing: -0.08em;
+            letter-spacing: -0.06em;
         }
 
-        .gabay-mark span {
+        .shield-mark span {
             display: block;
-            margin-top: 10px;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
+            margin-top: 8px;
+            font-size: 0.64rem;
+            letter-spacing: 0.16em;
             text-transform: uppercase;
             opacity: 0.88;
         }
 
-        .orbit-chip {
+        .security-chip {
             position: absolute;
             z-index: 3;
             padding: 9px 13px;
-            border: 1px solid rgba(23, 78, 166, 0.16);
+            border: 1px solid rgba(15, 139, 141, 0.16);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 12px 32px rgba(23, 32, 51, 0.08);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 12px 32px rgba(18, 50, 74, 0.08);
             font-size: 0.78rem;
             font-weight: 700;
             backdrop-filter: blur(10px);
         }
 
-        .orbit-chip.one { top: 36px; right: 8px; }
-        .orbit-chip.two { bottom: 62px; left: 0; }
-        .orbit-chip.three { bottom: 20px; right: 26px; }
+        .security-chip.one { top: 42px; right: 8px; }
+        .security-chip.two { bottom: 70px; left: 0; }
+        .security-chip.three { bottom: 22px; right: 22px; }
+
+        .impact-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .impact-item {
+            padding: 22px;
+            border: 1px solid var(--border, #dfe5ee);
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .impact-item strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #0f8b8d;
+            font-size: 1.35rem;
+        }
+
+        .impact-item span {
+            color: var(--text-muted, #526079);
+            font-size: 0.92rem;
+        }
+
+        .privacy-banner {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 36px;
+            align-items: center;
+            padding: 42px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #12324a, #0f8b8d);
+            color: #ffffff;
+        }
+
+        .privacy-banner p {
+            color: rgba(255,255,255,0.82);
+        }
+
+        .privacy-banner .eyebrow {
+            color: #bceced;
+        }
+
+        .privacy-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .privacy-list li {
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+        }
 
         @media (max-width: 900px) {
             .hero { min-height: auto; padding: 64px 0; }
             .hero-grid { grid-template-columns: 1fr; gap: 38px; }
-            .hero-card.gabay-orbit { min-height: 320px; }
-            .gabay-orbit::before { width: 270px; height: 270px; }
-            .gabay-orbit::after { width: 185px; height: 185px; }
+            .hero-card.kalasag-visual { min-height: 320px; }
+            .shield-ring { width: 270px; height: 270px; }
+            .shield-mark { width: 165px; height: 190px; }
+            .impact-strip { grid-template-columns: 1fr; }
+            .privacy-banner { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 600px) {
-            .hero h1 { font-size: clamp(2.2rem, 12vw, 3.25rem); }
+            .hero h1 { font-size: clamp(2.15rem, 12vw, 3.15rem); }
             .hero-description { font-size: 1rem; }
             .hero-actions { gap: 10px; }
             .hero-actions .button { width: 100%; text-align: center; }
-            .hero-card.gabay-orbit { min-height: 280px; }
-            .orbit-chip { font-size: 0.7rem; }
+            .hero-card.kalasag-visual { min-height: 285px; }
+            .security-chip { font-size: 0.7rem; }
+            .privacy-list { grid-template-columns: 1fr; }
+            .privacy-banner { padding: 30px 22px; }
         }
     </style>
 </head>
@@ -166,8 +244,8 @@
 <body>
     <header class="site-header">
         <nav class="container navigation">
-            <a class="logo" href="index.html" aria-label="GABAY home">
-                GABAY
+            <a class="logo" href="index.html" aria-label="KALASAG home">
+                KALASAG
             </a>
 
             <button
@@ -197,196 +275,165 @@
             <div class="container hero-grid">
                 <div class="hero-content">
                     <p class="eyebrow">
-                        Responsible AI • Digital Readiness • SDG 4
+                        Data Privacy • Account Security • Digital Safety
                     </p>
 
                     <h1>
-                        Use AI wisely.
-                        <span class="hero-accent">Own your future.</span>
+                        Protect your data.
+                        <span class="hero-accent">Secure your digital life.</span>
                     </h1>
 
                     <p class="hero-description">
-                        <strong>GABAY</strong> helps senior high school students build AI literacy,
-                        balance technology with human judgment, act with accountability, and
-                        become ready for an AI-shaped future.
+                        <strong>KALASAG</strong> helps senior high school students protect personal information,
+                        secure online accounts, recognize digital threats, and respond confidently when something goes wrong.
                     </p>
 
                     <div class="hero-actions">
                         <a class="button primary-button" href="modules.html">
-                            Start Your GABAY Journey
+                            Start Learning
                         </a>
 
-                        <a class="button secondary-button" href="#why-gabay">
-                            Discover the Benefits
+                        <a class="button secondary-button" href="#why-kalasag">
+                            Explore KALASAG
                         </a>
                     </div>
                 </div>
 
-                <div class="hero-card gabay-orbit" aria-label="GABAY learning framework">
-                    <div class="gabay-mark">
-                        <strong>GABAY</strong>
-                        <span>Responsible AI</span>
+                <div class="hero-card kalasag-visual" aria-label="KALASAG digital protection framework">
+                    <div class="shield-ring"></div>
+                    <div class="shield-mark">
+                        <div>
+                            <strong>KALASAG</strong>
+                            <span>Digital Protection</span>
+                        </div>
                     </div>
-                    <span class="orbit-chip one">AI Literacy</span>
-                    <span class="orbit-chip two">Accountability</span>
-                    <span class="orbit-chip three">Youth Readiness</span>
+                    <span class="security-chip one">Protect Data</span>
+                    <span class="security-chip two">Secure Accounts</span>
+                    <span class="security-chip three">Spot Threats</span>
                 </div>
             </div>
         </section>
 
-        <!-- Acronym Section -->
-        <section class="section alternate-section" id="why-gabay">
+        <!-- What KALASAG Means -->
+        <section class="section alternate-section" id="why-kalasag">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">What GABAY Stands For</p>
+                    <p class="eyebrow">What KALASAG Stands For</p>
 
                     <h2>
-                        More than a name—GABAY is a responsible AI learning framework.
+                        Keeping Accounts, Learner Data, and Security Awareness Guarded.
                     </h2>
 
                     <p>
-                        Each part of GABAY represents a skill or value students need to use
-                        artificial intelligence effectively in school, online spaces, and future workplaces.
+                        KALASAG is built around one practical goal: helping learners make safer choices whenever they sign in, share, upload, click, or communicate online.
                     </p>
                 </div>
 
-                <div class="card-grid">
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">G</div>
-                        <h3>Growing AI Literacy</h3>
-                        <p>
-                            Understand what AI can do, recognize its limitations, and use it as a learning tool rather than a shortcut.
-                        </p>
+                <div class="impact-strip">
+                    <article class="impact-item">
+                        <strong>Protect</strong>
+                        <span>Know which information is personal, sensitive, or confidential.</span>
                     </article>
 
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">B</div>
-                        <h3>Balance</h3>
-                        <p>
-                            Combine the speed of AI with human creativity, reasoning, empathy, and sound decision-making.
-                        </p>
+                    <article class="impact-item">
+                        <strong>Prevent</strong>
+                        <span>Use stronger account habits and recognize suspicious digital activity.</span>
                     </article>
 
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">A</div>
-                        <h3>Accountability</h3>
-                        <p>
-                            Verify information, protect personal data, acknowledge AI assistance, and take ownership of final outputs.
-                        </p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">Y</div>
-                        <h3>Youth Readiness</h3>
-                        <p>
-                            Build critical thinking, communication, digital literacy, and career skills for an AI-shaped future.
-                        </p>
+                    <article class="impact-item">
+                        <strong>Respond</strong>
+                        <span>Take calm, timely action when an account or private information is at risk.</span>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Benefits Section -->
+        <!-- Why It Matters -->
         <section class="section">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">Why Responsible AI Matters</p>
+                    <p class="eyebrow">Why Digital Protection Matters</p>
 
                     <h2>
-                        AI can support learning—but students must remain in control.
+                        Every click, upload, login, and message can reveal something about you.
                     </h2>
 
                     <p>
-                        GABAY helps learners move beyond simply generating answers. It develops
-                        the judgment needed to question, verify, revise, and use AI with purpose.
+                        Digital safety is not only about avoiding hackers. It is also about controlling what you share, understanding where your data goes, and knowing how to act when a digital situation feels unsafe.
                     </p>
                 </div>
 
                 <div class="card-grid">
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">🔍</div>
-                        <h3>Think Critically</h3>
-                        <p>
-                            Examine AI-generated claims, detect errors, compare sources, and decide what information can be trusted.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">01</div>
+                        <h3>Know Your Data</h3>
+                        <p>Identify personal, sensitive, confidential, and publicly shareable information.</p>
                     </article>
 
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">✍️</div>
-                        <h3>Learn Authentically</h3>
-                        <p>
-                            Use AI for support while preserving your own ideas, understanding, and personal voice.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">02</div>
+                        <h3>Lock Down Accounts</h3>
+                        <p>Use passphrases, multi-factor authentication, secure recovery options, and device protection.</p>
                     </article>
 
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">🔐</div>
-                        <h3>Stay Safe</h3>
-                        <p>
-                            Protect private information and make informed choices when interacting with AI platforms.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">03</div>
+                        <h3>Spot the Trap</h3>
+                        <p>Recognize phishing, fake links, impersonation, urgent requests, and social engineering.</p>
                     </article>
 
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">⚖️</div>
-                        <h3>Act Responsibly</h3>
-                        <p>
-                            Practice academic honesty, transparency, respectful use, and accountability for final work.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">04</div>
+                        <h3>Share with Care</h3>
+                        <p>Make smarter choices about posts, images, locations, files, app permissions, and cloud access.</p>
                     </article>
 
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">💬</div>
-                        <h3>Communicate Better</h3>
-                        <p>
-                            Improve professional emails, written work, presentations, and interview responses without losing authenticity.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">05</div>
+                        <h3>Protect Data in AI</h3>
+                        <p>Remove identifiers and avoid uploading private or confidential information to AI platforms.</p>
                     </article>
 
                     <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">💼</div>
-                        <h3>Prepare for Careers</h3>
-                        <p>
-                            Explore careers, improve application materials, and develop practical digital skills for future workplaces.
-                        </p>
+                        <div class="card-icon" aria-hidden="true">06</div>
+                        <h3>Recover Smart</h3>
+                        <p>Know what to do after a suspicious message, account compromise, or privacy incident.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Responsible Use Comparison -->
+        <!-- Safe vs Risky Choices -->
         <section class="section alternate-section">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">Choose Your Path</p>
+                    <p class="eyebrow">Choose the Safer Action</p>
 
                     <h2>
-                        Responsible AI use begins with better choices.
+                        Good digital security is built through everyday decisions.
                     </h2>
                 </div>
 
                 <div class="comparison-grid">
                     <article class="comparison-card responsible-card">
-                        <h3>✅ Guided by GABAY</h3>
-
+                        <h3>Safer Digital Habits</h3>
                         <ul>
-                            <li>Use AI to explore, practice, and improve.</li>
-                            <li>Check facts using credible sources.</li>
-                            <li>Revise outputs using your own judgment.</li>
-                            <li>Protect personal and confidential information.</li>
-                            <li>Acknowledge AI assistance when required.</li>
+                            <li>Use unique passphrases for important accounts.</li>
+                            <li>Turn on multi-factor authentication.</li>
+                            <li>Check the sender and link before clicking.</li>
+                            <li>Review app permissions and privacy settings.</li>
+                            <li>Remove personal details before sharing files or prompts.</li>
                         </ul>
                     </article>
 
                     <article class="comparison-card irresponsible-card">
-                        <h3>⚠️ Unguided AI Use</h3>
-
+                        <h3>Risky Digital Habits</h3>
                         <ul>
-                            <li>Copy answers without understanding them.</li>
-                            <li>Trust every AI-generated claim immediately.</li>
-                            <li>Submit generated work as entirely original.</li>
-                            <li>Share private or sensitive information.</li>
-                            <li>Use AI to deceive, harm, or misrepresent.</li>
+                            <li>Reuse one password across several accounts.</li>
+                            <li>Respond immediately to urgent or threatening messages.</li>
+                            <li>Post private information publicly.</li>
+                            <li>Allow every app permission without checking.</li>
+                            <li>Upload confidential documents to unfamiliar platforms.</li>
                         </ul>
                     </article>
                 </div>
@@ -397,54 +444,54 @@
         <section class="section">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">The GABAY Learning Journey</p>
+                    <p class="eyebrow">The KALASAG Learning Journey</p>
 
                     <h2>
-                        Six practical modules for responsible and future-ready AI use.
+                        Six focused modules for safer digital participation.
                     </h2>
                 </div>
 
                 <div class="module-preview-grid">
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">🤖</div>
+                        <div class="card-icon" aria-hidden="true">01</div>
                         <span class="module-number">Module 1</span>
-                        <h3>Understanding AI</h3>
-                        <p>Explore how AI works, where it appears, and what its strengths and limitations are.</p>
+                        <h3>Your Data, Your Identity</h3>
+                        <p>Understand personal information, consent, data collection, and digital footprints.</p>
                     </article>
 
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">🔍</div>
+                        <div class="card-icon" aria-hidden="true">02</div>
                         <span class="module-number">Module 2</span>
-                        <h3>Think Before You Trust</h3>
-                        <p>Check claims, evaluate sources, identify hallucinations, and revise unreliable answers.</p>
+                        <h3>Lock It Down</h3>
+                        <p>Strengthen passwords, authentication, recovery options, and device security.</p>
                     </article>
 
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">✍️</div>
+                        <div class="card-icon" aria-hidden="true">03</div>
                         <span class="module-number">Module 3</span>
-                        <h3>AI-Assisted Research and Writing</h3>
-                        <p>Use AI for ideas and improvement while keeping your own thinking and voice.</p>
+                        <h3>Spot the Trap</h3>
+                        <p>Analyze phishing, scams, suspicious links, impersonation, and social engineering.</p>
                     </article>
 
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">⚖️</div>
+                        <div class="card-icon" aria-hidden="true">04</div>
                         <span class="module-number">Module 4</span>
-                        <h3>Academic Integrity</h3>
-                        <p>Distinguish appropriate support from plagiarism, substitution, and dishonest use.</p>
+                        <h3>Share with Care</h3>
+                        <p>Manage social media, app permissions, location sharing, images, and cloud files.</p>
                     </article>
 
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">🔐</div>
+                        <div class="card-icon" aria-hidden="true">05</div>
                         <span class="module-number">Module 5</span>
-                        <h3>Privacy and Digital Safety</h3>
-                        <p>Protect personal information and respond responsibly to online risks.</p>
+                        <h3>Privacy in the Age of AI</h3>
+                        <p>Use AI tools without exposing personal, school, family, or third-party information.</p>
                     </article>
 
                     <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">💼</div>
+                        <div class="card-icon" aria-hidden="true">06</div>
                         <span class="module-number">Module 6</span>
-                        <h3>AI for Career Readiness</h3>
-                        <p>Apply responsible AI use to career exploration, résumés, emails, and interviews.</p>
+                        <h3>Act Fast, Recover Smart</h3>
+                        <p>Respond to compromised accounts, suspicious activity, and unauthorized disclosure.</p>
                     </article>
                 </div>
 
@@ -456,31 +503,24 @@
             </div>
         </section>
 
-        <!-- Checklist Section -->
+        <!-- Privacy Promise -->
         <section class="section alternate-section">
             <div class="container">
-                <div class="checklist-panel">
+                <div class="privacy-banner">
                     <div>
-                        <p class="eyebrow">Your GABAY Check</p>
-
-                        <h2>
-                            Pause before you use an AI response.
-                        </h2>
-
+                        <p class="eyebrow">KALASAG Privacy Promise</p>
+                        <h2>Learn safely without giving away sensitive information.</h2>
                         <p>
-                            Use these questions to make responsible decisions before submitting,
-                            sharing, or acting on AI-generated content.
+                            KALASAG uses fictional scenarios and does not ask learners to submit real passwords, identification numbers, private files, or confidential account information.
                         </p>
                     </div>
 
-                    <ol class="numbered-checklist">
-                        <li>Do I understand the response?</li>
-                        <li>Have I checked whether it is accurate?</li>
-                        <li>Did I verify important claims using credible sources?</li>
-                        <li>Does the final output reflect my own thinking?</li>
-                        <li>Did I protect personal and private information?</li>
-                        <li>Am I being honest about how I used AI?</li>
-                    </ol>
+                    <ul class="privacy-list">
+                        <li>No real passwords</li>
+                        <li>No private documents</li>
+                        <li>No unnecessary personal data</li>
+                        <li>No public sharing of learner responses</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -488,19 +528,14 @@
         <!-- Call to Action -->
         <section class="call-to-action">
             <div class="container call-to-action-content">
-                <p style="font-size: 3.5rem; margin: 0 0 12px;" aria-hidden="true">
-                    🧭
-                </p>
-
-                <p class="eyebrow">Let GABAY Lead the Way</p>
+                <p class="eyebrow">Build Your Digital Shield</p>
 
                 <h2>
-                    Build better AI habits for school, life, and your future career.
+                    Small security habits can protect what matters most.
                 </h2>
 
                 <p>
-                    Begin with the initial assessment, discover what you already know,
-                    and start your responsible AI learning journey.
+                    Begin with the initial assessment, discover your current habits, and start strengthening your personal KALASAG.
                 </p>
 
                 <a class="button light-button" href="assessment.html">
@@ -513,13 +548,13 @@
     <footer class="site-footer">
         <div class="container footer-content">
             <div>
-                <strong>GABAY</strong>
+                <strong>KALASAG</strong>
                 <p>
-                    Growing AI Literacy, Balance, Accountability, and Youth Readiness.
+                    Keeping Accounts, Learner Data, and Security Awareness Guarded.
                 </p>
             </div>
 
-            <p>&copy; 2026 GABAY by Ctrl+EDU</p>
+            <p>&copy; 2026 KALASAG by Ctrl+EDU</p>
         </div>
     </footer>
 

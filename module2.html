@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KALASAG Module 2: Lock It Down. Learn how to protect online accounts using strong passphrases, unique credentials, multi-factor authentication, secure recovery, and device safeguards.">
+    <title>Module 2: Lock It Down | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --kalasag-safe: #eaf7f3;
+            --kalasag-warn: #fff5df;
+            --kalasag-danger: #fff0ef;
+            --kalasag-blue: #527cc5;
+            --kalasag-gold: #d99b28;
+        }
+
+        .module-hero {
+            min-height: 72vh;
+            display: grid;
+            align-items: center;
+            padding: 74px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 16%, rgba(15,139,141,0.16), transparent 28%),
+                radial-gradient(circle at 12% 88%, rgba(18,50,74,0.08), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f4f8f9 100%);
+        }
+
+        .module-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+            gap: 70px;
+        }
+
+        .module-hero .eyebrow,
+        .journey-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid rgba(15,139,141,0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.82);
+            color: var(--kalasag-teal);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .module-hero h1 {
+            max-width: 760px;
+            margin: 20px 0 0;
+            font-size: clamp(2.35rem, 4.8vw, 4.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .module-hero h1 span { color: var(--kalasag-teal); }
+
+        .module-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .lock-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .lock-core {
+            position: relative;
+            z-index: 2;
+            width: 220px;
+            height: 220px;
+            display: grid;
+            place-items: center;
+            border-radius: 44px;
+            color: #ffffff;
+            text-align: center;
+            background: linear-gradient(145deg, var(--kalasag-navy), var(--kalasag-teal));
+            box-shadow: 0 30px 70px rgba(18,50,74,0.25);
+            transform: rotate(-4deg);
+        }
+
+        .lock-core::before {
+            content: "";
+            position: absolute;
+            width: 106px;
+            height: 92px;
+            top: -72px;
+            border: 18px solid var(--kalasag-navy);
+            border-bottom: 0;
+            border-radius: 60px 60px 0 0;
+            opacity: 0.96;
+        }
+
+        .lock-core strong {
+            display: block;
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+        }
+
+        .lock-core span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .security-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(15,139,141,0.17);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.94);
+            box-shadow: 0 12px 30px rgba(18,50,74,0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .security-chip.one { top: 28px; left: 9%; }
+        .security-chip.two { top: 68px; right: 1%; }
+        .security-chip.three { bottom: 80px; right: 0; }
+        .security-chip.four { bottom: 28px; left: 13%; }
+        .security-chip.five { top: 175px; left: -3%; }
+
+        .progress-wrap {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .progress-shell {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .progress-title,
+        .progress-value {
+            color: var(--kalasag-navy);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e7eef0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-teal), #38b6b8);
+            transition: width 0.35s ease;
+        }
+
+        .journey-nav {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .journey-nav a {
+            display: block;
+            padding: 11px 8px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .journey-nav a:hover,
+        .journey-nav a:focus {
+            border-color: rgba(15,139,141,0.4);
+            color: var(--kalasag-teal);
+        }
+
+        .learning-card-grid,
+        .security-grid,
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .learning-card,
+        .security-card,
+        .scenario-card,
+        .reflection-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(18,50,74,0.05);
+        }
+
+        .learning-card .number,
+        .security-card .number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            background: rgba(15,139,141,0.10);
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .learning-card h3,
+        .security-card h3,
+        .scenario-card h3 { margin-top: 0; }
+
+        .learning-card p,
+        .security-card p,
+        .scenario-card p { color: var(--kalasag-muted); }
+
+        .mini-list {
+            margin: 16px 0 0;
+            padding-left: 20px;
+            color: var(--kalasag-muted);
+        }
+
+        .mini-list li { margin-bottom: 8px; }
+
+        .security-card.passphrase { border-top: 5px solid var(--kalasag-blue); }
+        .security-card.unique { border-top: 5px solid var(--kalasag-teal); }
+        .security-card.mfa { border-top: 5px solid var(--kalasag-gold); }
+        .security-card.recovery { border-top: 5px solid #c66d8d; }
+
+        .activity-panel {
+            margin-top: 36px;
+            padding: 34px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 22px;
+            background: linear-gradient(180deg, #ffffff, #f8fbfb);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .activity-header h3 { margin: 5px 0 0; }
+
+        .question-card {
+            padding: 22px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .question-card + .question-card { margin-top: 16px; }
+        .question-card p { margin-top: 0; font-weight: 800; }
+
+        .choice-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .choice-button {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .choice-button:hover,
+        .choice-button:focus {
+            border-color: rgba(15,139,141,0.5);
+            background: #f2fbfb;
+        }
+
+        .choice-button.correct {
+            border-color: #2f9b70;
+            background: var(--kalasag-safe);
+        }
+
+        .choice-button.incorrect {
+            border-color: #d46b65;
+            background: var(--kalasag-danger);
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            color: var(--kalasag-navy);
+            font-size: 0.92rem;
+        }
+
+        .feedback.show { display: block; }
+        .feedback.good { background: var(--kalasag-safe); }
+        .feedback.review { background: var(--kalasag-warn); }
+
+        .password-lab {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .sample-builder {
+            padding: 28px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+        }
+
+        .sample-output {
+            min-height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 18px 0;
+            padding: 18px;
+            border: 1px dashed rgba(15,139,141,0.45);
+            border-radius: 14px;
+            background: var(--kalasag-pale);
+            color: var(--kalasag-navy);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 900;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .builder-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .small-button {
+            padding: 11px 15px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 10px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .small-button:hover,
+        .small-button:focus {
+            border-color: var(--kalasag-teal);
+            background: #f2fbfb;
+        }
+
+        .rule-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .rule-item {
+            display: flex;
+            gap: 12px;
+            padding: 15px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 12px;
+            background: #ffffff;
+        }
+
+        .rule-item span {
+            flex: 0 0 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: rgba(15,139,141,0.10);
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .reuse-chain {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            align-items: stretch;
+            margin-top: 30px;
+        }
+
+        .chain-step {
+            position: relative;
+            padding: 22px 17px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 15px;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .chain-step:not(:last-child)::after {
+            content: "→";
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            z-index: 2;
+            transform: translateY(-50%);
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .chain-step strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--kalasag-navy);
+        }
+
+        .chain-step span {
+            color: var(--kalasag-muted);
+            font-size: 0.85rem;
+        }
+
+        .mfa-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .mfa-step {
+            padding: 25px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 17px;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .mfa-step .icon {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            border-radius: 18px;
+            background: rgba(15,139,141,0.10);
+            color: var(--kalasag-teal);
+            font-size: 1.45rem;
+            font-weight: 900;
+        }
+
+        .mfa-step p { color: var(--kalasag-muted); }
+
+        .security-audit {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+        }
+
+        .check-item input { margin-top: 4px; }
+
+        .result-panel {
+            display: none;
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 14px;
+            background: var(--kalasag-safe);
+        }
+
+        .result-panel.show { display: block; }
+
+        .scenario-card .scenario-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--kalasag-teal);
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .module-complete {
+            padding: 48px;
+            border-radius: 25px;
+            background:
+                radial-gradient(circle at 88% 18%, rgba(255,255,255,0.16), transparent 28%),
+                linear-gradient(135deg, var(--kalasag-navy), var(--kalasag-teal));
+            color: #ffffff;
+            box-shadow: 0 28px 70px rgba(18,50,74,0.20);
+        }
+
+        .module-complete p { color: rgba(255,255,255,0.84); }
+        .module-complete .eyebrow { color: #c9f3f3; }
+
+        .completion-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        @media (max-width: 1000px) {
+            .reuse-chain { grid-template-columns: 1fr; }
+            .chain-step:not(:last-child)::after {
+                content: "↓";
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: -17px;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .module-hero { min-height: auto; padding: 64px 0; }
+            .module-hero .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+            .lock-visual { min-height: 350px; }
+            .learning-card-grid,
+            .security-grid,
+            .scenario-grid { grid-template-columns: 1fr 1fr; }
+            .journey-nav { grid-template-columns: repeat(3, 1fr); }
+            .password-lab { grid-template-columns: 1fr; }
+            .mfa-steps { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 650px) {
+            .module-hero h1 { font-size: clamp(2.2rem, 12vw, 3.2rem); }
+            .lock-visual { min-height: 320px; }
+            .lock-core { width: 180px; height: 180px; }
+            .lock-core::before { width: 88px; height: 76px; top: -60px; border-width: 15px; border-bottom: 0; }
+            .security-chip { font-size: 0.68rem; }
+            .learning-card-grid,
+            .security-grid,
+            .scenario-grid,
+            .security-audit { grid-template-columns: 1fr; }
+            .progress-shell { grid-template-columns: 1fr auto; }
+            .progress-track { grid-column: 1 / -1; grid-row: 2; }
+            .journey-nav { grid-template-columns: repeat(2, 1fr); }
+            .activity-panel { padding: 24px 18px; }
+            .activity-header { flex-direction: column; }
+            .module-complete { padding: 34px 23px; }
+            .completion-actions .button { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html" aria-label="KALASAG home">KALASAG</a>
+
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="module-hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <p class="eyebrow">Module 2 • Lock It Down</p>
+                <h1>Your account is a doorway. <span>Decide how many locks it needs.</span></h1>
+                <p class="hero-description">
+                    A password alone may not be enough to protect your digital life. In this module, you will build safer account habits using strong passphrases, unique credentials, multi-factor authentication, secure recovery options, and basic device protection.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#objectives">Begin the Journey</a>
+                    <a class="button secondary-button" href="modules.html">Back to Modules</a>
+                </div>
+            </div>
+
+            <div class="lock-visual" aria-label="Visual showing layers of online account security">
+                <span class="security-chip one">Passphrase</span>
+                <span class="security-chip two">MFA</span>
+                <span class="security-chip three">Recovery</span>
+                <span class="security-chip four">Device Lock</span>
+                <span class="security-chip five">Unique Login</span>
+                <div class="lock-core">
+                    <div>
+                        <strong>LOCKED</strong>
+                        <span>Account protected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="progress-wrap">
+        <div class="container">
+            <div class="progress-shell">
+                <span class="progress-title">Module 2 progress</span>
+                <div class="progress-track" aria-label="Module completion progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <span class="progress-value" id="progressValue">10%</span>
+            </div>
+
+            <div class="journey-nav" aria-label="Module learning journey">
+                <a href="#objectives">1. Get Ready</a>
+                <a href="#passphrases">2. Passphrases</a>
+                <a href="#unique">3. Unique Logins</a>
+                <a href="#mfa">4. MFA</a>
+                <a href="#recovery">5. Recovery</a>
+                <a href="#challenge">6. Final Check</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" id="objectives" data-progress="18">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 1 • Get Ready</p>
+                <h2>What will you be able to do?</h2>
+                <p>By the end of this module, you should be able to protect important accounts using several layers of security instead of depending on one password.</p>
+            </div>
+
+            <div class="learning-card-grid">
+                <article class="learning-card">
+                    <div class="number">01</div>
+                    <h3>Create safer credentials</h3>
+                    <p>Recognize the qualities of a strong passphrase and explain why every important account should use a unique credential.</p>
+                </article>
+                <article class="learning-card">
+                    <div class="number">02</div>
+                    <h3>Add another layer</h3>
+                    <p>Explain how multi-factor authentication can reduce the damage caused by a stolen or guessed password.</p>
+                </article>
+                <article class="learning-card">
+                    <div class="number">03</div>
+                    <h3>Prepare for recovery</h3>
+                    <p>Review account-recovery options, device locks, and backup methods without exposing personal information.</p>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Quick self-check</span>
+                        <h3>What do you already believe?</h3>
+                    </div>
+                    <span class="module-number">Not graded</span>
+                </div>
+
+                <div class="question-card">
+                    <p>Your password is very long, so it is safe to use it for your email, social media, and school account. Is this a good practice?</p>
+                    <div class="choice-list" data-question="warmup">
+                        <button class="choice-button" data-correct="false" data-feedback="Length helps, but password reuse connects your accounts. If one service is breached, attackers may try the same credential elsewhere.">Yes. A strong password can be reused safely.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Important accounts should have unique credentials so that one exposed password does not unlock several services.">No. Each important account should use a unique credential.</button>
+                    </div>
+                    <div class="feedback" id="warmup-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="passphrases" data-progress="35">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 2 • Build a Stronger Secret</p>
+                <h2>Long, memorable, and difficult to guess.</h2>
+                <p>A passphrase combines several unrelated words into a longer credential. Length and unpredictability matter more than simply replacing letters with obvious symbols. Never use the examples on this page as your real password.</p>
+            </div>
+
+            <div class="security-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+                <article class="security-card passphrase">
+                    <div class="number">L</div>
+                    <h3>Long</h3>
+                    <p>Longer credentials generally take more effort to guess or crack.</p>
+                </article>
+                <article class="security-card unique">
+                    <div class="number">U</div>
+                    <h3>Unique</h3>
+                    <p>Do not reuse the same credential across important accounts.</p>
+                </article>
+                <article class="security-card mfa">
+                    <div class="number">R</div>
+                    <h3>Random enough</h3>
+                    <p>Avoid names, birthdays, favorite teams, and predictable patterns.</p>
+                </article>
+                <article class="security-card recovery">
+                    <div class="number">M</div>
+                    <h3>Memorable</h3>
+                    <p>Use a structure you can remember without storing it in unsafe places.</p>
+                </article>
+            </div>
+
+            <div class="activity-panel password-lab">
+                <div class="sample-builder">
+                    <span class="journey-label">Sample passphrase laboratory</span>
+                    <h3>Generate a fictional example</h3>
+                    <p>This tool creates a demonstration only. Do not copy the result as an actual password.</p>
+                    <div class="sample-output" id="samplePassphrase" aria-live="polite">River-Lantern-Mango-Orbit</div>
+                    <div class="builder-controls">
+                        <button class="small-button" id="generatePassphrase" type="button">Generate another example</button>
+                        <button class="small-button" id="explainPassphrase" type="button">Why is it stronger?</button>
+                    </div>
+                    <div class="feedback" id="builderFeedback"></div>
+                </div>
+
+                <div class="rule-list">
+                    <div class="rule-item"><span>1</span><div><strong>Use several unrelated words.</strong><br>Related phrases, quotations, and personal facts can be easier to predict.</div></div>
+                    <div class="rule-item"><span>2</span><div><strong>Do not expose it.</strong><br>A strong credential still fails if it is shared, phished, photographed, or saved insecurely.</div></div>
+                    <div class="rule-item"><span>3</span><div><strong>Let a password manager help.</strong><br>A reputable password manager can generate and store unique credentials securely.</div></div>
+                    <div class="rule-item"><span>4</span><div><strong>Change it when there is a reason.</strong><br>Update a credential after suspected exposure, a breach notice, or unauthorized access.</div></div>
+                </div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Interactive challenge</span>
+                        <h3>Which fictional credential is the safest starting point?</h3>
+                    </div>
+                    <span class="module-number">Do not use these examples</span>
+                </div>
+
+                <div class="question-card">
+                    <p>Select the strongest option among these fictional examples.</p>
+                    <div class="choice-list" data-question="q1">
+                        <button class="choice-button" data-correct="false" data-feedback="This includes a common word and a predictable year pattern.">basketball2026</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Replacing letters with symbols does not make a short and common word unpredictable enough.">P@ssw0rd!</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. This example is longer and combines unrelated words. A real account should still use a unique passphrase that is not shown publicly.">Copper-Cloud-Piano-Harbor</button>
+                        <button class="choice-button" data-correct="false" data-feedback="A name and birthday can often be found or guessed from public information.">MariaMay2008</button>
+                    </div>
+                    <div class="feedback" id="q1-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="unique" data-progress="52">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 3 • Break the Reuse Chain</p>
+                <h2>One stolen password should not unlock your whole life.</h2>
+                <p>When the same credential is reused, a breach at one service can become an attack on many accounts. Attackers may automatically test exposed credentials on email, social media, shopping, gaming, and school platforms.</p>
+            </div>
+
+            <div class="reuse-chain" aria-label="How password reuse can lead to account takeover">
+                <div class="chain-step"><strong>1. One site is breached</strong><span>A credential is exposed or stolen.</span></div>
+                <div class="chain-step"><strong>2. Credentials circulate</strong><span>The email and password may be shared or sold.</span></div>
+                <div class="chain-step"><strong>3. Attackers reuse them</strong><span>The same login is tested on other services.</span></div>
+                <div class="chain-step"><strong>4. Another account opens</strong><span>Reused credentials allow unauthorized access.</span></div>
+                <div class="chain-step"><strong>5. Damage spreads</strong><span>Messages, files, contacts, or recovery options may be abused.</span></div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Decision scenario</span>
+                        <h3>A service you use announces a data breach.</h3>
+                    </div>
+                    <span class="module-number">Choose the best first response</span>
+                </div>
+
+                <div class="question-card">
+                    <p>You used the exposed password on three other accounts. What should you do?</p>
+                    <div class="choice-list" data-question="q2">
+                        <button class="choice-button" data-correct="false" data-feedback="Waiting allows attackers more time to test the exposed credential on other services.">Wait to see whether anything happens.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Change the reused credentials immediately, beginning with your email and other high-value accounts. Make each replacement unique and review recent sign-ins.">Change every account that reused it, starting with email, and review account activity.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Changing only the breached account does not protect the other accounts that use the same exposed credential.">Change the password only on the breached service.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Posting the exposed password creates more risk and does not secure any account.">Post the password publicly so friends know it was compromised.</button>
+                    </div>
+                    <div class="feedback" id="q2-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="mfa" data-progress="68">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 4 • Add Another Layer</p>
+                <h2>Multi-factor authentication asks for more than one proof.</h2>
+                <p>MFA combines two or more different factors. Even if someone learns your password, the additional factor can make unauthorized access more difficult.</p>
+            </div>
+
+            <div class="mfa-steps">
+                <article class="mfa-step">
+                    <div class="icon">A</div>
+                    <h3>Something you know</h3>
+                    <p>A password, passphrase, or PIN.</p>
+                </article>
+                <article class="mfa-step">
+                    <div class="icon">B</div>
+                    <h3>Something you have</h3>
+                    <p>An authenticator app, security key, or registered device.</p>
+                </article>
+                <article class="mfa-step">
+                    <div class="icon">C</div>
+                    <h3>Something you are</h3>
+                    <p>A biometric factor, such as a fingerprint or face match, when appropriately configured.</p>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">MFA safety check</span>
+                        <h3>Unexpected approval request</h3>
+                    </div>
+                    <span class="module-number">Think before you tap</span>
+                </div>
+
+                <div class="question-card">
+                    <p>Your phone receives an MFA approval request, but you are not trying to sign in. What is the safest response?</p>
+                    <div class="choice-list" data-question="q3">
+                        <button class="choice-button" data-correct="false" data-feedback="Approving an unexpected request may give an attacker access to your account.">Approve it so the notification disappears.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Deny the request, secure the account, review recent activity, and report the incident through the appropriate support channel.">Deny it, change or secure the account, and review recent sign-in activity.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Ignoring repeated unexpected requests without securing the account may allow the attack to continue.">Ignore every request without taking further action.</button>
+                    </div>
+                    <div class="feedback" id="q3-feedback"></div>
+                </div>
+            </div>
+
+            <div class="security-grid" style="margin-top: 28px;">
+                <article class="security-card passphrase">
+                    <div class="number">01</div>
+                    <h3>Enable MFA first on high-value accounts</h3>
+                    <p>Prioritize email, school, banking or payment, cloud storage, and social-media accounts.</p>
+                </article>
+                <article class="security-card unique">
+                    <div class="number">02</div>
+                    <h3>Protect backup codes</h3>
+                    <p>Store recovery or backup codes securely. Do not post, message, or photograph them carelessly.</p>
+                </article>
+                <article class="security-card mfa">
+                    <div class="number">03</div>
+                    <h3>Never share verification codes</h3>
+                    <p>A legitimate support person should not ask you to reveal a one-time authentication code.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="recovery" data-progress="84">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 5 • Prepare for Recovery</p>
+                <h2>Security includes getting back in safely.</h2>
+                <p>Recovery methods should help you regain access without becoming an easy path for someone else. Keep them current, private, and protected.</p>
+            </div>
+
+            <div class="security-grid" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+                <article class="security-card passphrase">
+                    <div class="number">1</div>
+                    <h3>Recovery email</h3>
+                    <p>Use an account you control and protect it with its own unique credential and MFA.</p>
+                </article>
+                <article class="security-card unique">
+                    <div class="number">2</div>
+                    <h3>Recovery number</h3>
+                    <p>Keep the registered number current and secure the device with a screen lock.</p>
+                </article>
+                <article class="security-card mfa">
+                    <div class="number">3</div>
+                    <h3>Backup codes</h3>
+                    <p>Store them offline or in a protected password manager, not in a public note or chat.</p>
+                </article>
+                <article class="security-card recovery">
+                    <div class="number">4</div>
+                    <h3>Trusted devices</h3>
+                    <p>Remove devices you no longer own and review active sessions regularly.</p>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Personal account-security audit</span>
+                        <h3>Which protective habits are already part of your routine?</h3>
+                    </div>
+                    <span class="module-number">Do not enter actual credentials</span>
+                </div>
+
+                <div class="security-audit" id="securityAudit">
+                    <label class="check-item"><input type="checkbox"> <span>I use a unique credential for my primary email account.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>I have enabled MFA on at least one high-value account.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>My phone or computer uses a screen lock.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>My recovery email and phone number are current.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>I know where my backup or recovery codes are stored securely.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>I review active sessions and remove unfamiliar or old devices.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>I do not share passwords or verification codes with friends or strangers.</span></label>
+                    <label class="check-item"><input type="checkbox"> <span>I know whom to contact if a school account appears compromised.</span></label>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="button primary-button" id="auditButton" type="button">Review My Habits</button>
+                </div>
+                <div class="result-panel" id="auditResult" aria-live="polite"></div>
+            </div>
+
+            <div class="scenario-grid" style="margin-top: 28px;">
+                <article class="scenario-card">
+                    <span class="scenario-label">Device safety</span>
+                    <h3>Your phone is lost.</h3>
+                    <p>Use device-finding or remote-lock features when available, secure important accounts, and inform the appropriate trusted adult or school contact.</p>
+                </article>
+                <article class="scenario-card">
+                    <span class="scenario-label">Shared computer</span>
+                    <h3>You used a public or shared device.</h3>
+                    <p>Sign out completely, avoid saving passwords, close the browser, and review active sessions from a trusted device.</p>
+                </article>
+                <article class="scenario-card">
+                    <span class="scenario-label">Old device</span>
+                    <h3>You are giving a device away.</h3>
+                    <p>Back up what you need, sign out of accounts, remove the device from trusted lists, and perform an approved secure reset.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="challenge" data-progress="96">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 6 • Final Check</p>
+                <h2>Can you lock down the account?</h2>
+                <p>Apply the complete strategy: unique credential, MFA, protected recovery, and a secure device.</p>
+            </div>
+
+            <div class="activity-panel" style="margin-top: 0;">
+                <div class="question-card">
+                    <p>1. Which setup gives an important email account the strongest overall protection?</p>
+                    <div class="choice-list" data-question="final1">
+                        <button class="choice-button" data-correct="false" data-feedback="A memorable password is not enough if it is reused and the account lacks an additional factor.">A memorable reused password and no MFA</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. A unique passphrase, MFA, current recovery options, and device security work together as layers.">A unique passphrase, MFA, current recovery methods, and a locked device</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Frequent changes do not compensate for weak, predictable, or reused credentials.">A short password changed every week</button>
+                    </div>
+                    <div class="feedback" id="final1-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>2. A friend asks you to send a verification code because they say it will help recover their account. What should you do?</p>
+                    <div class="choice-list" data-question="final2">
+                        <button class="choice-button" data-correct="false" data-feedback="Verification codes are tied to your sign-in or recovery process and should not be shared.">Send it because the person is your friend.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Do not share the code. Verify the request through another trusted channel and secure your account if the code was unexpected.">Do not share it; verify the request separately and secure your account if needed.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Posting the code publicly exposes it to more people and increases the risk.">Post the code in the group chat to ask whether it is legitimate.</button>
+                    </div>
+                    <div class="feedback" id="final2-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>3. Which statement about account recovery is most accurate?</p>
+                    <div class="choice-list" data-question="final3">
+                        <button class="choice-button" data-correct="false" data-feedback="Recovery methods can become an attack path when they are outdated or poorly protected.">Recovery settings do not matter until you forget your password.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Recovery information should be current, private, and protected because it can be used to regain control of an account.">Recovery methods are part of account security and should be reviewed regularly.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Backup codes should be stored securely and never kept in a public note or shared chat.">Backup codes are safest when saved in a public cloud note anyone can access.</button>
+                    </div>
+                    <div class="feedback" id="final3-feedback"></div>
+                </div>
+            </div>
+
+            <div class="module-complete" style="margin-top: 34px;">
+                <p class="eyebrow">Module 2 complete</p>
+                <h2>Strong security is built in layers.</h2>
+                <p>You have explored passphrases, password reuse, multi-factor authentication, secure recovery, and device protection. Mark the module complete, then continue to Module 3 to learn how to recognize phishing and social-engineering traps.</p>
+                <div class="completion-actions">
+                    <button class="button light-button" id="completeModule" type="button">Mark Module 2 Complete</button>
+                    <a class="button secondary-button" href="module3.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Continue to Module 3</a>
+                    <a class="button secondary-button" href="module1.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Review Module 1</a>
+                </div>
+                <p id="completionMessage" style="margin-bottom: 0; font-weight: 800;" aria-live="polite"></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+    "use strict";
+
+    const progressBar = document.getElementById("progressBar");
+    const progressValue = document.getElementById("progressValue");
+    const progressSections = [...document.querySelectorAll("[data-progress]")];
+
+    function updateProgress() {
+        let currentProgress = 10;
+        const viewportMarker = window.scrollY + window.innerHeight * 0.45;
+
+        progressSections.forEach((section) => {
+            if (viewportMarker >= section.offsetTop) {
+                currentProgress = Number(section.dataset.progress);
+            }
+        });
+
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10) {
+            currentProgress = 100;
+        }
+
+        progressBar.style.width = `${currentProgress}%`;
+        progressValue.textContent = `${currentProgress}%`;
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("load", updateProgress);
+
+    document.querySelectorAll(".choice-list").forEach((choiceList) => {
+        choiceList.addEventListener("click", (event) => {
+            const button = event.target.closest(".choice-button");
+            if (!button) return;
+
+            const questionId = choiceList.dataset.question;
+            const feedback = document.getElementById(`${questionId}-feedback`);
+            const isCorrect = button.dataset.correct === "true";
+
+            choiceList.querySelectorAll(".choice-button").forEach((item) => {
+                item.classList.remove("correct", "incorrect");
+                item.setAttribute("aria-pressed", "false");
+            });
+
+            button.classList.add(isCorrect ? "correct" : "incorrect");
+            button.setAttribute("aria-pressed", "true");
+
+            feedback.textContent = button.dataset.feedback;
+            feedback.className = `feedback show ${isCorrect ? "good" : "review"}`;
+        });
+    });
+
+    const wordsA = ["River", "Copper", "Silent", "Mango", "Velvet", "Solar", "Cedar", "Paper"];
+    const wordsB = ["Lantern", "Cloud", "Piano", "Harbor", "Comet", "Garden", "Anchor", "Kite"];
+    const wordsC = ["Orbit", "Forest", "Window", "Pebble", "Rocket", "Bridge", "Canyon", "Drum"];
+    const wordsD = ["Turtle", "Breeze", "Market", "Galaxy", "Notebook", "Island", "Sparrow", "Coffee"];
+
+    function randomItem(items) {
+        return items[Math.floor(Math.random() * items.length)];
+    }
+
+    document.getElementById("generatePassphrase").addEventListener("click", () => {
+        const sample = `${randomItem(wordsA)}-${randomItem(wordsB)}-${randomItem(wordsC)}-${randomItem(wordsD)}`;
+        document.getElementById("samplePassphrase").textContent = sample;
+        const feedback = document.getElementById("builderFeedback");
+        feedback.textContent = "This is a public demonstration. Create your own private and unique credential rather than copying this example.";
+        feedback.className = "feedback show review";
+    });
+
+    document.getElementById("explainPassphrase").addEventListener("click", () => {
+        const feedback = document.getElementById("builderFeedback");
+        feedback.textContent = "The sample is longer and combines unrelated words, making it less predictable than a short common password. Its safety would still depend on being private and unique to one account.";
+        feedback.className = "feedback show good";
+    });
+
+    document.getElementById("auditButton").addEventListener("click", () => {
+        const checks = [...document.querySelectorAll("#securityAudit input[type='checkbox']")];
+        const score = checks.filter((item) => item.checked).length;
+        const result = document.getElementById("auditResult");
+
+        let message;
+        if (score <= 2) {
+            message = `You selected ${score} of ${checks.length} habits. Start with three high-impact steps: secure your primary email with a unique passphrase, enable MFA, and lock your device.`;
+        } else if (score <= 5) {
+            message = `You selected ${score} of ${checks.length} habits. You have a developing security routine. Focus next on recovery methods, backup codes, and reviewing active sessions.`;
+        } else {
+            message = `You selected ${score} of ${checks.length} habits. You already use several protective layers. Continue reviewing your settings and avoid becoming overconfident.`;
+        }
+
+        result.textContent = message;
+        result.classList.add("show");
+    });
+
+    const completeButton = document.getElementById("completeModule");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showCompletionState() {
+        const completed = localStorage.getItem("kalasagModule2Complete") === "true";
+        if (completed) {
+            completeButton.textContent = "Module 2 Completed ✓";
+            completeButton.disabled = true;
+            completionMessage.textContent = "Your progress has been saved on this browser and device.";
+        }
+    }
+
+    completeButton.addEventListener("click", () => {
+        localStorage.setItem("kalasagModule2Complete", "true");
+        progressBar.style.width = "100%";
+        progressValue.textContent = "100%";
+        showCompletionState();
+    });
+
+    showCompletionState();
+</script>
+</body>
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KALASAG Module 3: Spot the Trap. Learn how to recognize phishing, impersonation, social engineering, suspicious links, QR-code scams, and unsafe attachments.">
+    <title>Module 3: Spot the Trap | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --kalasag-safe: #eaf7f3;
+            --kalasag-warn: #fff5df;
+            --kalasag-danger: #fff0ef;
+            --kalasag-blue: #527cc5;
+            --kalasag-gold: #d99b28;
+            --kalasag-red: #c75b58;
+        }
+
+        .module-hero {
+            min-height: 72vh;
+            display: grid;
+            align-items: center;
+            padding: 74px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 87% 14%, rgba(217,155,40,0.17), transparent 28%),
+                radial-gradient(circle at 12% 88%, rgba(15,139,141,0.10), transparent 30%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .module-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+            gap: 70px;
+        }
+
+        .module-hero .eyebrow,
+        .journey-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid rgba(15,139,141,0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.84);
+            color: var(--kalasag-teal);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .module-hero h1 {
+            max-width: 780px;
+            margin: 20px 0 0;
+            font-size: clamp(2.35rem, 4.8vw, 4.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .module-hero h1 span { color: var(--kalasag-gold); }
+
+        .module-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .trap-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .trap-core {
+            position: relative;
+            z-index: 2;
+            width: 235px;
+            min-height: 190px;
+            padding: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(18,50,74,0.09);
+            border-radius: 28px;
+            background: #ffffff;
+            box-shadow: 0 30px 70px rgba(18,50,74,0.18);
+            transform: rotate(-3deg);
+        }
+
+        .trap-core::before {
+            content: "!";
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            background: linear-gradient(145deg, var(--kalasag-gold), #f6c860);
+            color: var(--kalasag-navy);
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .trap-core strong {
+            display: block;
+            margin-top: 18px;
+            color: var(--kalasag-navy);
+            font-size: 1.65rem;
+            letter-spacing: -0.04em;
+            text-align: center;
+        }
+
+        .trap-core span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .signal-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,0.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 30px rgba(18,50,74,0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .signal-chip.one { top: 24px; left: 8%; }
+        .signal-chip.two { top: 70px; right: 0; }
+        .signal-chip.three { bottom: 78px; right: -1%; }
+        .signal-chip.four { bottom: 25px; left: 11%; }
+        .signal-chip.five { top: 178px; left: -4%; }
+
+        .progress-wrap {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .progress-shell {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .progress-title,
+        .progress-value {
+            color: var(--kalasag-navy);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e7eef0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-gold), #f0c45e);
+            transition: width 0.35s ease;
+        }
+
+        .journey-nav {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .journey-nav a {
+            display: block;
+            padding: 11px 8px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .journey-nav a:hover,
+        .journey-nav a:focus {
+            border-color: rgba(217,155,40,0.5);
+            color: #a36b05;
+        }
+
+        .learning-card-grid,
+        .signal-grid,
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .learning-card,
+        .signal-card,
+        .scenario-card,
+        .message-card,
+        .reflection-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(18,50,74,0.05);
+        }
+
+        .learning-card .number,
+        .signal-card .number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            background: rgba(217,155,40,0.13);
+            color: #9a6507;
+            font-weight: 900;
+        }
+
+        .learning-card h3,
+        .signal-card h3,
+        .scenario-card h3 { margin-top: 0; }
+
+        .learning-card p,
+        .signal-card p,
+        .scenario-card p { color: var(--kalasag-muted); }
+
+        .mini-list {
+            margin: 16px 0 0;
+            padding-left: 20px;
+            color: var(--kalasag-muted);
+        }
+
+        .mini-list li { margin-bottom: 8px; }
+
+        .signal-card.sender { border-top: 5px solid var(--kalasag-blue); }
+        .signal-card.pressure { border-top: 5px solid var(--kalasag-gold); }
+        .signal-card.request { border-top: 5px solid var(--kalasag-red); }
+        .signal-card.link { border-top: 5px solid var(--kalasag-teal); }
+        .signal-card.attachment { border-top: 5px solid #9764b8; }
+        .signal-card.context { border-top: 5px solid #4f936d; }
+
+        .activity-panel {
+            margin-top: 36px;
+            padding: 30px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 22px;
+            background: #ffffff;
+            box-shadow: 0 18px 48px rgba(18,50,74,0.07);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 22px;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .activity-header h3 { margin: 12px 0 0; }
+
+        .message-shell {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .message-preview {
+            padding: 24px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #f9fbfc;
+        }
+
+        .message-preview .meta {
+            display: grid;
+            gap: 7px;
+            margin-bottom: 18px;
+            color: var(--kalasag-muted);
+            font-size: 0.88rem;
+        }
+
+        .message-preview .meta strong { color: var(--kalasag-navy); }
+
+        .message-body {
+            padding: 18px;
+            border-radius: 14px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            line-height: 1.65;
+        }
+
+        .message-body .fake-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--kalasag-blue);
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .clue-list {
+            display: grid;
+            gap: 11px;
+        }
+
+        .clue-button,
+        .choice-button {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 750;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .clue-button:hover,
+        .choice-button:hover {
+            border-color: rgba(15,139,141,0.35);
+            transform: translateY(-1px);
+        }
+
+        .clue-button.found,
+        .choice-button.correct {
+            border-color: rgba(46,125,91,0.55);
+            background: var(--kalasag-safe);
+            color: #215d46;
+        }
+
+        .choice-button.incorrect {
+            border-color: rgba(199,91,88,0.55);
+            background: var(--kalasag-danger);
+            color: #8d3f3c;
+        }
+
+        .result-panel,
+        .feedback {
+            display: none;
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: 13px;
+            line-height: 1.6;
+        }
+
+        .result-panel.show,
+        .feedback.show { display: block; }
+
+        .feedback.good {
+            background: var(--kalasag-safe);
+            color: #245f48;
+        }
+
+        .feedback.review {
+            background: var(--kalasag-warn);
+            color: #7a5611;
+        }
+
+        .question-card + .question-card { margin-top: 24px; }
+        .question-card > p { font-weight: 850; color: var(--kalasag-navy); }
+        .choice-list { display: grid; gap: 11px; }
+
+        .url-lab {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .url-lab input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 12px;
+            font: inherit;
+        }
+
+        .decision-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .decision-step {
+            padding: 20px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .decision-step strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--kalasag-navy);
+        }
+
+        .decision-step span { color: var(--kalasag-muted); font-size: 0.92rem; }
+
+        .scenario-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--kalasag-teal);
+            font-size: 0.76rem;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .check-item:last-child { border-bottom: 0; }
+        .check-item input { margin-top: 4px; transform: scale(1.15); }
+
+        .module-complete {
+            padding: 44px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, var(--kalasag-navy), #1c5970);
+            color: #ffffff;
+        }
+
+        .module-complete .eyebrow { color: #d6f2f2; }
+        .module-complete h2 { margin-top: 12px; color: #ffffff; }
+        .module-complete p { max-width: 760px; color: #d8e5ea; }
+
+        .completion-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        @media (max-width: 980px) {
+            .module-hero .hero-grid,
+            .message-shell { grid-template-columns: 1fr; }
+            .learning-card-grid,
+            .signal-grid,
+            .scenario-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .decision-strip { grid-template-columns: repeat(2, 1fr); }
+            .trap-visual { min-height: 330px; }
+        }
+
+        @media (max-width: 720px) {
+            .module-hero { padding-top: 54px; }
+            .module-hero h1 { font-size: 2.7rem; }
+            .journey-nav { grid-template-columns: repeat(2, 1fr); }
+            .learning-card-grid,
+            .signal-grid,
+            .scenario-grid,
+            .decision-strip { grid-template-columns: 1fr; }
+            .activity-panel { padding: 22px; }
+            .activity-header { flex-direction: column; }
+            .url-lab { grid-template-columns: 1fr; }
+            .progress-shell { grid-template-columns: 1fr; gap: 8px; }
+            .progress-value { text-align: right; }
+            .module-complete { padding: 30px 24px; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >☰</button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="module-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">Module 3 • Spot the Trap</p>
+                <h1>Pause before you <span>click, reply, or trust.</span></h1>
+                <p class="hero-description">
+                    Learn how phishing and social engineering use urgency, fear, curiosity, authority, and familiarity to influence your decisions. Build a repeatable process for checking messages, links, attachments, QR codes, and requests before taking action.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#objectives">Begin the Journey</a>
+                    <a class="button secondary-button" href="modules.html">Back to Modules</a>
+                </div>
+            </div>
+
+            <div class="trap-visual" aria-label="A warning card surrounded by common phishing signals">
+                <span class="signal-chip one">Urgent request</span>
+                <span class="signal-chip two">Unknown sender</span>
+                <span class="signal-chip three">Suspicious link</span>
+                <span class="signal-chip four">Verification code</span>
+                <span class="signal-chip five">Unexpected file</span>
+                <div class="trap-core">
+                    <div>
+                        <strong>Spot the trap</strong>
+                        <span>Check the message, not just the logo.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="Module progress">
+        <div class="container">
+            <div class="progress-shell">
+                <span class="progress-title">Module 3 progress</span>
+                <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+                <span class="progress-value" id="progressValue">0%</span>
+            </div>
+            <div class="journey-nav">
+                <a href="#objectives">1. Prepare</a>
+                <a href="#signals">2. Read Signals</a>
+                <a href="#detective">3. Investigate</a>
+                <a href="#links">4. Inspect Links</a>
+                <a href="#respond">5. Respond Safely</a>
+                <a href="#challenge">6. Final Check</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="objectives" data-progress="16">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 1 • Prepare</p>
+                <h2>What will you be able to do?</h2>
+                <p>By the end of this module, you should be able to examine suspicious communication, identify manipulation techniques, and choose safer next steps.</p>
+            </div>
+
+            <div class="learning-card-grid">
+                <article class="learning-card">
+                    <div class="number">01</div>
+                    <h3>Recognize social engineering</h3>
+                    <p>Explain how attackers manipulate people through urgency, fear, reward, authority, and trust.</p>
+                </article>
+                <article class="learning-card">
+                    <div class="number">02</div>
+                    <h3>Inspect communication</h3>
+                    <p>Check the sender, wording, links, attachments, QR codes, and unusual requests before responding.</p>
+                </article>
+                <article class="learning-card">
+                    <div class="number">03</div>
+                    <h3>Choose a safe response</h3>
+                    <p>Verify through a trusted channel, avoid sharing codes or credentials, and report suspicious activity appropriately.</p>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Quick reflection</span>
+                        <h3>What usually makes a message feel trustworthy?</h3>
+                    </div>
+                    <span class="module-number">There may be several answers</span>
+                </div>
+                <div class="scenario-grid">
+                    <article class="scenario-card"><span class="scenario-label">Familiarity</span><h3>A known name or logo</h3><p>Attackers can copy names, profile photos, signatures, and branding. Familiar appearance is not proof.</p></article>
+                    <article class="scenario-card"><span class="scenario-label">Emotion</span><h3>Urgency or fear</h3><p>Pressure reduces careful thinking. A legitimate message should still survive independent verification.</p></article>
+                    <article class="scenario-card"><span class="scenario-label">Reward</span><h3>A prize or opportunity</h3><p>Unexpected rewards can be used to make risky requests feel exciting or harmless.</p></article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="signals" data-progress="34">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 2 • Read the Signals</p>
+                <h2>One clue may be harmless. Several clues form a pattern.</h2>
+                <p>Instead of asking only, “Does this look real?” ask, “What evidence supports or weakens this message?”</p>
+            </div>
+
+            <div class="signal-grid">
+                <article class="signal-card sender">
+                    <div class="number">S</div>
+                    <h3>Sender</h3>
+                    <p>Check the full address, account history, display name, spelling, and whether the contact method is expected.</p>
+                </article>
+                <article class="signal-card pressure">
+                    <div class="number">P</div>
+                    <h3>Pressure</h3>
+                    <p>Be cautious when a message creates panic, secrecy, limited time, or fear of punishment.</p>
+                </article>
+                <article class="signal-card request">
+                    <div class="number">R</div>
+                    <h3>Request</h3>
+                    <p>Question requests for passwords, codes, payments, personal details, downloads, or account changes.</p>
+                </article>
+                <article class="signal-card link">
+                    <div class="number">L</div>
+                    <h3>Link or QR code</h3>
+                    <p>Inspect the destination before opening it. A short link, QR code, or familiar text can hide a different site.</p>
+                </article>
+                <article class="signal-card attachment">
+                    <div class="number">A</div>
+                    <h3>Attachment</h3>
+                    <p>Unexpected files may contain malicious content or lead to fake sign-in pages.</p>
+                </article>
+                <article class="signal-card context">
+                    <div class="number">C</div>
+                    <h3>Context</h3>
+                    <p>Ask whether the message makes sense based on your recent activity, school process, or relationship with the sender.</p>
+                </article>
+            </div>
+
+            <div class="decision-strip">
+                <div class="decision-step"><strong>1. Pause</strong><span>Do not act while pressured or distracted.</span></div>
+                <div class="decision-step"><strong>2. Inspect</strong><span>Check the sender, request, destination, and context.</span></div>
+                <div class="decision-step"><strong>3. Verify</strong><span>Use a trusted website, known number, or separate contact method.</span></div>
+                <div class="decision-step"><strong>4. Report</strong><span>Flag the message and ask for help when appropriate.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="detective" data-progress="54">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 3 • Message Detective</p>
+                <h2>Find the warning signs.</h2>
+                <p>This fictional message contains several clues. Select each clue to reveal why it deserves attention.</p>
+            </div>
+
+            <div class="activity-panel" style="margin-top: 0;">
+                <div class="message-shell">
+                    <div class="message-preview">
+                        <div class="meta">
+                            <span><strong>From:</strong> Student Support &lt;support-office@school-helpdesk-login.net&gt;</span>
+                            <span><strong>Subject:</strong> URGENT: Your account will be closed today</span>
+                        </div>
+                        <div class="message-body">
+                            Dear Student,<br><br>
+                            We detected an error in your account. Confirm your password and verification code within 15 minutes or your school files will be permanently deleted. Do not contact your teacher because this is an automated security process.
+                            <span class="fake-link">https://school-account-check.example/verify</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="clue-list" id="clueList">
+                            <button class="clue-button" data-clue="The domain does not match the official school domain. Display names can be copied, so inspect the complete address.">The sender address</button>
+                            <button class="clue-button" data-clue="The message creates extreme urgency and threatens permanent loss to reduce careful thinking.">The urgent deadline and threat</button>
+                            <button class="clue-button" data-clue="Legitimate support staff should not ask for your password or verification code through a message.">The request for credentials and a code</button>
+                            <button class="clue-button" data-clue="The instruction to avoid contacting a teacher or trusted adult is a secrecy tactic.">The instruction to keep it secret</button>
+                            <button class="clue-button" data-clue="The destination should be verified independently. Do not rely on the visible link text alone.">The verification link</button>
+                        </div>
+                        <div class="result-panel" id="clueResult" aria-live="polite"></div>
+                        <p id="clueCount" style="margin-top: 14px; color: var(--kalasag-muted); font-weight: 800;">0 of 5 clues reviewed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-grid" style="margin-top: 28px;">
+                <article class="scenario-card">
+                    <span class="scenario-label">Impersonation</span>
+                    <h3>“Your teacher needs gift cards now.”</h3>
+                    <p>Verify using a known number or in person. A familiar name does not prove who controls the account.</p>
+                </article>
+                <article class="scenario-card">
+                    <span class="scenario-label">Code theft</span>
+                    <h3>“Send me the code you just received.”</h3>
+                    <p>Never share one-time passwords or approval codes. An unexpected code may mean someone is attempting to sign in.</p>
+                </article>
+                <article class="scenario-card">
+                    <span class="scenario-label">QR phishing</span>
+                    <h3>“Scan to claim your school reward.”</h3>
+                    <p>A QR code hides its destination until scanned. Verify the source and inspect the address before proceeding.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="links" data-progress="70">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 4 • Inspect Links and Files</p>
+                <h2>Look beyond what the message displays.</h2>
+                <p>A link can use familiar words while leading somewhere else. A file can look ordinary while creating unnecessary risk.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <article class="comparison-card responsible-card">
+                    <h3>Safer inspection habits</h3>
+                    <ul>
+                        <li>Use the official app or type the known website address yourself.</li>
+                        <li>Check the complete domain carefully, including spelling and endings.</li>
+                        <li>Verify unexpected files with the sender through another channel.</li>
+                        <li>Preview QR-code destinations before continuing, when your device allows it.</li>
+                        <li>Ask a trusted adult or school contact when uncertain.</li>
+                    </ul>
+                </article>
+                <article class="comparison-card irresponsible-card">
+                    <h3>Risky shortcuts</h3>
+                    <ul>
+                        <li>Trusting a link because the visible text looks official.</li>
+                        <li>Opening a file because it was sent by a familiar display name.</li>
+                        <li>Entering credentials after following an unexpected message.</li>
+                        <li>Scanning unknown QR codes without checking the destination.</li>
+                        <li>Ignoring browser or device warnings.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Practice URL lab</span>
+                        <h3>Which address deserves the most caution?</h3>
+                    </div>
+                    <span class="module-number">Fictional examples only</span>
+                </div>
+
+                <div class="question-card">
+                    <p>Select the safest way to access your school portal after receiving an unexpected account-warning message.</p>
+                    <div class="choice-list" data-question="url1">
+                        <button class="choice-button" data-correct="false" data-feedback="The link may lead to a look-alike sign-in page. Do not use an unexpected message as your route to a sensitive account.">Click the message link because it includes the school name.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Open the official app or type the known address yourself, then check for alerts inside the trusted service.">Open the official app or type the known school address yourself.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Forwarding spreads the suspicious link and does not verify whether it is legitimate.">Forward the link to classmates and ask them to test it first.</button>
+                    </div>
+                    <div class="feedback" id="url1-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>Which domain is most likely attempting to imitate an official school login?</p>
+                    <div class="choice-list" data-question="url2">
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. The official-looking words appear before the actual registered domain, which is school-help-login.example.">portal.school.edu.school-help-login.example</button>
+                        <button class="choice-button" data-correct="false" data-feedback="This fictional example uses a simple school.edu structure and is less suspicious than the look-alike option, although real addresses must still be verified.">portal.school.edu</button>
+                        <button class="choice-button" data-correct="false" data-feedback="A saved official app may be safer than following an unexpected link, assuming the app itself was installed from a trusted source.">The saved official school app</button>
+                    </div>
+                    <div class="feedback" id="url2-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="respond" data-progress="86">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 5 • Respond Safely</p>
+                <h2>Do not only avoid the trap. Know what to do next.</h2>
+                <p>A calm response protects you and may help protect other people from the same attempt.</p>
+            </div>
+
+            <div class="decision-strip">
+                <div class="decision-step"><strong>Do not interact</strong><span>Avoid clicking, replying, scanning, downloading, or sharing.</span></div>
+                <div class="decision-step"><strong>Verify separately</strong><span>Contact the person or organization using a known, trusted channel.</span></div>
+                <div class="decision-step"><strong>Report</strong><span>Use the platform's report feature or inform the appropriate school contact.</span></div>
+                <div class="decision-step"><strong>Secure your account</strong><span>If you interacted, change affected credentials, review sessions, and enable MFA.</span></div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Response scenario</span>
+                        <h3>You clicked a suspicious link and entered your password. What should happen first?</h3>
+                    </div>
+                    <span class="module-number">Choose the safest sequence</span>
+                </div>
+                <div class="choice-list" data-question="response1">
+                    <button class="choice-button" data-correct="false" data-feedback="Waiting may give an attacker more time. Treat the credential as exposed and act promptly.">Wait until tomorrow to see whether anything unusual happens.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. From a trusted device, change the exposed password, review active sessions, enable or review MFA, and report the incident through the appropriate channel.">Use a trusted device to change the password, review sessions, strengthen security, and report the incident.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Deleting the message does not undo credential exposure or remove unauthorized sessions.">Delete the message and continue using the same password.</button>
+                </div>
+                <div class="feedback" id="response1-feedback"></div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Personal readiness check</span>
+                        <h3>Which habits can help you slow down and verify?</h3>
+                    </div>
+                    <span class="module-number">No personal data is collected</span>
+                </div>
+                <div id="readinessCheck">
+                    <label class="check-item"><input type="checkbox"><span>I check the full sender address, not only the display name.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I do not share passwords, one-time codes, or approval prompts.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I access important accounts through saved official apps or known addresses.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I verify urgent requests using a separate trusted channel.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I report suspicious messages instead of forwarding them widely.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I know whom to contact if I accidentally interact with a suspicious message.</span></label>
+                </div>
+                <div style="margin-top: 20px;"><button class="button primary-button" id="readinessButton" type="button">Review My Readiness</button></div>
+                <div class="result-panel" id="readinessResult" aria-live="polite"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="challenge" data-progress="96">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 6 • Final Check</p>
+                <h2>Can you spot and stop the trap?</h2>
+                <p>Use the complete process: pause, inspect, verify, report, and secure.</p>
+            </div>
+
+            <div class="activity-panel" style="margin-top: 0;">
+                <div class="question-card">
+                    <p>1. A message from a classmate's account asks for a verification code. What is the safest response?</p>
+                    <div class="choice-list" data-question="final1">
+                        <button class="choice-button" data-correct="false" data-feedback="An account may be compromised even when the message comes from a familiar profile.">Send the code because you know the classmate.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Do not share the code. Contact the classmate through another trusted channel and secure your account if the code was unexpected.">Do not share it; verify with the classmate separately.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Posting the code exposes it to more people and creates additional risk.">Post the code in the class group chat.</button>
+                    </div>
+                    <div class="feedback" id="final1-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>2. Which combination most strongly suggests phishing?</p>
+                    <div class="choice-list" data-question="final2">
+                        <button class="choice-button" data-correct="false" data-feedback="A routine message through an expected channel with no risky request may be legitimate, though it should still be read carefully.">An expected reminder inside the official school platform</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. A look-alike sender, urgent threat, credential request, and unfamiliar link create a strong risk pattern.">A look-alike address, urgent threat, request for credentials, and unfamiliar link</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Correct spelling alone does not prove legitimacy, but this option lacks the stronger combination of warning signs.">A message with correct spelling and no request</button>
+                    </div>
+                    <div class="feedback" id="final2-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>3. What is the safest way to verify an urgent request from a teacher or school office?</p>
+                    <div class="choice-list" data-question="final3">
+                        <button class="choice-button" data-correct="false" data-feedback="Replying uses the same potentially compromised communication channel.">Reply to the message and ask whether it is real.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Use a known official contact method, such as the school platform, directory number, or an in-person conversation.">Use a separate, known official channel.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Friends may not be able to verify the sender and forwarding can spread suspicious content.">Forward it to several friends and follow the majority opinion.</button>
+                    </div>
+                    <div class="feedback" id="final3-feedback"></div>
+                </div>
+            </div>
+
+            <div class="module-complete" style="margin-top: 34px;">
+                <p class="eyebrow">Module 3 complete</p>
+                <h2>Trust should be verified, not assumed.</h2>
+                <p>You have examined social-engineering tactics, sender clues, suspicious links, QR codes, attachments, and safe response steps. Mark the module complete, then continue to Module 4 to learn how to share information with greater care.</p>
+                <div class="completion-actions">
+                    <button class="button light-button" id="completeModule" type="button">Mark Module 3 Complete</button>
+                    <a class="button secondary-button" href="module4.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Continue to Module 4</a>
+                    <a class="button secondary-button" href="module2.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Review Module 2</a>
+                </div>
+                <p id="completionMessage" style="margin-bottom: 0; font-weight: 800;" aria-live="polite"></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+    "use strict";
+
+    const progressBar = document.getElementById("progressBar");
+    const progressValue = document.getElementById("progressValue");
+    const progressSections = [...document.querySelectorAll("[data-progress]")];
+
+    function updateProgress() {
+        let currentProgress = 8;
+        const viewportMarker = window.scrollY + window.innerHeight * 0.45;
+
+        progressSections.forEach((section) => {
+            if (viewportMarker >= section.offsetTop) {
+                currentProgress = Number(section.dataset.progress);
+            }
+        });
+
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10) {
+            currentProgress = 100;
+        }
+
+        progressBar.style.width = `${currentProgress}%`;
+        progressValue.textContent = `${currentProgress}%`;
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("load", updateProgress);
+
+    document.querySelectorAll(".choice-list").forEach((choiceList) => {
+        choiceList.addEventListener("click", (event) => {
+            const button = event.target.closest(".choice-button");
+            if (!button) return;
+
+            const questionId = choiceList.dataset.question;
+            const feedback = document.getElementById(`${questionId}-feedback`);
+            const isCorrect = button.dataset.correct === "true";
+
+            choiceList.querySelectorAll(".choice-button").forEach((item) => {
+                item.classList.remove("correct", "incorrect");
+                item.setAttribute("aria-pressed", "false");
+            });
+
+            button.classList.add(isCorrect ? "correct" : "incorrect");
+            button.setAttribute("aria-pressed", "true");
+            feedback.textContent = button.dataset.feedback;
+            feedback.className = `feedback show ${isCorrect ? "good" : "review"}`;
+        });
+    });
+
+    const clueButtons = [...document.querySelectorAll(".clue-button")];
+    const clueResult = document.getElementById("clueResult");
+    const clueCount = document.getElementById("clueCount");
+
+    clueButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            button.classList.add("found");
+            clueResult.textContent = button.dataset.clue;
+            clueResult.className = "result-panel show";
+            const reviewed = clueButtons.filter((item) => item.classList.contains("found")).length;
+            clueCount.textContent = `${reviewed} of ${clueButtons.length} clues reviewed`;
+        });
+    });
+
+    document.getElementById("readinessButton").addEventListener("click", () => {
+        const checks = [...document.querySelectorAll("#readinessCheck input[type='checkbox']")];
+        const score = checks.filter((item) => item.checked).length;
+        const result = document.getElementById("readinessResult");
+
+        if (score <= 2) {
+            result.textContent = `You selected ${score} of ${checks.length} habits. Start with three actions: verify urgent requests separately, never share codes, and use official routes to access important accounts.`;
+        } else if (score <= 4) {
+            result.textContent = `You selected ${score} of ${checks.length} habits. Your routine is developing. Focus next on sender inspection, reporting, and knowing what to do after accidental interaction.`;
+        } else {
+            result.textContent = `You selected ${score} of ${checks.length} habits. You use several strong protective behaviors. Continue slowing down when messages create urgency or emotional pressure.`;
+        }
+
+        result.classList.add("show");
+    });
+
+    const completeButton = document.getElementById("completeModule");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showCompletionState() {
+        const completed = localStorage.getItem("kalasagModule3Complete") === "true";
+        if (completed) {
+            completeButton.textContent = "Module 3 Completed ✓";
+            completeButton.disabled = true;
+            completionMessage.textContent = "Your progress has been saved on this browser and device.";
+        }
+    }
+
+    completeButton.addEventListener("click", () => {
+        localStorage.setItem("kalasagModule3Complete", "true");
+        progressBar.style.width = "100%";
+        progressValue.textContent = "100%";
+        showCompletionState();
+    });
+
+    showCompletionState();
+</script>
+</body>
+</html>

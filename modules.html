@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Explore the GABAY learning modules on responsible AI, fact-checking, academic integrity, privacy, and digital career readiness."
+        content="Explore the KALASAG learning modules on data privacy, account protection, phishing awareness, safe sharing, AI privacy, and incident response."
     >
 
-    <title>Modules | GABAY</title>
+    <title>Modules | KALASAG</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* Minimalist module-page overrides aligned with the GABAY homepage */
+        /* KALASAG module-page overrides aligned with the homepage */
         .modules-hero {
             min-height: 68vh;
             display: grid;
@@ -21,13 +21,13 @@
             padding: 72px 0 64px;
             overflow: hidden;
             background:
-                radial-gradient(circle at 84% 16%, rgba(124, 92, 255, 0.13), transparent 27%),
-                radial-gradient(circle at 16% 80%, rgba(23, 78, 166, 0.08), transparent 24%),
-                linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+                radial-gradient(circle at 84% 16%, rgba(15, 139, 141, 0.15), transparent 27%),
+                radial-gradient(circle at 16% 82%, rgba(18, 50, 74, 0.08), transparent 28%),
+                linear-gradient(180deg, #ffffff 0%, #f4f8f9 100%);
         }
 
         .modules-hero .hero-grid {
-            grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.75fr);
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
             gap: 72px;
         }
 
@@ -37,9 +37,9 @@
             gap: 8px;
             margin-bottom: 18px;
             padding: 7px 12px;
-            border: 1px solid rgba(23, 78, 166, 0.18);
+            border: 1px solid rgba(15, 139, 141, 0.2);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.76);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(12px);
             font-size: 0.72rem;
             letter-spacing: 0.12em;
@@ -48,14 +48,14 @@
         .modules-hero h1 {
             max-width: 720px;
             margin: 0;
-            font-size: clamp(2.35rem, 4.7vw, 4.35rem);
+            font-size: clamp(2.3rem, 4.7vw, 4.35rem);
             line-height: 1.03;
             letter-spacing: -0.055em;
             text-wrap: balance;
         }
 
         .modules-hero h1 span {
-            color: var(--primary, #174ea6);
+            color: #0f8b8d;
         }
 
         .modules-hero .hero-description {
@@ -65,56 +65,75 @@
             line-height: 1.75;
         }
 
-        .journey-visual {
+        .shield-path {
             position: relative;
             min-height: 390px;
             display: grid;
             place-items: center;
         }
 
-        .journey-line {
+        .shield-path::before {
+            content: "";
             position: absolute;
-            width: 2px;
-            height: 270px;
-            background: linear-gradient(180deg, rgba(23, 78, 166, 0.12), #174ea6, rgba(124, 92, 255, 0.16));
+            width: 305px;
+            height: 305px;
+            border: 1px solid rgba(15, 139, 141, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 80px rgba(15, 139, 141, 0.08);
         }
 
-        .journey-node {
+        .shield-path::after {
+            content: "";
             position: absolute;
-            left: 50%;
-            width: 56px;
-            height: 56px;
+            width: 210px;
+            height: 240px;
+            background: linear-gradient(150deg, #12324a 0%, #0f8b8d 100%);
+            clip-path: polygon(50% 0%, 91% 16%, 84% 67%, 50% 100%, 16% 67%, 9% 16%);
+            filter: drop-shadow(0 26px 36px rgba(18, 50, 74, 0.25));
+        }
+
+        .path-node {
+            position: absolute;
+            z-index: 2;
+            width: 54px;
+            height: 54px;
             display: grid;
             place-items: center;
-            transform: translateX(-50%);
-            border: 1px solid rgba(23, 78, 166, 0.14);
-            border-radius: 18px;
+            border: 1px solid rgba(15, 139, 141, 0.16);
+            border-radius: 17px;
             background: rgba(255, 255, 255, 0.94);
-            box-shadow: 0 16px 34px rgba(23, 32, 51, 0.10);
-            color: var(--primary, #174ea6);
+            box-shadow: 0 14px 30px rgba(18, 50, 74, 0.11);
+            color: #12324a;
             font-weight: 800;
         }
 
-        .journey-node:nth-of-type(2) { top: 22px; }
-        .journey-node:nth-of-type(3) { top: 88px; left: 34%; }
-        .journey-node:nth-of-type(4) { top: 154px; left: 66%; }
-        .journey-node:nth-of-type(5) { top: 220px; left: 34%; }
-        .journey-node:nth-of-type(6) { top: 286px; left: 66%; }
-        .journey-node:nth-of-type(7) { top: 352px; }
+        .path-node.one { top: 18px; left: 50%; transform: translateX(-50%); }
+        .path-node.two { top: 90px; right: 7%; }
+        .path-node.three { bottom: 88px; right: 10%; }
+        .path-node.four { bottom: 16px; left: 50%; transform: translateX(-50%); }
+        .path-node.five { bottom: 88px; left: 10%; }
+        .path-node.six { top: 90px; left: 7%; }
 
-        .journey-caption {
-            position: absolute;
-            right: 0;
-            bottom: -4px;
-            max-width: 170px;
-            padding: 11px 14px;
-            border: 1px solid rgba(23, 78, 166, 0.14);
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 12px 30px rgba(23, 32, 51, 0.08);
-            color: var(--text-muted, #526079);
-            font-size: 0.78rem;
-            line-height: 1.45;
+        .path-center {
+            position: relative;
+            z-index: 3;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .path-center strong {
+            display: block;
+            font-size: 1.65rem;
+            letter-spacing: -0.045em;
+        }
+
+        .path-center span {
+            display: block;
+            margin-top: 7px;
+            font-size: 0.66rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            opacity: 0.86;
         }
 
         .module-preview-grid {
@@ -125,7 +144,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            min-height: 290px;
+            min-height: 318px;
             overflow: hidden;
             transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
@@ -133,17 +152,18 @@
         .module-preview::after {
             content: "";
             position: absolute;
-            inset: auto -35px -55px auto;
-            width: 120px;
-            height: 120px;
+            right: -38px;
+            bottom: -58px;
+            width: 132px;
+            height: 132px;
             border-radius: 50%;
-            background: rgba(23, 78, 166, 0.06);
+            background: rgba(15, 139, 141, 0.06);
         }
 
         .module-preview:hover {
             transform: translateY(-6px);
-            border-color: rgba(23, 78, 166, 0.22);
-            box-shadow: 0 18px 42px rgba(23, 32, 51, 0.10);
+            border-color: rgba(15, 139, 141, 0.25);
+            box-shadow: 0 18px 42px rgba(18, 50, 74, 0.11);
         }
 
         .module-preview .card-icon {
@@ -151,7 +171,9 @@
             height: 54px;
             margin-bottom: 20px;
             border-radius: 17px;
-            font-size: 1.25rem;
+            background: rgba(15, 139, 141, 0.10);
+            color: #0f8b8d;
+            font-size: 1rem;
         }
 
         .module-preview h3 {
@@ -170,9 +192,10 @@
             align-items: center;
             gap: 8px;
             margin-top: 22px;
-            color: var(--primary, #174ea6);
+            color: #0f8b8d;
             font-weight: 800;
             text-decoration: none;
+            transition: gap 0.2s ease;
         }
 
         .module-link:hover {
@@ -196,7 +219,7 @@
         .path-step strong {
             display: block;
             margin-bottom: 6px;
-            color: var(--primary, #174ea6);
+            color: #0f8b8d;
             font-size: 0.8rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -207,19 +230,59 @@
             font-size: 0.92rem;
         }
 
+        .module-detail {
+            scroll-margin-top: 95px;
+        }
+
+        .module-detail .section-heading {
+            max-width: 830px;
+        }
+
+        .module-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .module-label .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            background: rgba(15, 139, 141, 0.10);
+            color: #0f8b8d;
+        }
+
+        .lesson-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .lesson-chip {
+            padding: 9px 12px;
+            border: 1px solid rgba(15, 139, 141, 0.18);
+            border-radius: 999px;
+            background: #ffffff;
+            color: #12324a;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
         .module-banner {
             margin-top: 58px;
             padding: 44px;
             border-radius: 24px;
             background:
                 radial-gradient(circle at 86% 20%, rgba(255, 255, 255, 0.16), transparent 28%),
-                linear-gradient(135deg, #174ea6 0%, #6d55d8 100%);
+                linear-gradient(135deg, #12324a 0%, #0f8b8d 100%);
             color: #ffffff;
-            box-shadow: 0 28px 70px rgba(23, 78, 166, 0.20);
+            box-shadow: 0 28px 70px rgba(18, 50, 74, 0.20);
         }
 
         .module-banner .eyebrow {
-            color: #dce8ff;
+            color: #bceced;
         }
 
         .module-banner h2 {
@@ -232,13 +295,13 @@
         .module-banner p {
             max-width: 680px;
             margin: 18px 0 28px;
-            color: #e8efff;
+            color: rgba(255,255,255,0.84);
         }
 
         @media (max-width: 900px) {
             .modules-hero { min-height: auto; padding: 64px 0; }
             .modules-hero .hero-grid { grid-template-columns: 1fr; gap: 38px; }
-            .journey-visual { min-height: 350px; }
+            .shield-path { min-height: 350px; }
             .path-strip { grid-template-columns: repeat(2, 1fr); }
         }
 
@@ -246,8 +309,12 @@
             .modules-hero h1 { font-size: clamp(2.2rem, 12vw, 3.2rem); }
             .modules-hero .hero-actions { gap: 10px; }
             .modules-hero .hero-actions .button { width: 100%; text-align: center; }
-            .journey-visual { min-height: 330px; }
-            .journey-caption { right: 2%; }
+            .shield-path { min-height: 325px; }
+            .shield-path::before { width: 270px; height: 270px; }
+            .shield-path::after { width: 182px; height: 210px; }
+            .path-node { width: 48px; height: 48px; }
+            .path-node.two, .path-node.six { top: 82px; }
+            .path-node.three, .path-node.five { bottom: 80px; }
             .path-strip { grid-template-columns: 1fr; }
             .module-banner { padding: 34px 24px; }
         }
@@ -257,8 +324,8 @@
 <body>
     <header class="site-header">
         <nav class="container navigation">
-            <a class="logo" href="index.html" aria-label="GABAY home">
-                GABAY
+            <a class="logo" href="index.html" aria-label="KALASAG home">
+                KALASAG
             </a>
 
             <button
@@ -283,55 +350,52 @@
     </header>
 
     <main>
+        <!-- Hero -->
         <section class="modules-hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <p class="eyebrow">GABAY Learning Path</p>
+                    <p class="eyebrow">The KALASAG Learning Journey</p>
 
                     <h1>
-                        Build better AI habits.
-                        <span>One skill at a time.</span>
+                        Build your digital shield,
+                        <span>one safer habit at a time.</span>
                     </h1>
 
                     <p class="hero-description">
-                        Move through six focused modules designed to help you question AI outputs,
-                        protect your privacy, work with integrity, and prepare for an AI-shaped future.
+                        Explore six practical modules designed to help you protect personal information,
+                        secure accounts, recognize threats, share responsibly, and recover from digital incidents.
                     </p>
 
                     <div class="hero-actions">
-                        <a class="button primary-button" href="#module-list">
-                            Explore the Modules
-                        </a>
-
-                        <a class="button secondary-button" href="assessment.html">
-                            Take the Pre-Assessment
-                        </a>
+                        <a class="button primary-button" href="module1.html">Start Module 1</a>
+                        <a class="button secondary-button" href="assessment.html">Take the Initial Assessment</a>
                     </div>
                 </div>
 
-                <div class="journey-visual" aria-label="Six-step GABAY learning journey">
-                    <div class="journey-line" aria-hidden="true"></div>
-                    <span class="journey-node" aria-label="Module 1">1</span>
-                    <span class="journey-node" aria-label="Module 2">2</span>
-                    <span class="journey-node" aria-label="Module 3">3</span>
-                    <span class="journey-node" aria-label="Module 4">4</span>
-                    <span class="journey-node" aria-label="Module 5">5</span>
-                    <span class="journey-node" aria-label="Module 6">6</span>
-                    <p class="journey-caption">Learn. Practice. Reflect. Apply.</p>
+                <div class="shield-path" aria-label="Six-module KALASAG learning path">
+                    <span class="path-node one">01</span>
+                    <span class="path-node two">02</span>
+                    <span class="path-node three">03</span>
+                    <span class="path-node four">04</span>
+                    <span class="path-node five">05</span>
+                    <span class="path-node six">06</span>
+
+                    <div class="path-center">
+                        <strong>KALASAG</strong>
+                        <span>Learn • Practice • Protect</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section alternate-section" id="module-list">
+        <!-- Overview -->
+        <section class="section alternate-section">
             <div class="container">
                 <div class="section-heading centered-heading">
-                    <p class="eyebrow">Choose Your Next Skill</p>
-
-                    <h2>Six modules for responsible, future-ready AI use.</h2>
-
+                    <p class="eyebrow">Choose Your Starting Point</p>
+                    <h2>Six focused modules for safer digital participation.</h2>
                     <p>
-                        Start from the beginning or open the topic you need most. Each module is
-                        designed for quick learning, practical application, and meaningful reflection.
+                        Follow the sequence from data awareness to incident response, or revisit a module whenever you need a quick security refresher.
                     </p>
                 </div>
 
@@ -339,95 +403,360 @@
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">01</div>
                         <span class="module-number">Module 1</span>
-                        <h3>Understanding AI</h3>
-                        <p>
-                            See how AI works, where it appears in everyday life, and why human judgment still matters.
-                        </p>
-                        <a class="module-link" href="module-1.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Your Data, Your Identity</h3>
+                        <p>Understand personal information, consent, data collection, and the digital trail you leave behind.</p>
+                        <a class="module-link" href="module1.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
 
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">02</div>
                         <span class="module-number">Module 2</span>
-                        <h3>Think Before You Trust</h3>
-                        <p>
-                            Spot weak evidence, hallucinations, fabricated references, and misleading AI-generated claims.
-                        </p>
-                        <a class="module-link" href="module-2.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Lock It Down</h3>
+                        <p>Strengthen passwords, authentication, recovery options, and the protection of your devices.</p>
+                        <a class="module-link" href="module2.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
 
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">03</div>
                         <span class="module-number">Module 3</span>
-                        <h3>Research and Writing</h3>
-                        <p>
-                            Use AI for ideas, structure, and feedback while keeping your own voice and thinking.
-                        </p>
-                        <a class="module-link" href="module-3.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Spot the Trap</h3>
+                        <p>Recognize phishing, scams, fake links, impersonation, and social-engineering tactics.</p>
+                        <a class="module-link" href="module3.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
 
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">04</div>
                         <span class="module-number">Module 4</span>
-                        <h3>Integrity and Transparency</h3>
-                        <p>
-                            Know when AI use is acceptable, when disclosure is needed, and when a shortcut becomes dishonest.
-                        </p>
-                        <a class="module-link" href="module-4.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Share with Care</h3>
+                        <p>Manage privacy settings, app permissions, locations, images, cloud files, and online posts.</p>
+                        <a class="module-link" href="module4.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
 
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">05</div>
                         <span class="module-number">Module 5</span>
-                        <h3>Privacy and Safety</h3>
-                        <p>
-                            Protect personal data, recognize digital risks, and make safer choices when using AI platforms.
-                        </p>
-                        <a class="module-link" href="module-5.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Privacy in the Age of AI</h3>
+                        <p>Use AI tools without exposing your information or the private data of other people.</p>
+                        <a class="module-link" href="module5.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
 
                     <article class="module-preview">
                         <div class="card-icon" aria-hidden="true">06</div>
                         <span class="module-number">Module 6</span>
-                        <h3>AI for Career Readiness</h3>
-                        <p>
-                            Apply AI responsibly to career exploration, résumés, professional messages, and interview practice.
-                        </p>
-                        <a class="module-link" href="module-6.html">Open module <span aria-hidden="true">→</span></a>
+                        <h3>Act Fast, Recover Smart</h3>
+                        <p>Respond calmly to account compromise, suspicious activity, and unauthorized disclosure.</p>
+                        <a class="module-link" href="module6.html">Explore module <span aria-hidden="true">→</span></a>
                     </article>
                 </div>
 
-                <div class="path-strip" aria-label="GABAY learning process">
-                    <div class="path-step">
-                        <strong>01 · Learn</strong>
-                        <span>Explore a focused concept through concise multimedia content.</span>
+                <div class="path-strip">
+                    <div class="path-step"><strong>Learn</strong><span>Understand the risk and the safer practice.</span></div>
+                    <div class="path-step"><strong>Inspect</strong><span>Analyze realistic messages, settings, and situations.</span></div>
+                    <div class="path-step"><strong>Decide</strong><span>Choose the safest response and receive feedback.</span></div>
+                    <div class="path-step"><strong>Apply</strong><span>Turn the lesson into a habit you can use immediately.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 1 -->
+        <section class="section module-detail" id="module1">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">01</div>
+                        <p class="eyebrow">Module 1</p>
+                    </div>
+                    <h2>Your Data, Your Identity</h2>
+                    <p>
+                        Learn how personal information becomes part of your digital identity and why the same detail can be harmless in one situation but sensitive in another.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Personal data</span>
+                        <span class="lesson-chip">Sensitive information</span>
+                        <span class="lesson-chip">Consent</span>
+                        <span class="lesson-chip">Digital footprints</span>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>What You Will Learn</h3>
+                        <ul>
+                            <li>Classify information as public, personal, sensitive, or confidential.</li>
+                            <li>Explain how websites and applications collect and use data.</li>
+                            <li>Recognize how posts, forms, photos, and accounts build a digital footprint.</li>
+                            <li>Make more informed choices before sharing information.</li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>What You Will Do</h3>
+                        <ul>
+                            <li>Complete a “Safe to Share?” classification challenge.</li>
+                            <li>Trace how one piece of information can travel online.</li>
+                            <li>Review a fictional sign-up form for unnecessary data requests.</li>
+                            <li>Create a personal data-awareness checklist.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="module2.html">Continue to Module 2</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 2 -->
+        <section class="section alternate-section module-detail" id="module2">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">02</div>
+                        <p class="eyebrow">Module 2</p>
+                    </div>
+                    <h2>Lock It Down</h2>
+                    <p>
+                        Build stronger defenses around the accounts and devices that store your messages, files, schoolwork, photographs, and identity information.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Passphrases</span>
+                        <span class="lesson-chip">Password reuse</span>
+                        <span class="lesson-chip">Multi-factor authentication</span>
+                        <span class="lesson-chip">Account recovery</span>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>Stronger Protection</h3>
+                        <ul>
+                            <li>Use a unique passphrase for every important account.</li>
+                            <li>Turn on multi-factor authentication where available.</li>
+                            <li>Keep recovery details accurate and secure.</li>
+                            <li>Lock devices and install trusted updates.</li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>Common Weaknesses</h3>
+                        <ul>
+                            <li>Reusing one password across many accounts.</li>
+                            <li>Sharing passwords with friends or classmates.</li>
+                            <li>Using easily guessed personal details.</li>
+                            <li>Ignoring suspicious sign-in alerts.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="module3.html">Continue to Module 3</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 3 -->
+        <section class="section module-detail" id="module3">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">03</div>
+                        <p class="eyebrow">Module 3</p>
+                    </div>
+                    <h2>Spot the Trap</h2>
+                    <p>
+                        Learn how attackers use urgency, fear, rewards, authority, and familiar-looking messages to persuade people to click, reply, pay, or reveal information.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Phishing</span>
+                        <span class="lesson-chip">Impersonation</span>
+                        <span class="lesson-chip">Suspicious links</span>
+                        <span class="lesson-chip">Social engineering</span>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>Pause and Inspect</h3>
+                        <ul>
+                            <li>Check the sender, address, wording, and destination of links.</li>
+                            <li>Verify urgent requests through a separate trusted channel.</li>
+                            <li>Avoid opening unexpected attachments.</li>
+                            <li>Report suspicious messages instead of forwarding them.</li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>Warning Signs</h3>
+                        <ul>
+                            <li>Threats that demand immediate action.</li>
+                            <li>Unexpected rewards, prizes, or refunds.</li>
+                            <li>Requests for passwords, codes, or payment.</li>
+                            <li>Links or sender details that are almost—but not exactly—correct.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="module4.html">Continue to Module 4</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 4 -->
+        <section class="section alternate-section module-detail" id="module4">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">04</div>
+                        <p class="eyebrow">Module 4</p>
+                    </div>
+                    <h2>Share with Care</h2>
+                    <p>
+                        Take greater control of what applications, websites, classmates, and strangers can see, collect, copy, or redistribute.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Privacy settings</span>
+                        <span class="lesson-chip">App permissions</span>
+                        <span class="lesson-chip">Location sharing</span>
+                        <span class="lesson-chip">Cloud files</span>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>Share More Safely</h3>
+                        <ul>
+                            <li>Review who can see a post, file, image, or location.</li>
+                            <li>Give applications only the permissions they genuinely need.</li>
+                            <li>Remove hidden personal details before posting or uploading.</li>
+                            <li>Ask permission before sharing another person's data or image.</li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>Think Twice Before Sharing</h3>
+                        <ul>
+                            <li>Real-time locations and daily routines.</li>
+                            <li>Identification cards, tickets, and documents with visible details.</li>
+                            <li>Public cloud links containing private schoolwork or records.</li>
+                            <li>Images or screenshots involving other people without consent.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="module5.html">Continue to Module 5</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 5 -->
+        <section class="section module-detail" id="module5">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">05</div>
+                        <p class="eyebrow">Module 5</p>
+                    </div>
+                    <h2>Privacy in the Age of AI</h2>
+                    <p>
+                        AI tools can be useful, but prompts, images, files, and chat histories may contain information that should not be exposed or reused.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Safe prompting</span>
+                        <span class="lesson-chip">Anonymization</span>
+                        <span class="lesson-chip">File uploads</span>
+                        <span class="lesson-chip">Third-party data</span>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <article class="comparison-card responsible-card">
+                        <h3>Protect Data Before Using AI</h3>
+                        <ul>
+                            <li>Replace real names and identifiers with fictional placeholders.</li>
+                            <li>Remove confidential details from documents and screenshots.</li>
+                            <li>Use general descriptions instead of private personal information.</li>
+                            <li>Follow school rules and platform privacy guidance.</li>
+                        </ul>
+                    </article>
+
+                    <article class="comparison-card irresponsible-card">
+                        <h3>Do Not Upload</h3>
+                        <ul>
+                            <li>Passwords, account-recovery information, or authentication codes.</li>
+                            <li>Private student records, identification documents, or medical details.</li>
+                            <li>Confidential school or workplace files.</li>
+                            <li>Personal information belonging to another person without permission.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="centered-action">
+                    <a class="button primary-button" href="module6.html">Continue to Module 6</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 6 -->
+        <section class="section alternate-section module-detail" id="module6">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="module-label">
+                        <div class="card-icon" aria-hidden="true">06</div>
+                        <p class="eyebrow">Module 6</p>
+                    </div>
+                    <h2>Act Fast, Recover Smart</h2>
+                    <p>
+                        A privacy or security incident can happen even when you are careful. The safest response is calm, timely, and supported by trusted people.
+                    </p>
+                    <div class="lesson-chip-list">
+                        <span class="lesson-chip">Account recovery</span>
+                        <span class="lesson-chip">Evidence preservation</span>
+                        <span class="lesson-chip">Reporting</span>
+                        <span class="lesson-chip">Personal action plan</span>
+                    </div>
+                </div>
+
+                <div class="checklist-panel">
+                    <div>
+                        <p class="eyebrow">KALASAG Response Steps</p>
+                        <h2>Secure first. Report next. Recover carefully.</h2>
+                        <p>
+                            Use these steps after a suspicious login, phishing attempt, exposed file, or compromised account.
+                        </p>
                     </div>
 
-                    <div class="path-step">
-                        <strong>02 · Practice</strong>
-                        <span>Apply what you learned through scenarios, checks, and guided tasks.</span>
-                    </div>
-
-                    <div class="path-step">
-                        <strong>03 · Reflect</strong>
-                        <span>Connect the lesson to your current habits and decisions.</span>
-                    </div>
-
-                    <div class="path-step">
-                        <strong>04 · Apply</strong>
-                        <span>Use responsible AI strategies in school and career-related work.</span>
-                    </div>
+                    <ol class="numbered-checklist">
+                        <li>Stop the activity and disconnect when necessary.</li>
+                        <li>Secure the account and change affected credentials.</li>
+                        <li>Preserve screenshots, messages, and other evidence.</li>
+                        <li>Report the incident to a trusted adult or approved school contact.</li>
+                        <li>Review connected accounts, devices, and recovery settings.</li>
+                        <li>Monitor for continued suspicious activity.</li>
+                    </ol>
                 </div>
 
                 <div class="module-banner">
-                    <p class="eyebrow">Begin Your GABAY Journey</p>
-                    <h2>Strong AI skills begin with better judgment.</h2>
+                    <p class="eyebrow">Final KALASAG Challenge</p>
+                    <h2>Create your personal digital-protection plan.</h2>
                     <p>
-                        Complete the pre-assessment first, then work through the modules and compare
-                        how your understanding, confidence, and decision-making improve.
+                        Identify three security habits you will improve immediately, list the people or services you can contact for help, and schedule a regular privacy check for your important accounts.
                     </p>
-                    <a class="button light-button" href="assessment.html">Take the Pre-Assessment</a>
+                    <a class="button light-button" href="assessment.html">Go to the Assessment</a>
                 </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="call-to-action">
+            <div class="container call-to-action-content">
+                <p class="eyebrow">Ready to Begin?</p>
+                <h2>Protect your identity before a digital risk becomes a real problem.</h2>
+                <p>
+                    Take the initial assessment, discover your current habits, and begin strengthening your personal KALASAG.
+                </p>
+                <a class="button light-button" href="assessment.html">Take the Initial Assessment</a>
             </div>
         </section>
     </main>
@@ -435,11 +764,11 @@
     <footer class="site-footer">
         <div class="container footer-content">
             <div>
-                <strong>GABAY</strong>
-                <p>Growing AI Literacy, Balance, Accountability, and Youth Readiness.</p>
+                <strong>KALASAG</strong>
+                <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
             </div>
 
-            <p>&copy; 2026 GABAY</p>
+            <p>&copy; 2026 KALASAG by Ctrl+EDU</p>
         </div>
     </footer>
 
