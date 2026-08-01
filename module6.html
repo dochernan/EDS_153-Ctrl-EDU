@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KALASAG Module 6: Act Fast, Recover Smart. Learn how to respond to compromised accounts, privacy breaches, suspicious activity, and digital security incidents.">
+    <title>Module 6: Act Fast, Recover Smart | KALASAG</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --kalasag-safe: #eaf7f3;
+            --kalasag-warn: #fff5df;
+            --kalasag-danger: #fff0ef;
+            --kalasag-purple: #6f63b8;
+            --kalasag-blue: #527cc5;
+            --kalasag-coral: #d96b65;
+        }
+
+        .module-hero {
+            min-height: 72vh;
+            display: grid;
+            align-items: center;
+            padding: 74px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 16%, rgba(217,107,101,0.15), transparent 29%),
+                radial-gradient(circle at 12% 88%, rgba(15,139,141,0.10), transparent 31%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .module-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+            gap: 70px;
+        }
+
+        .module-hero .eyebrow,
+        .journey-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid rgba(15,139,141,0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.84);
+            color: var(--kalasag-teal);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .module-hero h1 {
+            max-width: 760px;
+            margin: 20px 0 0;
+            font-size: clamp(2.35rem, 4.8vw, 4.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .module-hero h1 span { color: var(--kalasag-coral); }
+
+        .module-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .incident-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .incident-core {
+            position: relative;
+            z-index: 2;
+            width: 248px;
+            min-height: 208px;
+            padding: 30px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(18,50,74,0.09);
+            border-radius: 30px;
+            background: #ffffff;
+            box-shadow: 0 30px 70px rgba(18,50,74,0.18);
+            transform: rotate(2deg);
+        }
+
+        .incident-core::before {
+            content: "!";
+            width: 74px;
+            height: 74px;
+            display: grid;
+            place-items: center;
+            border-radius: 22px;
+            background: linear-gradient(145deg, var(--kalasag-coral), #ed9a84);
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .incident-core strong {
+            display: block;
+            margin-top: 18px;
+            color: var(--kalasag-navy);
+            font-size: 1.55rem;
+            letter-spacing: -0.04em;
+            text-align: center;
+        }
+
+        .incident-core span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .response-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,0.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 30px rgba(18,50,74,0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .response-chip.one { top: 22px; left: 8%; }
+        .response-chip.two { top: 72px; right: -1%; }
+        .response-chip.three { bottom: 72px; right: 2%; }
+        .response-chip.four { bottom: 20px; left: 10%; }
+        .response-chip.five { top: 182px; left: -3%; }
+
+        .progress-wrap {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .progress-shell {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .progress-title,
+        .progress-value {
+            color: var(--kalasag-navy);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e7eef0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-coral), #ed9a84);
+            transition: width 0.35s ease;
+        }
+
+        .journey-nav {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .journey-nav a {
+            display: block;
+            padding: 11px 8px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .journey-nav a:hover,
+        .journey-nav a:focus {
+            border-color: rgba(217,107,101,0.5);
+            color: var(--kalasag-coral);
+        }
+
+        .learning-card-grid,
+        .scenario-grid,
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .learning-card,
+        .scenario-card,
+        .action-card,
+        .reflection-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(18,50,74,0.05);
+        }
+
+        .learning-card h3,
+        .scenario-card h3,
+        .action-card h3 {
+            margin: 14px 0 10px;
+        }
+
+        .learning-card p,
+        .scenario-card p,
+        .action-card p {
+            margin-bottom: 0;
+            color: var(--kalasag-muted);
+        }
+
+        .activity-panel {
+            margin-top: 30px;
+            padding: 30px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 22px;
+            background: #ffffff;
+            box-shadow: 0 14px 40px rgba(18,50,74,0.06);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .activity-header h3 {
+            margin: 12px 0 0;
+            font-size: 1.35rem;
+        }
+
+        .choice-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .choice-button {
+            width: 100%;
+            padding: 15px 17px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease, transform .2s ease;
+        }
+
+        .choice-button:hover,
+        .choice-button:focus {
+            border-color: rgba(15,139,141,.45);
+            transform: translateY(-1px);
+        }
+
+        .choice-button.correct {
+            border-color: #4f9d78;
+            background: var(--kalasag-safe);
+        }
+
+        .choice-button.incorrect {
+            border-color: #d97973;
+            background: var(--kalasag-danger);
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            line-height: 1.55;
+        }
+
+        .feedback.show { display: block; }
+        .feedback.good { background: var(--kalasag-safe); color: #235d46; }
+        .feedback.review { background: var(--kalasag-warn); color: #7f5d18; }
+
+        .response-sequence {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .response-step {
+            position: relative;
+            min-height: 170px;
+            padding: 22px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+        }
+
+        .response-step .step-number {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            background: rgba(217,107,101,.13);
+            color: var(--kalasag-coral);
+            font-weight: 900;
+        }
+
+        .response-step h3 {
+            margin: 0 0 9px;
+            font-size: 1rem;
+        }
+
+        .response-step p {
+            margin: 0;
+            color: var(--kalasag-muted);
+            font-size: .9rem;
+        }
+
+        .incident-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .incident-table th,
+        .incident-table td {
+            padding: 15px;
+            border: 1px solid var(--kalasag-border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .incident-table th {
+            background: var(--kalasag-navy);
+            color: #ffffff;
+        }
+
+        .incident-table tr:nth-child(even) td {
+            background: var(--kalasag-pale);
+        }
+
+        .callout {
+            margin-top: 26px;
+            padding: 24px;
+            border-left: 5px solid var(--kalasag-teal);
+            border-radius: 14px;
+            background: var(--kalasag-safe);
+        }
+
+        .callout.warning {
+            border-left-color: var(--kalasag-coral);
+            background: var(--kalasag-danger);
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .check-item:last-child { border-bottom: 0; }
+        .check-item input { margin-top: 4px; transform: scale(1.2); }
+
+        .result-panel {
+            display: none;
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--kalasag-pale);
+            color: var(--kalasag-navy);
+            font-weight: 700;
+        }
+
+        .result-panel.show { display: block; }
+
+        .question-card {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .question-card:first-child { padding-top: 0; }
+        .question-card:last-child { border-bottom: 0; padding-bottom: 0; }
+        .question-card > p { font-weight: 800; color: var(--kalasag-navy); }
+
+        .module-complete {
+            padding: 42px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--kalasag-navy), #284f69);
+            color: #ffffff;
+        }
+
+        .module-complete .eyebrow { color: #b9eee7; }
+        .module-complete h2 { margin-top: 10px; color: #ffffff; }
+        .module-complete p { color: #d9e4ea; }
+
+        .completion-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 1000px) {
+            .response-sequence { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 900px) {
+            .module-hero .hero-grid { grid-template-columns: 1fr 1fr; }
+            .learning-card-grid,
+            .scenario-grid,
+            .action-grid { grid-template-columns: 1fr 1fr; }
+            .journey-nav { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .module-hero { padding-top: 48px; }
+            .module-hero .hero-grid,
+            .learning-card-grid,
+            .scenario-grid,
+            .action-grid,
+            .response-sequence { grid-template-columns: 1fr; }
+            .incident-visual { min-height: 330px; }
+            .response-chip.one { left: 0; }
+            .response-chip.two { right: 0; }
+            .response-chip.three { right: 0; }
+            .response-chip.five { left: 0; }
+            .progress-shell { grid-template-columns: 1fr auto; }
+            .progress-title { grid-column: 1 / -1; }
+            .journey-nav { grid-template-columns: repeat(2, 1fr); }
+            .activity-header { flex-direction: column; }
+            .module-complete { padding: 30px 22px; }
+            .incident-table { font-size: .86rem; }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="module-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">Module 6 • Act Fast, Recover Smart</p>
+
+                <h1>
+                    When something goes wrong,
+                    <span>your next steps matter.</span>
+                </h1>
+
+                <p class="hero-description">
+                    A suspicious login, leaked password, lost device, accidental upload,
+                    or compromised account can feel overwhelming. This module will help
+                    you respond calmly, limit the damage, recover safely, and know when
+                    to ask for help.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#objectives">
+                        Begin the Module
+                    </a>
+
+                    <a class="button secondary-button" href="modules.html">
+                        View All Modules
+                    </a>
+                </div>
+            </div>
+
+            <div class="incident-visual" aria-label="Digital incident response illustration">
+                <div class="incident-core">
+                    <div>
+                        <strong>Respond with a plan</strong>
+                        <span>Pause, protect, report, recover, and review.</span>
+                    </div>
+                </div>
+
+                <span class="response-chip one">Secure the account</span>
+                <span class="response-chip two">Preserve evidence</span>
+                <span class="response-chip three">Report the incident</span>
+                <span class="response-chip four">Review what happened</span>
+                <span class="response-chip five">Protect others</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="Module progress">
+        <div class="container">
+            <div class="progress-shell">
+                <span class="progress-title">Module 6 progress</span>
+
+                <div class="progress-track">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <span class="progress-value" id="progressValue">0%</span>
+            </div>
+
+            <div class="journey-nav">
+                <a href="#objectives">1. Begin</a>
+                <a href="#recognize">2. Recognize</a>
+                <a href="#respond">3. Respond</a>
+                <a href="#recover">4. Recover</a>
+                <a href="#report">5. Report</a>
+                <a href="#challenge">6. Final Check</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="objectives" data-progress="16">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 1 • Learning Goals</p>
+
+                <h2>What will you be able to do?</h2>
+
+                <p>
+                    By the end of this module, you should be able to recognize a
+                    possible privacy or security incident and choose appropriate
+                    actions to reduce harm and restore control.
+                </p>
+            </div>
+
+            <div class="learning-card-grid">
+                <article class="learning-card">
+                    <div class="card-icon">01</div>
+                    <h3>Recognize an incident</h3>
+                    <p>
+                        Identify warning signs of account compromise, unauthorized
+                        access, accidental disclosure, and device loss.
+                    </p>
+                </article>
+
+                <article class="learning-card">
+                    <div class="card-icon">02</div>
+                    <h3>Limit the damage</h3>
+                    <p>
+                        Take immediate actions that stop further access, sharing,
+                        or misuse.
+                    </p>
+                </article>
+
+                <article class="learning-card">
+                    <div class="card-icon">03</div>
+                    <h3>Preserve evidence</h3>
+                    <p>
+                        Save important details without spreading harmful content or
+                        changing information that may be needed for investigation.
+                    </p>
+                </article>
+
+                <article class="learning-card">
+                    <div class="card-icon">04</div>
+                    <h3>Recover safely</h3>
+                    <p>
+                        Reset access, review active sessions, restore settings, and
+                        protect related accounts.
+                    </p>
+                </article>
+
+                <article class="learning-card">
+                    <div class="card-icon">05</div>
+                    <h3>Report appropriately</h3>
+                    <p>
+                        Know when to contact a trusted adult, teacher, school office,
+                        platform, or service provider.
+                    </p>
+                </article>
+
+                <article class="learning-card">
+                    <div class="card-icon">06</div>
+                    <h3>Learn from the incident</h3>
+                    <p>
+                        Review what happened and strengthen habits to reduce future
+                        risk.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="recognize" data-progress="33">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 2 • Recognize the Warning Signs</p>
+
+                <h2>Not every problem looks dramatic.</h2>
+
+                <p>
+                    A security incident may begin with a small clue: a password-reset
+                    email you did not request, a login from an unfamiliar place, a
+                    message you did not send, changed account settings, missing files,
+                    or a device that suddenly behaves differently.
+                </p>
+            </div>
+
+            <div class="action-grid">
+                <article class="action-card">
+                    <div class="card-icon">A</div>
+                    <h3>Account warning signs</h3>
+                    <p>
+                        Unexpected login alerts, changed passwords, unfamiliar active
+                        sessions, unknown recovery details, or messages sent from your
+                        account.
+                    </p>
+                </article>
+
+                <article class="action-card">
+                    <div class="card-icon">B</div>
+                    <h3>Data exposure signs</h3>
+                    <p>
+                        A private file becomes public, a screenshot is forwarded, a
+                        document is shared with the wrong person, or sensitive data is
+                        uploaded to an external service.
+                    </p>
+                </article>
+
+                <article class="action-card">
+                    <div class="card-icon">C</div>
+                    <h3>Device warning signs</h3>
+                    <p>
+                        A device is lost, stolen, unlocked, remotely accessed, or shows
+                        suspicious applications, pop-ups, or changes.
+                    </p>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Quick decision</span>
+                        <h3>
+                            You receive a notification that your email was accessed
+                            from an unfamiliar device. What should you do first?
+                        </h3>
+                    </div>
+
+                    <span class="module-number">Treat unexpected access seriously</span>
+                </div>
+
+                <div class="choice-list" data-question="recognize1">
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="Waiting may give an unauthorized user more time to access messages, reset other accounts, or change security settings."
+                    >
+                        Ignore it unless something else happens.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="true"
+                        data-feedback="Correct. Use the official account page to review sessions, secure the account, and confirm whether the login was yours."
+                    >
+                        Open the official account settings, review active sessions, and secure the account.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="Replying to an alert message or using its links may be risky if the notification itself is fake."
+                    >
+                        Reply to the notification and ask whether it is real.
+                    </button>
+                </div>
+
+                <div class="feedback" id="recognize1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="respond" data-progress="52">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 3 • Immediate Response</p>
+
+                <h2>Pause. Protect. Preserve. Report. Review.</h2>
+
+                <p>
+                    A good response is calm and organized. Avoid deleting everything,
+                    confronting a suspected attacker, forwarding harmful material, or
+                    making random changes without understanding the situation.
+                </p>
+            </div>
+
+            <div class="response-sequence">
+                <article class="response-step">
+                    <div class="step-number">1</div>
+                    <h3>Pause</h3>
+                    <p>
+                        Stop interacting with suspicious messages, links, files, or
+                        accounts.
+                    </p>
+                </article>
+
+                <article class="response-step">
+                    <div class="step-number">2</div>
+                    <h3>Protect</h3>
+                    <p>
+                        Secure the account or device and stop further access or sharing.
+                    </p>
+                </article>
+
+                <article class="response-step">
+                    <div class="step-number">3</div>
+                    <h3>Preserve</h3>
+                    <p>
+                        Record useful details such as time, sender, device, screenshot,
+                        or account alert.
+                    </p>
+                </article>
+
+                <article class="response-step">
+                    <div class="step-number">4</div>
+                    <h3>Report</h3>
+                    <p>
+                        Contact the right person or service, especially when other
+                        people's data is involved.
+                    </p>
+                </article>
+
+                <article class="response-step">
+                    <div class="step-number">5</div>
+                    <h3>Review</h3>
+                    <p>
+                        Check related accounts, privacy settings, devices, and recovery
+                        options.
+                    </p>
+                </article>
+            </div>
+
+            <div class="callout">
+                <strong>Important:</strong>
+                Never enter a password, recovery code, or verification code into this
+                learning website. Practice activities should use fictional examples only.
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Incident scenario</span>
+
+                        <h3>
+                            You accidentally share a private cloud document using a
+                            public link. What is the best response?
+                        </h3>
+                    </div>
+
+                    <span class="module-number">Remove access before explaining</span>
+                </div>
+
+                <div class="choice-list" data-question="respond1">
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="Posting another message does not remove access to the original file."
+                    >
+                        Add a comment asking people not to open the link.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="true"
+                        data-feedback="Correct. Disable the public link, review who accessed the file, preserve necessary details, and inform the responsible teacher or affected people if needed."
+                    >
+                        Disable the public link, review access, and report the disclosure when necessary.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="Deleting the message alone may not remove the shared file or revoke access."
+                    >
+                        Delete the message containing the link and do nothing else.
+                    </button>
+                </div>
+
+                <div class="feedback" id="respond1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="recover" data-progress="70">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 4 • Recover Control</p>
+
+                <h2>Recovery is more than changing one password.</h2>
+
+                <p>
+                    After securing the affected account or device, review how the
+                    incident may have affected connected services, saved sessions,
+                    recovery methods, files, and other people.
+                </p>
+            </div>
+
+            <table class="incident-table">
+                <thead>
+                    <tr>
+                        <th>Incident</th>
+                        <th>Immediate action</th>
+                        <th>Recovery action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Compromised account</td>
+                        <td>
+                            Use the official recovery page, change the password, and end
+                            unfamiliar sessions.
+                        </td>
+                        <td>
+                            Enable MFA, review recovery details, check sent messages, and
+                            secure accounts that reused the password.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Lost or stolen device</td>
+                        <td>
+                            Use official device-location or remote-lock features when
+                            available and report the loss.
+                        </td>
+                        <td>
+                            Sign out remotely, change important passwords, review saved
+                            accounts, and replace access credentials if necessary.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Private file shared publicly</td>
+                        <td>
+                            Revoke the public link or permissions immediately.
+                        </td>
+                        <td>
+                            Review access logs, notify affected people, and replace or
+                            remove exposed information when possible.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Verification code shared</td>
+                        <td>
+                            Secure the account immediately and reject unexpected login
+                            attempts.
+                        </td>
+                        <td>
+                            Change the password, review sessions, check recovery options,
+                            and contact the service if access was lost.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Suspicious application installed</td>
+                        <td>
+                            Disconnect when necessary and stop entering credentials.
+                        </td>
+                        <td>
+                            Remove the application using trusted procedures, update the
+                            device, run approved security checks, and seek technical help.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Recovery decision</span>
+
+                        <h3>
+                            Your social-media password was reused on your email account.
+                            The social-media account is compromised. What else should you do?
+                        </h3>
+                    </div>
+
+                    <span class="module-number">Protect connected accounts</span>
+                </div>
+
+                <div class="choice-list" data-question="recover1">
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="A compromised reused password may be tested on other accounts, especially email."
+                    >
+                        Change only the social-media password.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="true"
+                        data-feedback="Correct. Change the reused password anywhere it appears, prioritize email and financial or school accounts, enable MFA, and review active sessions."
+                    >
+                        Change every account that used the same password and review their security settings.
+                    </button>
+
+                    <button
+                        class="choice-button"
+                        data-correct="false"
+                        data-feedback="Waiting for another account to be attacked creates unnecessary risk."
+                    >
+                        Leave the email unchanged unless it is also compromised.
+                    </button>
+                </div>
+
+                <div class="feedback" id="recover1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="report" data-progress="86">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 5 • Report and Reflect</p>
+
+                <h2>Asking for help is part of a strong response.</h2>
+
+                <p>
+                    Reporting is especially important when a school account, another
+                    person's information, threats, harassment, financial loss, or
+                    repeated unauthorized access is involved.
+                </p>
+            </div>
+
+            <div class="comparison-grid">
+                <article class="comparison-card responsible-card">
+                    <h3>Report when</h3>
+                    <ul>
+                        <li>A school account or school-managed device is involved.</li>
+                        <li>Another person's data may have been exposed.</li>
+                        <li>You cannot regain access to an important account.</li>
+                        <li>There are threats, impersonation, harassment, or blackmail.</li>
+                        <li>Money, identity documents, or sensitive records are involved.</li>
+                        <li>The incident continues after basic recovery actions.</li>
+                    </ul>
+                </article>
+
+                <article class="comparison-card irresponsible-card">
+                    <h3>Avoid these reactions</h3>
+                    <ul>
+                        <li>Hiding the incident because of embarrassment.</li>
+                        <li>Forwarding suspicious content to friends for opinions.</li>
+                        <li>Publicly accusing someone without verified evidence.</li>
+                        <li>Paying, complying, or sharing more information under pressure.</li>
+                        <li>Deleting all evidence before asking for help.</li>
+                        <li>Using unverified “recovery” services or strangers online.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Personal readiness check</span>
+
+                        <h3>Which incident-response habits are already part of your routine?</h3>
+                    </div>
+
+                    <span class="module-number">No sensitive data is collected</span>
+                </div>
+
+                <div id="responseAudit">
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I know how to review active sessions on my important accounts.</span>
+                    </label>
+
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I know how to use official account-recovery pages.</span>
+                    </label>
+
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I know whom to contact at school if a school account or file is involved.</span>
+                    </label>
+
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I know not to share verification codes or recovery details.</span>
+                    </label>
+
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I know how to revoke a public file link or app permission.</span>
+                    </label>
+
+                    <label class="check-item">
+                        <input type="checkbox">
+                        <span>I have a trusted adult or support person I can contact after an incident.</span>
+                    </label>
+                </div>
+
+                <div style="margin-top:20px;">
+                    <button class="button primary-button" id="auditButton" type="button">
+                        Review My Readiness
+                    </button>
+                </div>
+
+                <div class="result-panel" id="auditResult" aria-live="polite"></div>
+            </div>
+
+            <div class="callout warning">
+                <strong>Remember:</strong>
+                A security incident is not automatically your fault. Manipulation,
+                impersonation, stolen credentials, and platform mistakes can affect
+                careful users too. Respond early and seek appropriate help.
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="challenge" data-progress="96">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 6 • Final Check</p>
+
+                <h2>Can you respond calmly and correctly?</h2>
+
+                <p>
+                    Choose the safest action in each situation.
+                </p>
+            </div>
+
+            <div class="activity-panel" style="margin-top:0;">
+                <div class="question-card">
+                    <p>
+                        1. You receive an unexpected MFA approval request. What is the safest action?
+                    </p>
+
+                    <div class="choice-list" data-question="final1">
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Approving an unexpected request may give someone access to your account."
+                        >
+                            Approve it in case it belongs to one of your devices.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="true"
+                            data-feedback="Correct. Deny the request, review account activity, and secure the account if the attempt was not yours."
+                        >
+                            Deny it, review account activity, and change security settings if needed.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Ignoring repeated approval requests without checking may allow the incident to continue."
+                        >
+                            Ignore it permanently without reviewing the account.
+                        </button>
+                    </div>
+
+                    <div class="feedback" id="final1-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>
+                        2. What is the best reason to preserve screenshots, times, and sender details?
+                    </p>
+
+                    <div class="choice-list" data-question="final2">
+                        <button
+                            class="choice-button"
+                            data-correct="true"
+                            data-feedback="Correct. Accurate records can help trusted adults, school personnel, platforms, or service providers understand and respond to the incident."
+                        >
+                            They may help explain what happened and support reporting or recovery.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Evidence should not be posted publicly because that may spread private or harmful content."
+                        >
+                            They should be posted publicly to warn everyone immediately.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Preserving evidence does not mean keeping dangerous files active or continuing to interact with them."
+                        >
+                            They prove that you should keep opening the suspicious material.
+                        </button>
+                    </div>
+
+                    <div class="feedback" id="final2-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>
+                        3. Which response best follows the KALASAG incident process?
+                    </p>
+
+                    <div class="choice-list" data-question="final3">
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Deleting everything before securing the account or preserving needed details may make recovery and investigation more difficult."
+                        >
+                            Delete everything immediately and avoid telling anyone.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="true"
+                            data-feedback="Correct. Stop the risky activity, secure access, preserve useful evidence, report appropriately, recover related accounts, and review future protections."
+                        >
+                            Pause, protect, preserve, report, recover, and review.
+                        </button>
+
+                        <button
+                            class="choice-button"
+                            data-correct="false"
+                            data-feedback="Confronting or threatening a suspected attacker may increase risk and does not restore control."
+                        >
+                            Publicly confront the suspected person before changing anything.
+                        </button>
+                    </div>
+
+                    <div class="feedback" id="final3-feedback"></div>
+                </div>
+            </div>
+
+            <div class="module-complete" style="margin-top:34px;">
+                <p class="eyebrow">Module 6 complete</p>
+
+                <h2>You are ready to act with calm, care, and control.</h2>
+
+                <p>
+                    You have completed the KALASAG learning journey. You can now
+                    recognize common incidents, take immediate protective action,
+                    preserve evidence, recover accounts and devices, report problems,
+                    and improve your personal security plan.
+                </p>
+
+                <div class="completion-actions">
+                    <button class="button light-button" id="completeModule" type="button">
+                        Mark Module 6 Complete
+                    </button>
+
+                    <a
+                        class="button secondary-button"
+                        href="assessment.html"
+                        style="border-color:rgba(255,255,255,.65);color:#fff;"
+                    >
+                        Take the Final Assessment
+                    </a>
+
+                    <a
+                        class="button secondary-button"
+                        href="module5.html"
+                        style="border-color:rgba(255,255,255,.65);color:#fff;"
+                    >
+                        Review Module 5
+                    </a>
+
+                    <a
+                        class="button secondary-button"
+                        href="modules.html"
+                        style="border-color:rgba(255,255,255,.65);color:#fff;"
+                    >
+                        Return to Modules
+                    </a>
+                </div>
+
+                <p
+                    id="completionMessage"
+                    style="margin-bottom:0;font-weight:800;"
+                    aria-live="polite"
+                ></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+"use strict";
+
+const progressBar = document.getElementById("progressBar");
+const progressValue = document.getElementById("progressValue");
+const progressSections = [...document.querySelectorAll("[data-progress]")];
+
+function updateProgress() {
+    let progress = 8;
+    const marker = window.scrollY + window.innerHeight * 0.45;
+
+    progressSections.forEach(section => {
+        if (marker >= section.offsetTop) {
+            progress = Number(section.dataset.progress);
+        }
+    });
+
+    if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10
+    ) {
+        progress = 100;
+    }
+
+    progressBar.style.width = `${progress}%`;
+    progressValue.textContent = `${progress}%`;
+}
+
+window.addEventListener("scroll", updateProgress, { passive: true });
+window.addEventListener("load", updateProgress);
+
+document.querySelectorAll(".choice-list").forEach(list => {
+    list.addEventListener("click", event => {
+        const button = event.target.closest(".choice-button");
+
+        if (!button) {
+            return;
+        }
+
+        const questionId = list.dataset.question;
+        const feedback = document.getElementById(`${questionId}-feedback`);
+        const isCorrect = button.dataset.correct === "true";
+
+        list.querySelectorAll(".choice-button").forEach(item => {
+            item.classList.remove("correct", "incorrect");
+            item.setAttribute("aria-pressed", "false");
+        });
+
+        button.classList.add(isCorrect ? "correct" : "incorrect");
+        button.setAttribute("aria-pressed", "true");
+
+        feedback.textContent = button.dataset.feedback;
+        feedback.className = `feedback show ${isCorrect ? "good" : "review"}`;
+    });
+});
+
+const auditButton = document.getElementById("auditButton");
+const auditResult = document.getElementById("auditResult");
+
+auditButton.addEventListener("click", () => {
+    const checkboxes = [
+        ...document.querySelectorAll("#responseAudit input[type='checkbox']")
+    ];
+
+    const selected = checkboxes.filter(item => item.checked).length;
+
+    if (selected <= 2) {
+        auditResult.textContent =
+            `You selected ${selected} of ${checkboxes.length} habits. Begin by learning official recovery steps, identifying a trusted support person, and reviewing active sessions on your important accounts.`;
+    } else if (selected <= 4) {
+        auditResult.textContent =
+            `You selected ${selected} of ${checkboxes.length} habits. Your response readiness is developing. Strengthen reporting, recovery, and file-access controls.`;
+    } else {
+        auditResult.textContent =
+            `You selected ${selected} of ${checkboxes.length} habits. You already have several strong response practices. Keep your support contacts and recovery information current.`;
+    }
+
+    auditResult.classList.add("show");
+});
+
+const completeButton = document.getElementById("completeModule");
+const completionMessage = document.getElementById("completionMessage");
+
+function showCompletionState() {
+    const completed =
+        localStorage.getItem("kalasagModule6Complete") === "true";
+
+    if (completed) {
+        completeButton.textContent = "Module 6 Completed ✓";
+        completeButton.disabled = true;
+        completionMessage.textContent =
+            "Your progress has been saved on this browser and device.";
+    }
+}
+
+completeButton.addEventListener("click", () => {
+    localStorage.setItem("kalasagModule6Complete", "true");
+    progressBar.style.width = "100%";
+    progressValue.textContent = "100%";
+    showCompletionState();
+});
+
+showCompletionState();
+</script>
+</body>
+</html>

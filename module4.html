@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KALASAG Module 4: Share with Care. Learn how to protect privacy on social media, review app permissions, manage location sharing, secure cloud files, and respect other people's data.">
+    <title>Module 4: Share with Care | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --kalasag-safe: #eaf7f3;
+            --kalasag-warn: #fff5df;
+            --kalasag-danger: #fff0ef;
+            --kalasag-purple: #6f63b8;
+            --kalasag-blue: #527cc5;
+            --kalasag-coral: #d96b65;
+        }
+
+        .module-hero {
+            min-height: 72vh;
+            display: grid;
+            align-items: center;
+            padding: 74px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 16%, rgba(111,99,184,0.16), transparent 29%),
+                radial-gradient(circle at 12% 88%, rgba(15,139,141,0.10), transparent 31%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .module-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+            gap: 70px;
+        }
+
+        .module-hero .eyebrow,
+        .journey-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid rgba(15,139,141,0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.84);
+            color: var(--kalasag-teal);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .module-hero h1 {
+            max-width: 760px;
+            margin: 20px 0 0;
+            font-size: clamp(2.35rem, 4.8vw, 4.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .module-hero h1 span { color: var(--kalasag-purple); }
+
+        .module-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .share-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .share-core {
+            position: relative;
+            z-index: 2;
+            width: 242px;
+            min-height: 202px;
+            padding: 30px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(18,50,74,0.09);
+            border-radius: 30px;
+            background: #ffffff;
+            box-shadow: 0 30px 70px rgba(18,50,74,0.18);
+            transform: rotate(2deg);
+        }
+
+        .share-core::before {
+            content: "↗";
+            width: 68px;
+            height: 68px;
+            display: grid;
+            place-items: center;
+            border-radius: 20px;
+            background: linear-gradient(145deg, var(--kalasag-purple), #958ade);
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .share-core strong {
+            display: block;
+            margin-top: 18px;
+            color: var(--kalasag-navy);
+            font-size: 1.65rem;
+            letter-spacing: -0.04em;
+            text-align: center;
+        }
+
+        .share-core span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .privacy-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,0.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 30px rgba(18,50,74,0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .privacy-chip.one { top: 22px; left: 8%; }
+        .privacy-chip.two { top: 72px; right: -1%; }
+        .privacy-chip.three { bottom: 72px; right: 2%; }
+        .privacy-chip.four { bottom: 20px; left: 10%; }
+        .privacy-chip.five { top: 182px; left: -3%; }
+
+        .progress-wrap {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .progress-shell {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .progress-title,
+        .progress-value {
+            color: var(--kalasag-navy);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e7eef0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-purple), #998fe2);
+            transition: width 0.35s ease;
+        }
+
+        .journey-nav {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .journey-nav a {
+            display: block;
+            padding: 11px 8px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .journey-nav a:hover,
+        .journey-nav a:focus {
+            border-color: rgba(111,99,184,0.5);
+            color: var(--kalasag-purple);
+        }
+
+        .learning-card-grid,
+        .scenario-grid,
+        .permission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .learning-card,
+        .scenario-card,
+        .permission-card,
+        .reflection-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(18,50,74,0.05);
+        }
+
+        .learning-card .number,
+        .permission-card .number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            background: rgba(111,99,184,0.12);
+            color: var(--kalasag-purple);
+            font-weight: 900;
+        }
+
+        .learning-card h3,
+        .scenario-card h3,
+        .permission-card h3 { margin-top: 0; }
+
+        .learning-card p,
+        .scenario-card p,
+        .permission-card p { color: var(--kalasag-muted); }
+
+        .mini-list {
+            margin: 16px 0 0;
+            padding-left: 20px;
+            color: var(--kalasag-muted);
+        }
+
+        .mini-list li { margin-bottom: 8px; }
+
+        .privacy-spectrum {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .spectrum-card {
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid var(--kalasag-border);
+        }
+
+        .spectrum-card.safe { background: var(--kalasag-safe); border-color: rgba(15,139,141,0.25); }
+        .spectrum-card.caution { background: var(--kalasag-warn); border-color: rgba(217,155,40,0.25); }
+        .spectrum-card.private { background: var(--kalasag-danger); border-color: rgba(217,107,101,0.25); }
+        .spectrum-card h3 { margin-top: 0; }
+        .spectrum-card p { margin-bottom: 0; color: var(--kalasag-muted); }
+
+        .activity-panel {
+            margin-top: 30px;
+            padding: 30px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 14px 38px rgba(18,50,74,0.06);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .activity-header h3 { margin: 12px 0 0; }
+
+        .choice-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .choice-button {
+            width: 100%;
+            padding: 16px 18px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        }
+
+        .choice-button:hover,
+        .choice-button:focus {
+            border-color: rgba(111,99,184,0.55);
+            transform: translateY(-1px);
+        }
+
+        .choice-button.correct { background: var(--kalasag-safe); border-color: rgba(15,139,141,0.55); }
+        .choice-button.incorrect { background: var(--kalasag-danger); border-color: rgba(217,107,101,0.5); }
+
+        .feedback,
+        .result-panel {
+            display: none;
+            margin-top: 16px;
+            padding: 15px 17px;
+            border-radius: 13px;
+            color: var(--kalasag-navy);
+            font-weight: 700;
+            line-height: 1.55;
+        }
+
+        .feedback.show,
+        .result-panel.show { display: block; }
+        .feedback.good { background: var(--kalasag-safe); }
+        .feedback.review { background: var(--kalasag-warn); }
+        .result-panel { background: var(--kalasag-pale); border: 1px solid var(--kalasag-border); }
+
+        .permission-card { position: relative; overflow: hidden; }
+        .permission-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -25px -35px auto;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(111,99,184,0.08);
+        }
+
+        .decision-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .decision-step {
+            padding: 21px;
+            border-radius: 16px;
+            background: var(--kalasag-pale);
+            border: 1px solid var(--kalasag-border);
+        }
+
+        .decision-step strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--kalasag-navy);
+        }
+
+        .decision-step span { color: var(--kalasag-muted); font-size: 0.9rem; }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .check-item:last-child { border-bottom: 0; }
+        .check-item input { margin-top: 4px; transform: scale(1.15); accent-color: var(--kalasag-purple); }
+
+        .question-card {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .question-card:last-child { border-bottom: 0; }
+        .question-card p { color: var(--kalasag-navy); font-weight: 800; }
+
+        .module-complete {
+            padding: 42px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--kalasag-navy), #284f69);
+            color: #ffffff;
+        }
+
+        .module-complete .eyebrow { color: #b9eee7; }
+        .module-complete h2 { margin-top: 10px; color: #ffffff; }
+        .module-complete p { color: #d9e4ea; }
+
+        .completion-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .module-hero .hero-grid,
+            .privacy-spectrum,
+            .decision-strip { grid-template-columns: 1fr 1fr; }
+            .learning-card-grid,
+            .scenario-grid,
+            .permission-grid { grid-template-columns: 1fr 1fr; }
+            .journey-nav { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .module-hero { padding-top: 48px; }
+            .module-hero .hero-grid,
+            .learning-card-grid,
+            .scenario-grid,
+            .permission-grid,
+            .privacy-spectrum,
+            .decision-strip { grid-template-columns: 1fr; }
+            .share-visual { min-height: 330px; }
+            .privacy-chip.one { left: 0; }
+            .privacy-chip.two { right: 0; }
+            .privacy-chip.three { right: 0; }
+            .privacy-chip.five { left: 0; }
+            .progress-shell { grid-template-columns: 1fr auto; }
+            .progress-title { grid-column: 1 / -1; }
+            .journey-nav { grid-template-columns: repeat(2, 1fr); }
+            .activity-header { flex-direction: column; }
+            .module-complete { padding: 30px 22px; }
+        }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="module-hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <p class="eyebrow">Module 4 • Share with Care</p>
+                <h1>Every post, permission, and upload leaves a <span>privacy decision.</span></h1>
+                <p class="hero-description">Learn how to share information more intentionally, manage app permissions, protect your location and cloud files, and respect other people's data before you post, forward, or upload.</p>
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#objectives">Start the Learning Journey</a>
+                    <a class="button secondary-button" href="modules.html">Back to Modules</a>
+                </div>
+            </div>
+
+            <div class="share-visual" aria-hidden="true">
+                <span class="privacy-chip one">Audience</span>
+                <span class="privacy-chip two">Location</span>
+                <span class="privacy-chip three">Permissions</span>
+                <span class="privacy-chip four">Cloud files</span>
+                <span class="privacy-chip five">Other people</span>
+                <div class="share-core">
+                    <div>
+                        <strong>Think before sharing</strong>
+                        <span>Who can see it? What could happen next?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="Module progress">
+        <div class="container">
+            <div class="progress-shell">
+                <span class="progress-title">Module 4 progress</span>
+                <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+                <span class="progress-value" id="progressValue">0%</span>
+            </div>
+            <nav class="journey-nav" aria-label="Module sections">
+                <a href="#objectives">1. Begin</a>
+                <a href="#audience">2. Audience</a>
+                <a href="#permissions">3. Permissions</a>
+                <a href="#footprint">4. Footprint</a>
+                <a href="#respect">5. Respect</a>
+                <a href="#challenge">6. Final Check</a>
+            </nav>
+        </div>
+    </section>
+
+    <section class="section" id="objectives" data-progress="16">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 1 • Learning Goals</p>
+                <h2>Share with purpose, not by habit.</h2>
+                <p>By the end of this module, you should be able to make safer sharing decisions across social media, apps, cloud tools, and everyday digital communication.</p>
+            </div>
+
+            <div class="learning-card-grid">
+                <article class="learning-card"><div class="number">01</div><h3>Choose the right audience</h3><p>Decide who should see a post, file, photo, or personal update.</p></article>
+                <article class="learning-card"><div class="number">02</div><h3>Review permissions</h3><p>Recognize when an app asks for more access than it needs.</p></article>
+                <article class="learning-card"><div class="number">03</div><h3>Protect your footprint</h3><p>Understand how posts, location details, and cloud files can spread or remain accessible.</p></article>
+                <article class="learning-card"><div class="number">04</div><h3>Respect other people's data</h3><p>Ask before posting, tagging, forwarding, or uploading someone else's information.</p></article>
+                <article class="learning-card"><div class="number">05</div><h3>Use safer sharing habits</h3><p>Pause, remove unnecessary details, limit access, and review settings before sharing.</p></article>
+                <article class="learning-card"><div class="number">06</div><h3>Respond to oversharing</h3><p>Take practical steps when something private is shared accidentally or without permission.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="audience" data-progress="34">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 2 • Audience and Context</p>
+                <h2>Sharing is not simply public or private.</h2>
+                <p>The safest decision depends on what the information is, who will receive it, why it is needed, and what may happen after it is shared.</p>
+            </div>
+
+            <div class="privacy-spectrum">
+                <article class="spectrum-card safe"><h3>Usually safer to share</h3><p>General information that does not identify, locate, embarrass, or expose you or another person.</p></article>
+                <article class="spectrum-card caution"><h3>Share with caution</h3><p>Photos, schedules, achievements, school details, and personal stories that may reveal more than intended.</p></article>
+                <article class="spectrum-card private"><h3>Keep private</h3><p>Passwords, codes, IDs, exact addresses, confidential documents, medical details, and information shared in confidence.</p></article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Audience check</span>
+                        <h3>A learner wants to post a photo of a school ID to celebrate receiving it. What is the safest choice?</h3>
+                    </div>
+                    <span class="module-number">Choose one</span>
+                </div>
+                <div class="choice-list" data-question="audience1">
+                    <button class="choice-button" data-correct="false" data-feedback="An ID may reveal a full name, school number, barcode, signature, birth date, or other identifiers. Public posting increases exposure.">Post the entire ID publicly because it is already issued by the school.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Avoid posting the ID. If a celebration photo is necessary, use a different image or cover all identifying details before sharing with a limited audience.">Use another photo, or fully hide identifying details and limit the audience.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="A disappearing story may still be captured, forwarded, or stored. Temporary visibility does not remove privacy risk.">Post it as a disappearing story because it will vanish later.</button>
+                </div>
+                <div class="feedback" id="audience1-feedback"></div>
+            </div>
+
+            <div class="decision-strip">
+                <div class="decision-step"><strong>What is it?</strong><span>Identify whether the content is public, personal, sensitive, or confidential.</span></div>
+                <div class="decision-step"><strong>Who needs it?</strong><span>Choose the smallest appropriate audience instead of the largest possible one.</span></div>
+                <div class="decision-step"><strong>What could spread?</strong><span>Assume a screenshot, download, or forward may occur.</span></div>
+                <div class="decision-step"><strong>What can be removed?</strong><span>Crop, blur, anonymize, or omit details that are not necessary.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="permissions" data-progress="54">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 3 • App Permissions</p>
+                <h2>Access should match the task.</h2>
+                <p>Permissions are not harmless checkboxes. They may allow an app to collect location, contacts, photos, microphone input, camera data, or files.</p>
+            </div>
+
+            <div class="permission-grid">
+                <article class="permission-card"><div class="number">01</div><h3>Location</h3><p>Ask whether the app truly needs precise or continuous location access.</p><ul class="mini-list"><li>Prefer “while using” when appropriate.</li><li>Disable background access if unnecessary.</li></ul></article>
+                <article class="permission-card"><div class="number">02</div><h3>Contacts</h3><p>Access may expose information belonging to other people, not only you.</p><ul class="mini-list"><li>Decline if contact syncing is not essential.</li><li>Review uploaded address books.</li></ul></article>
+                <article class="permission-card"><div class="number">03</div><h3>Camera and microphone</h3><p>Allow access only when a feature genuinely requires recording or scanning.</p><ul class="mini-list"><li>Close access after use.</li><li>Watch for unexpected indicators.</li></ul></article>
+                <article class="permission-card"><div class="number">04</div><h3>Photos and files</h3><p>Choose selected files instead of full-library access when the platform allows it.</p><ul class="mini-list"><li>Check what will be uploaded.</li><li>Remove hidden or identifying details.</li></ul></article>
+                <article class="permission-card"><div class="number">05</div><h3>Notifications</h3><p>Notifications may reveal private messages on a locked screen.</p><ul class="mini-list"><li>Hide sensitive previews.</li><li>Disable unnecessary alerts.</li></ul></article>
+                <article class="permission-card"><div class="number">06</div><h3>Account connections</h3><p>Signing in with another platform may connect profile data and permissions.</p><ul class="mini-list"><li>Review linked applications.</li><li>Remove connections you no longer use.</li></ul></article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Permission decision</span>
+                        <h3>A flashlight app requests access to your contacts, microphone, and exact location. What should you do?</h3>
+                    </div>
+                    <span class="module-number">Match access to purpose</span>
+                </div>
+                <div class="choice-list" data-question="permission1">
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Those permissions are not necessary for a basic flashlight function. Deny them and consider using a trusted built-in tool instead.">Deny the permissions and use a trusted alternative.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Popularity does not prove that every permission is necessary or safe. Review the purpose of each request.">Allow everything because many people use the app.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Turning permissions off later does not prevent earlier collection. Decide before granting access.">Allow everything now and review it after several months.</button>
+                </div>
+                <div class="feedback" id="permission1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="footprint" data-progress="70">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 4 • Digital Footprints and Cloud Sharing</p>
+                <h2>Visibility can continue after you press share.</h2>
+                <p>Posts, links, files, comments, and location details may remain searchable, downloadable, cached, forwarded, or visible to people outside the original audience.</p>
+            </div>
+
+            <div class="scenario-grid">
+                <article class="scenario-card"><h3>Live location</h3><p>Sharing exact real-time location can reveal routines, travel, and when a home may be unattended.</p></article>
+                <article class="scenario-card"><h3>Cloud links</h3><p>“Anyone with the link” may allow access beyond the intended class or group.</p></article>
+                <article class="scenario-card"><h3>Photo details</h3><p>Uniforms, house numbers, IDs, screens, name tags, and metadata may reveal identity or location.</p></article>
+                <article class="scenario-card"><h3>Old posts</h3><p>Past content may still affect reputation, safety, or future opportunities.</p></article>
+                <article class="scenario-card"><h3>Tagged content</h3><p>Other people may connect your name to content you did not create or approve.</p></article>
+                <article class="scenario-card"><h3>Shared documents</h3><p>Comments, revision history, hidden sheets, and file names may expose more than the visible page.</p></article>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Cloud-file scenario</span>
+                        <h3>You need to share a group project with your teacher. Which setting is safest?</h3>
+                    </div>
+                    <span class="module-number">Use least necessary access</span>
+                </div>
+                <div class="choice-list" data-question="cloud1">
+                    <button class="choice-button" data-correct="false" data-feedback="Public access may expose student names, comments, or work to anyone who finds the link.">Publish the file publicly so the teacher can open it easily.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Share directly with the teacher's verified account and grant only the permission needed, such as view or comment.">Share with the teacher's verified account using the minimum required permission.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Posting the link in a large group increases the chance of forwarding and unauthorized access.">Post an editable link in a large class chat.</button>
+                </div>
+                <div class="feedback" id="cloud1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="respect" data-progress="86">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 5 • Respect and Recovery</p>
+                <h2>Privacy includes other people, too.</h2>
+                <p>Responsible sharing means considering consent, context, dignity, and harm before posting or forwarding someone else's information.</p>
+            </div>
+
+            <div class="decision-strip">
+                <div class="decision-step"><strong>Ask permission</strong><span>Get consent before posting identifiable images, stories, or private messages.</span></div>
+                <div class="decision-step"><strong>Limit details</strong><span>Remove names, faces, locations, or documents when they are not necessary.</span></div>
+                <div class="decision-step"><strong>Do not forward harm</strong><span>Avoid spreading screenshots, rumors, private chats, or embarrassing content.</span></div>
+                <div class="decision-step"><strong>Act after a mistake</strong><span>Delete where possible, notify affected people, adjust settings, and report serious exposure.</span></div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Consent scenario</span>
+                        <h3>A friend sends a private message about a difficult personal experience. Another classmate asks for a screenshot. What is the safest action?</h3>
+                    </div>
+                    <span class="module-number">Protect trust</span>
+                </div>
+                <div class="choice-list" data-question="respect1">
+                    <button class="choice-button" data-correct="false" data-feedback="A private message remains sensitive even when shared with one trusted person. Forwarding it may cause harm and break trust.">Send the screenshot because it may help explain the situation.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Do not forward the message. Support the friend and encourage appropriate help if there is a safety concern.">Keep it private and support the friend without forwarding the message.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Removing the name may not remove context, writing style, or details that identify the person.">Crop the name and post the rest anonymously.</button>
+                </div>
+                <div class="feedback" id="respect1-feedback"></div>
+            </div>
+
+            <div class="activity-panel">
+                <div class="activity-header">
+                    <div>
+                        <span class="journey-label">Personal sharing audit</span>
+                        <h3>Which protective habits are already part of your routine?</h3>
+                    </div>
+                    <span class="module-number">No personal data is collected</span>
+                </div>
+                <div id="sharingAudit">
+                    <label class="check-item"><input type="checkbox"><span>I review the audience before posting or sharing a file.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I avoid posting exact live locations or detailed routines publicly.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I review app permissions and remove access that is not needed.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I use direct, limited-access cloud sharing instead of public links.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I ask before posting or forwarding another person's information.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I know how to remove a post, revoke a link, or report unwanted sharing.</span></label>
+                </div>
+                <div style="margin-top: 20px;"><button class="button primary-button" id="auditButton" type="button">Review My Sharing Habits</button></div>
+                <div class="result-panel" id="auditResult" aria-live="polite"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="challenge" data-progress="96">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Step 6 • Final Check</p>
+                <h2>Can you share with care?</h2>
+                <p>Use the full process: identify the data, limit the audience, review permissions, protect other people, and act quickly after a mistake.</p>
+            </div>
+
+            <div class="activity-panel" style="margin-top: 0;">
+                <div class="question-card">
+                    <p>1. Which app permission follows the principle of least necessary access?</p>
+                    <div class="choice-list" data-question="final1">
+                        <button class="choice-button" data-correct="false" data-feedback="Continuous location access is not necessary for an app that only edits documents.">Allow a document editor to access precise location at all times.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Selected-photo access limits the app to only the files needed for the task.">Allow a design app to access only the selected photo you want to edit.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="A simple calculator does not need contact access to perform calculations.">Allow a calculator to upload all contacts.</button>
+                    </div>
+                    <div class="feedback" id="final1-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>2. What is the safest way to share a school document containing student names?</p>
+                    <div class="choice-list" data-question="final2">
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Share directly with verified recipients and grant only the access required.">Use verified recipients and limited permissions.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Public links may spread beyond the intended group and may remain accessible later.">Create a public editable link.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Posting a screenshot may still expose names and removes access controls.">Post screenshots in a public social-media story.</button>
+                    </div>
+                    <div class="feedback" id="final2-feedback"></div>
+                </div>
+
+                <div class="question-card">
+                    <p>3. You accidentally post a photo that reveals a classmate's private information. What should you do?</p>
+                    <div class="choice-list" data-question="final3">
+                        <button class="choice-button" data-correct="false" data-feedback="Waiting may increase the number of views, screenshots, and shares.">Leave it online and remove it at the end of the day.</button>
+                        <button class="choice-button" data-correct="true" data-feedback="Correct. Remove it promptly, notify the affected person, adjust privacy settings, and report or seek help if the exposure is serious.">Remove it quickly, inform the classmate, and take corrective steps.</button>
+                        <button class="choice-button" data-correct="false" data-feedback="Deleting comments does not remove the exposed information from the original post.">Keep the post but delete any comments about it.</button>
+                    </div>
+                    <div class="feedback" id="final3-feedback"></div>
+                </div>
+            </div>
+
+            <div class="module-complete" style="margin-top: 34px;">
+                <p class="eyebrow">Module 4 complete</p>
+                <h2>Privacy grows stronger when sharing becomes intentional.</h2>
+                <p>You have reviewed audiences, app permissions, location sharing, cloud access, digital footprints, consent, and recovery after oversharing. Mark this module complete, then continue to Module 5 to examine privacy in the age of AI.</p>
+                <div class="completion-actions">
+                    <button class="button light-button" id="completeModule" type="button">Mark Module 4 Complete</button>
+                    <a class="button secondary-button" href="module5.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Continue to Module 5</a>
+                    <a class="button secondary-button" href="module3.html" style="border-color: rgba(255,255,255,0.65); color: #ffffff;">Review Module 3</a>
+                </div>
+                <p id="completionMessage" style="margin-bottom: 0; font-weight: 800;" aria-live="polite"></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+    "use strict";
+
+    const progressBar = document.getElementById("progressBar");
+    const progressValue = document.getElementById("progressValue");
+    const progressSections = [...document.querySelectorAll("[data-progress]")];
+
+    function updateProgress() {
+        let currentProgress = 8;
+        const viewportMarker = window.scrollY + window.innerHeight * 0.45;
+
+        progressSections.forEach((section) => {
+            if (viewportMarker >= section.offsetTop) {
+                currentProgress = Number(section.dataset.progress);
+            }
+        });
+
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10) {
+            currentProgress = 100;
+        }
+
+        progressBar.style.width = `${currentProgress}%`;
+        progressValue.textContent = `${currentProgress}%`;
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("load", updateProgress);
+
+    document.querySelectorAll(".choice-list").forEach((choiceList) => {
+        choiceList.addEventListener("click", (event) => {
+            const button = event.target.closest(".choice-button");
+            if (!button) return;
+
+            const questionId = choiceList.dataset.question;
+            const feedback = document.getElementById(`${questionId}-feedback`);
+            const isCorrect = button.dataset.correct === "true";
+
+            choiceList.querySelectorAll(".choice-button").forEach((item) => {
+                item.classList.remove("correct", "incorrect");
+                item.setAttribute("aria-pressed", "false");
+            });
+
+            button.classList.add(isCorrect ? "correct" : "incorrect");
+            button.setAttribute("aria-pressed", "true");
+            feedback.textContent = button.dataset.feedback;
+            feedback.className = `feedback show ${isCorrect ? "good" : "review"}`;
+        });
+    });
+
+    document.getElementById("auditButton").addEventListener("click", () => {
+        const checks = [...document.querySelectorAll("#sharingAudit input[type='checkbox']")];
+        const score = checks.filter((item) => item.checked).length;
+        const result = document.getElementById("auditResult");
+
+        if (score <= 2) {
+            result.textContent = `You selected ${score} of ${checks.length} habits. Begin with three changes: review audiences, limit app permissions, and ask before sharing another person's information.`;
+        } else if (score <= 4) {
+            result.textContent = `You selected ${score} of ${checks.length} habits. Your routine is developing. Strengthen cloud-sharing controls, location privacy, and recovery steps after oversharing.`;
+        } else {
+            result.textContent = `You selected ${score} of ${checks.length} habits. You already practice several strong privacy behaviors. Continue reviewing settings and limiting unnecessary exposure.`;
+        }
+
+        result.classList.add("show");
+    });
+
+    const completeButton = document.getElementById("completeModule");
+    const completionMessage = document.getElementById("completionMessage");
+
+    function showCompletionState() {
+        const completed = localStorage.getItem("kalasagModule4Complete") === "true";
+        if (completed) {
+            completeButton.textContent = "Module 4 Completed ✓";
+            completeButton.disabled = true;
+            completionMessage.textContent = "Your progress has been saved on this browser and device.";
+        }
+    }
+
+    completeButton.addEventListener("click", () => {
+        localStorage.setItem("kalasagModule4Complete", "true");
+        progressBar.style.width = "100%";
+        progressValue.textContent = "100%";
+        showCompletionState();
+    });
+
+    showCompletionState();
+</script>
+</body>
+</html>

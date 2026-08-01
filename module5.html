@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KALASAG Module 5: Privacy in the Age of AI. Learn how to protect personal and confidential information when using AI tools, anonymize prompts, review uploads, and make privacy-conscious decisions.">
+    <title>Module 5: Privacy in the Age of AI | KALASAG</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --kalasag-safe: #eaf7f3;
+            --kalasag-warn: #fff5df;
+            --kalasag-danger: #fff0ef;
+            --kalasag-purple: #6f63b8;
+            --kalasag-blue: #527cc5;
+            --kalasag-coral: #d96b65;
+        }
+
+        .module-hero {
+            min-height: 72vh;
+            display: grid;
+            align-items: center;
+            padding: 74px 0 64px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 86% 16%, rgba(111,99,184,0.16), transparent 29%),
+                radial-gradient(circle at 12% 88%, rgba(15,139,141,0.10), transparent 31%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .module-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+            gap: 70px;
+        }
+
+        .module-hero .eyebrow,
+        .journey-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border: 1px solid rgba(15,139,141,0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.84);
+            color: var(--kalasag-teal);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .module-hero h1 {
+            max-width: 760px;
+            margin: 20px 0 0;
+            font-size: clamp(2.35rem, 4.8vw, 4.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .module-hero h1 span { color: var(--kalasag-purple); }
+
+        .module-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.25vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .share-visual {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .share-core {
+            position: relative;
+            z-index: 2;
+            width: 242px;
+            min-height: 202px;
+            padding: 30px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(18,50,74,0.09);
+            border-radius: 30px;
+            background: #ffffff;
+            box-shadow: 0 30px 70px rgba(18,50,74,0.18);
+            transform: rotate(2deg);
+        }
+
+        .share-core::before {
+            content: "↗";
+            width: 68px;
+            height: 68px;
+            display: grid;
+            place-items: center;
+            border-radius: 20px;
+            background: linear-gradient(145deg, var(--kalasag-purple), #958ade);
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .share-core strong {
+            display: block;
+            margin-top: 18px;
+            color: var(--kalasag-navy);
+            font-size: 1.65rem;
+            letter-spacing: -0.04em;
+            text-align: center;
+        }
+
+        .share-core span {
+            display: block;
+            margin-top: 8px;
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            text-align: center;
+        }
+
+        .privacy-chip {
+            position: absolute;
+            z-index: 3;
+            padding: 9px 13px;
+            border: 1px solid rgba(18,50,74,0.10);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 30px rgba(18,50,74,0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .privacy-chip.one { top: 22px; left: 8%; }
+        .privacy-chip.two { top: 72px; right: -1%; }
+        .privacy-chip.three { bottom: 72px; right: 2%; }
+        .privacy-chip.four { bottom: 20px; left: 10%; }
+        .privacy-chip.five { top: 182px; left: -3%; }
+
+        .progress-wrap {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .progress-shell {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .progress-title,
+        .progress-value {
+            color: var(--kalasag-navy);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 9px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #e7eef0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-purple), #998fe2);
+            transition: width 0.35s ease;
+        }
+
+        .journey-nav {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .journey-nav a {
+            display: block;
+            padding: 11px 8px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 11px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .journey-nav a:hover,
+        .journey-nav a:focus {
+            border-color: rgba(111,99,184,0.5);
+            color: var(--kalasag-purple);
+        }
+
+        .learning-card-grid,
+        .scenario-grid,
+        .permission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .learning-card,
+        .scenario-card,
+        .permission-card,
+        .reflection-card {
+            padding: 27px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(18,50,74,0.05);
+        }
+
+        .learning-card .number,
+        .permission-card .number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            background: rgba(111,99,184,0.12);
+            color: var(--kalasag-purple);
+            font-weight: 900;
+        }
+
+        .learning-card h3,
+        .scenario-card h3,
+        .permission-card h3 { margin-top: 0; }
+
+        .learning-card p,
+        .scenario-card p,
+        .permission-card p { color: var(--kalasag-muted); }
+
+        .mini-list {
+            margin: 16px 0 0;
+            padding-left: 20px;
+            color: var(--kalasag-muted);
+        }
+
+        .mini-list li { margin-bottom: 8px; }
+
+        .privacy-spectrum {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .spectrum-card {
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid var(--kalasag-border);
+        }
+
+        .spectrum-card.safe { background: var(--kalasag-safe); border-color: rgba(15,139,141,0.25); }
+        .spectrum-card.caution { background: var(--kalasag-warn); border-color: rgba(217,155,40,0.25); }
+        .spectrum-card.private { background: var(--kalasag-danger); border-color: rgba(217,107,101,0.25); }
+        .spectrum-card h3 { margin-top: 0; }
+        .spectrum-card p { margin-bottom: 0; color: var(--kalasag-muted); }
+
+        .activity-panel {
+            margin-top: 30px;
+            padding: 30px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 14px 38px rgba(18,50,74,0.06);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .activity-header h3 { margin: 12px 0 0; }
+
+        .choice-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .choice-button {
+            width: 100%;
+            padding: 16px 18px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        }
+
+        .choice-button:hover,
+        .choice-button:focus {
+            border-color: rgba(111,99,184,0.55);
+            transform: translateY(-1px);
+        }
+
+        .choice-button.correct { background: var(--kalasag-safe); border-color: rgba(15,139,141,0.55); }
+        .choice-button.incorrect { background: var(--kalasag-danger); border-color: rgba(217,107,101,0.5); }
+
+        .feedback,
+        .result-panel {
+            display: none;
+            margin-top: 16px;
+            padding: 15px 17px;
+            border-radius: 13px;
+            color: var(--kalasag-navy);
+            font-weight: 700;
+            line-height: 1.55;
+        }
+
+        .feedback.show,
+        .result-panel.show { display: block; }
+        .feedback.good { background: var(--kalasag-safe); }
+        .feedback.review { background: var(--kalasag-warn); }
+        .result-panel { background: var(--kalasag-pale); border: 1px solid var(--kalasag-border); }
+
+        .permission-card { position: relative; overflow: hidden; }
+        .permission-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -25px -35px auto;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(111,99,184,0.08);
+        }
+
+        .decision-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .decision-step {
+            padding: 21px;
+            border-radius: 16px;
+            background: var(--kalasag-pale);
+            border: 1px solid var(--kalasag-border);
+        }
+
+        .decision-step strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--kalasag-navy);
+        }
+
+        .decision-step span { color: var(--kalasag-muted); font-size: 0.9rem; }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .check-item:last-child { border-bottom: 0; }
+        .check-item input { margin-top: 4px; transform: scale(1.15); accent-color: var(--kalasag-purple); }
+
+        .question-card {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--kalasag-border);
+        }
+
+        .question-card:last-child { border-bottom: 0; }
+        .question-card p { color: var(--kalasag-navy); font-weight: 800; }
+
+        .module-complete {
+            padding: 42px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--kalasag-navy), #284f69);
+            color: #ffffff;
+        }
+
+        .module-complete .eyebrow { color: #b9eee7; }
+        .module-complete h2 { margin-top: 10px; color: #ffffff; }
+        .module-complete p { color: #d9e4ea; }
+
+        .completion-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .module-hero .hero-grid,
+            .privacy-spectrum,
+            .decision-strip { grid-template-columns: 1fr 1fr; }
+            .learning-card-grid,
+            .scenario-grid,
+            .permission-grid { grid-template-columns: 1fr 1fr; }
+            .journey-nav { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 700px) {
+            .module-hero { padding-top: 48px; }
+            .module-hero .hero-grid,
+            .learning-card-grid,
+            .scenario-grid,
+            .permission-grid,
+            .privacy-spectrum,
+            .decision-strip { grid-template-columns: 1fr; }
+            .share-visual { min-height: 330px; }
+            .privacy-chip.one { left: 0; }
+            .privacy-chip.two { right: 0; }
+            .privacy-chip.three { right: 0; }
+            .privacy-chip.five { left: 0; }
+            .progress-shell { grid-template-columns: 1fr auto; }
+            .progress-title { grid-column: 1 / -1; }
+            .journey-nav { grid-template-columns: repeat(2, 1fr); }
+            .activity-header { flex-direction: column; }
+            .module-complete { padding: 30px 22px; }
+        }
+
+        .ai-visual { position: relative; min-height: 390px; display: grid; place-items: center; }
+        .ai-core { position: relative; z-index: 2; width: 250px; min-height: 205px; padding: 30px; display: grid; place-items: center; border: 1px solid rgba(18,50,74,0.09); border-radius: 30px; background: #fff; box-shadow: 0 30px 70px rgba(18,50,74,0.18); transform: rotate(-2deg); }
+        .ai-core::before { content: "AI"; width: 74px; height: 74px; display: grid; place-items: center; border-radius: 22px; background: linear-gradient(145deg, var(--kalasag-blue), var(--kalasag-purple)); color:#fff; font-size:1.55rem; font-weight:900; }
+        .ai-core strong { display:block; margin-top:18px; color:var(--kalasag-navy); font-size:1.55rem; letter-spacing:-0.04em; text-align:center; }
+        .ai-core span { display:block; margin-top:8px; color:var(--kalasag-muted); font-size:.78rem; text-align:center; }
+        .data-chip { position:absolute; z-index:3; padding:9px 13px; border:1px solid rgba(18,50,74,.10); border-radius:999px; background:rgba(255,255,255,.95); box-shadow:0 12px 30px rgba(18,50,74,.10); color:var(--kalasag-navy); font-size:.78rem; font-weight:800; }
+        .data-chip.one { top:22px; left:8%; } .data-chip.two { top:72px; right:-1%; } .data-chip.three { bottom:72px; right:2%; } .data-chip.four { bottom:20px; left:10%; } .data-chip.five { top:182px; left:-3%; }
+</style>
+</head>
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="module-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">Module 5 • Privacy in the Age of AI</p>
+                <h1>Before you prompt, <span>protect the data.</span></h1>
+                <p class="hero-description">AI tools can help you learn, create, and solve problems—but every prompt, upload, and conversation may involve personal or confidential information. This module will help you use AI without exposing data that should remain protected.</p>
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#objectives">Begin the Module</a>
+                    <a class="button secondary-button" href="modules.html">View All Modules</a>
+                </div>
+            </div>
+            <div class="ai-visual" aria-label="AI privacy illustration">
+                <div class="ai-core"><div><strong>Prompt with care</strong><span>Share only what the task truly needs.</span></div></div>
+                <span class="data-chip one">Remove names</span>
+                <span class="data-chip two">Check uploads</span>
+                <span class="data-chip three">Protect school data</span>
+                <span class="data-chip four">Use fictional examples</span>
+                <span class="data-chip five">Review platform rules</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="Module progress">
+        <div class="container">
+            <div class="progress-shell"><span class="progress-title">Module 5 progress</span><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div><span class="progress-value" id="progressValue">0%</span></div>
+            <div class="journey-nav">
+                <a href="#objectives">1. Begin</a><a href="#data">2. Know the Data</a><a href="#prompts">3. Safer Prompts</a><a href="#uploads">4. Review Uploads</a><a href="#choices">5. Make Choices</a><a href="#challenge">6. Final Check</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="objectives" data-progress="16">
+        <div class="container">
+            <div class="section-heading centered-heading">
+                <p class="eyebrow">Step 1 • Learning Goals</p>
+                <h2>What will you be able to do?</h2>
+                <p>By the end of this module, you should be able to protect personal and confidential information while using AI tools.</p>
+            </div>
+            <div class="learning-card-grid">
+                <article class="learning-card"><div class="card-icon">01</div><h3>Identify risky data</h3><p>Recognize personal, sensitive, confidential, and third-party information that should not be placed in an AI prompt.</p></article>
+                <article class="learning-card"><div class="card-icon">02</div><h3>Anonymize safely</h3><p>Remove or replace identifying details before asking AI to analyze, edit, summarize, or generate content.</p></article>
+                <article class="learning-card"><div class="card-icon">03</div><h3>Review before upload</h3><p>Check documents, images, screenshots, and files for hidden or unnecessary information.</p></article>
+                <article class="learning-card"><div class="card-icon">04</div><h3>Make informed choices</h3><p>Consider the platform, the task, the data involved, and school rules before using AI.</p></article>
+                <article class="learning-card"><div class="card-icon">05</div><h3>Protect other people</h3><p>Respect classmates, family members, teachers, and organizations whose data may appear in your materials.</p></article>
+                <article class="learning-card"><div class="card-icon">06</div><h3>Respond after a mistake</h3><p>Know what to do if private information is accidentally entered or uploaded.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="data" data-progress="34">
+        <div class="container">
+            <div class="section-heading"><p class="eyebrow">Step 2 • Know the Data</p><h2>AI does not need your whole story.</h2><p>Only provide the minimum information needed for the task. A useful prompt can usually be written without names, account details, private conversations, health information, grades, addresses, or confidential school records.</p></div>
+            <div class="comparison-grid">
+                <article class="comparison-card responsible-card"><h3>Safer information</h3><ul><li>Fictional names and situations</li><li>General questions without identifying details</li><li>Public information from authorized sources</li><li>Short excerpts with private details removed</li><li>Aggregated or anonymized data</li></ul></article>
+                <article class="comparison-card irresponsible-card"><h3>Keep protected</h3><ul><li>Passwords, verification codes, or recovery answers</li><li>Student numbers, IDs, addresses, and phone numbers</li><li>Private messages, counseling notes, or medical details</li><li>Unreleased grades, disciplinary records, or confidential files</li><li>Another person's image, voice, or information without permission</li></ul></article>
+            </div>
+            <div class="activity-panel">
+                <div class="activity-header"><div><span class="journey-label">Quick decision</span><h3>You want AI to improve a classmate's résumé. Which approach is safest?</h3></div><span class="module-number">Use only necessary data</span></div>
+                <div class="choice-list" data-question="data1">
+                    <button class="choice-button" data-correct="false" data-feedback="The résumé may contain a full name, address, phone number, email, references, and other personal details that are not required for editing advice.">Upload the complete résumé with all personal details.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Replace identifying details with fictional placeholders and include only the section that needs feedback.">Remove identifiers, use placeholders, and share only the relevant section.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Permission matters, but data minimization is still necessary. Consent alone does not remove privacy risk.">Upload it unchanged as long as your classmate says yes.</button>
+                </div><div class="feedback" id="data1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="prompts" data-progress="54">
+        <div class="container">
+            <div class="section-heading centered-heading"><p class="eyebrow">Step 3 • Safer Prompting</p><h2>Rewrite the task, not the identity.</h2><p>Anonymization means removing or replacing details that can directly or indirectly identify a person.</p></div>
+            <div class="decision-strip">
+                <div class="decision-step"><strong>Remove identifiers</strong><span>Names, usernames, email addresses, student numbers, faces, and contact details.</span></div>
+                <div class="decision-step"><strong>Generalize context</strong><span>Replace exact schools, locations, dates, and positions with broader descriptions.</span></div>
+                <div class="decision-step"><strong>Reduce the content</strong><span>Submit only the paragraph, table, or section needed for the task.</span></div>
+                <div class="decision-step"><strong>Use placeholders</strong><span>Use labels such as Student A, School X, or [email removed].</span></div>
+            </div>
+            <div class="activity-panel">
+                <div class="activity-header"><div><span class="journey-label">Prompt makeover</span><h3>Which prompt best protects privacy?</h3></div><span class="module-number">Anonymize before prompting</span></div>
+                <div class="choice-list" data-question="prompt1">
+                    <button class="choice-button" data-correct="false" data-feedback="This prompt exposes a learner's full identity, school, grade, and a personal situation.">“Write advice for Maria Santos, a Grade 12 student at Lutucan Integrated National High School, who failed her research subject and is anxious about her parents.”</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. The prompt keeps the educational purpose while removing unnecessary identifying information.">“Write supportive study-planning advice for a senior high school learner who is struggling in a research subject.”</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Initials, an exact school, and a specific personal event may still identify the person in a small community.">“Write advice for M.S. from a specific Grade 12 section after a recent family meeting.”</button>
+                </div><div class="feedback" id="prompt1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="uploads" data-progress="70">
+        <div class="container">
+            <div class="section-heading"><p class="eyebrow">Step 4 • Review Every Upload</p><h2>A file may reveal more than you expect.</h2><p>Documents and images can contain names, comments, metadata, tracked changes, hidden sheets, faces, signatures, locations, and background details.</p></div>
+            <div class="permission-grid">
+                <article class="permission-card"><div class="card-icon">DOC</div><h3>Documents</h3><p>Check headers, comments, revision history, file names, author fields, and hidden text.</p></article>
+                <article class="permission-card"><div class="card-icon">IMG</div><h3>Images</h3><p>Look for faces, IDs, screens, addresses, uniforms, location clues, and private surroundings.</p></article>
+                <article class="permission-card"><div class="card-icon">DATA</div><h3>Spreadsheets</h3><p>Remove names, emails, identifiers, hidden columns, and unnecessary individual records.</p></article>
+            </div>
+            <div class="activity-panel">
+                <div class="activity-header"><div><span class="journey-label">Upload checklist</span><h3>A spreadsheet contains survey responses from classmates. You want AI to summarize the patterns. What should you do first?</h3></div><span class="module-number">Anonymize and minimize</span></div>
+                <div class="choice-list" data-question="upload1">
+                    <button class="choice-button" data-correct="false" data-feedback="Uploading the raw file may expose names, email addresses, timestamps, and open-ended responses.">Upload the original spreadsheet directly.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Remove identifiers, confirm permission and school rules, and use only the variables necessary for the analysis.">Create an anonymized copy containing only the needed data and confirm that AI use is permitted.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Renaming the file does not remove personal information inside the spreadsheet.">Change only the file name before uploading it.</button>
+                </div><div class="feedback" id="upload1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="choices" data-progress="86">
+        <div class="container">
+            <div class="section-heading centered-heading"><p class="eyebrow">Step 5 • Make Informed Choices</p><h2>Ask four questions before using AI.</h2><p>Responsible use begins before the prompt is submitted.</p></div>
+            <div class="decision-strip">
+                <div class="decision-step"><strong>What data?</strong><span>Does the content include personal, sensitive, confidential, or third-party information?</span></div>
+                <div class="decision-step"><strong>Why this tool?</strong><span>Can the task be completed without sharing the data or by using a safer alternative?</span></div>
+                <div class="decision-step"><strong>Which rules?</strong><span>Does the school, teacher, organization, or platform permit this use?</span></div>
+                <div class="decision-step"><strong>What if exposed?</strong><span>Would the person or organization be harmed if the content were seen by others?</span></div>
+            </div>
+            <div class="activity-panel">
+                <div class="activity-header"><div><span class="journey-label">AI privacy audit</span><h3>Which privacy habits are already part of your AI use?</h3></div><span class="module-number">No personal data is collected</span></div>
+                <div id="aiAudit">
+                    <label class="check-item"><input type="checkbox"><span>I remove names and identifiers before entering prompts.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I review screenshots, documents, and images before uploading them.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I avoid entering passwords, codes, account details, or confidential records.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I protect other people's data and ask permission when appropriate.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I check school or teacher rules before using AI for academic tasks.</span></label>
+                    <label class="check-item"><input type="checkbox"><span>I know how to report or respond after accidental disclosure.</span></label>
+                </div>
+                <div style="margin-top:20px;"><button class="button primary-button" id="auditButton" type="button">Review My AI Privacy Habits</button></div>
+                <div class="result-panel" id="auditResult" aria-live="polite"></div>
+            </div>
+            <div class="activity-panel">
+                <div class="activity-header"><div><span class="journey-label">After a mistake</span><h3>You accidentally paste private information into an AI chat. What should you do?</h3></div><span class="module-number">Act quickly and report when needed</span></div>
+                <div class="choice-list" data-question="mistake1">
+                    <button class="choice-button" data-correct="false" data-feedback="Ignoring the incident may leave the information exposed and delay protective action.">Do nothing because the chat is probably private.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Stop, remove the content if possible, review platform controls, notify affected people or school personnel when necessary, and secure any exposed accounts or documents.">Stop, delete or remove access where possible, document what happened, and seek appropriate help.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Adding more messages does not remove or neutralize the original disclosure.">Send several new prompts so the private information moves higher in the chat.</button>
+                </div><div class="feedback" id="mistake1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="challenge" data-progress="96">
+        <div class="container">
+            <div class="section-heading"><p class="eyebrow">Step 6 • Final Check</p><h2>Can you protect privacy while using AI?</h2><p>Choose the safest action in each situation.</p></div>
+            <div class="activity-panel" style="margin-top:0;">
+                <div class="question-card"><p>1. Which prompt follows data minimization?</p><div class="choice-list" data-question="final1">
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. It provides enough context for the task without identifying the learner.">“Explain this algebra concept to a Grade 12 learner who needs a simpler example.”</button>
+                    <button class="choice-button" data-correct="false" data-feedback="The prompt includes unnecessary identifying and academic information.">“Explain this to Juan Dela Cruz, student number 2026-1045, who received a grade of 72.”</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Uploading a full student profile is unnecessary for a general explanation.">“Read the attached student profile and personalize the lesson.”</button>
+                </div><div class="feedback" id="final1-feedback"></div></div>
+                <div class="question-card"><p>2. What should you check before uploading a document to an AI tool?</p><div class="choice-list" data-question="final2">
+                    <button class="choice-button" data-correct="false" data-feedback="File size matters for performance but does not address privacy risk.">Only whether the file is small enough.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Review visible and hidden information, remove unnecessary identifiers, and confirm that the use is permitted.">Its contents, metadata, identifiers, permissions, and whether the upload is allowed.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="A professional-looking document can still contain private or confidential information.">Only whether the document looks professional.</button>
+                </div><div class="feedback" id="final2-feedback"></div></div>
+                <div class="question-card"><p>3. Which statement is most responsible?</p><div class="choice-list" data-question="final3">
+                    <button class="choice-button" data-correct="false" data-feedback="AI platforms may process, store, or review submitted content depending on their settings and policies.">Anything entered into an AI tool is automatically private.</button>
+                    <button class="choice-button" data-correct="true" data-feedback="Correct. Treat AI tools as external services and share only the minimum information necessary after checking rules and risks.">Use AI only with data you are authorized to share, and minimize what you provide.</button>
+                    <button class="choice-button" data-correct="false" data-feedback="Deleting a chat may not guarantee that all copies or processing records are immediately removed.">Deleting a chat always guarantees complete removal from every system.</button>
+                </div><div class="feedback" id="final3-feedback"></div></div>
+            </div>
+
+            <div class="module-complete" style="margin-top:34px;">
+                <p class="eyebrow">Module 5 complete</p>
+                <h2>Smart AI use begins with protected data.</h2>
+                <p>You have learned how to minimize data, anonymize prompts, review uploads, protect other people, follow rules, and respond after accidental disclosure. Mark this module complete, then continue to Module 6 for incident response and recovery.</p>
+                <div class="completion-actions">
+                    <button class="button light-button" id="completeModule" type="button">Mark Module 5 Complete</button>
+                    <a class="button secondary-button" href="module6.html" style="border-color:rgba(255,255,255,.65);color:#fff;">Continue to Module 6</a>
+                    <a class="button secondary-button" href="module4.html" style="border-color:rgba(255,255,255,.65);color:#fff;">Review Module 4</a>
+                </div>
+                <p id="completionMessage" style="margin-bottom:0;font-weight:800;" aria-live="polite"></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer"><div class="container footer-content"><div><strong>KALASAG</strong><p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p></div><p>&copy; 2026 KALASAG</p></div></footer>
+<script src="js/script.js"></script>
+<script>
+"use strict";
+const progressBar=document.getElementById("progressBar"),progressValue=document.getElementById("progressValue"),progressSections=[...document.querySelectorAll("[data-progress]")];
+function updateProgress(){let p=8,m=window.scrollY+window.innerHeight*.45;progressSections.forEach(s=>{if(m>=s.offsetTop)p=Number(s.dataset.progress);});if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-10)p=100;progressBar.style.width=`${p}%`;progressValue.textContent=`${p}%`;}
+window.addEventListener("scroll",updateProgress,{passive:true});window.addEventListener("load",updateProgress);
+document.querySelectorAll(".choice-list").forEach(list=>{list.addEventListener("click",e=>{const b=e.target.closest(".choice-button");if(!b)return;const id=list.dataset.question,f=document.getElementById(`${id}-feedback`),ok=b.dataset.correct==="true";list.querySelectorAll(".choice-button").forEach(i=>{i.classList.remove("correct","incorrect");i.setAttribute("aria-pressed","false");});b.classList.add(ok?"correct":"incorrect");b.setAttribute("aria-pressed","true");f.textContent=b.dataset.feedback;f.className=`feedback show ${ok?"good":"review"}`;});});
+document.getElementById("auditButton").addEventListener("click",()=>{const c=[...document.querySelectorAll("#aiAudit input[type='checkbox']")],s=c.filter(i=>i.checked).length,r=document.getElementById("auditResult");if(s<=2)r.textContent=`You selected ${s} of ${c.length} habits. Start by removing identifiers, reviewing uploads, and never entering account credentials.`;else if(s<=4)r.textContent=`You selected ${s} of ${c.length} habits. Your privacy routine is developing. Strengthen permission checks, third-party privacy, and incident response.`;else r.textContent=`You selected ${s} of ${c.length} habits. You already practice several strong AI privacy behaviors. Continue minimizing data and reviewing platform rules.`;r.classList.add("show");});
+const completeButton=document.getElementById("completeModule"),completionMessage=document.getElementById("completionMessage");
+function showCompletionState(){const done=localStorage.getItem("kalasagModule5Complete")==="true";if(done){completeButton.textContent="Module 5 Completed ✓";completeButton.disabled=true;completionMessage.textContent="Your progress has been saved on this browser and device.";}}
+completeButton.addEventListener("click",()=>{localStorage.setItem("kalasagModule5Complete","true");progressBar.style.width="100%";progressValue.textContent="100%";showCompletionState();});showCompletionState();
+</script>
+</body>
+</html>

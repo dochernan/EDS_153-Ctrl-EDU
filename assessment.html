@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="KALASAG assessment on data privacy, account security, phishing, safe sharing, AI privacy, and incident response."
+    >
+
+    <title>Assessment | KALASAG</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-coral: #d96b65;
+            --kalasag-gold: #f2b134;
+            --kalasag-green: #2e7d5b;
+            --kalasag-blue: #527cc5;
+            --kalasag-purple: #6f63b8;
+            --kalasag-pale: #f5f8fa;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --success-bg: #eaf7f3;
+            --warning-bg: #fff5df;
+            --danger-bg: #fff0ef;
+        }
+
+        .assessment-hero {
+            padding: 82px 0 68px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 84% 18%, rgba(15, 139, 141, 0.13), transparent 29%),
+                radial-gradient(circle at 8% 90%, rgba(242, 177, 52, 0.11), transparent 31%),
+                linear-gradient(180deg, #ffffff 0%, #f7fafb 100%);
+        }
+
+        .assessment-hero .hero-grid {
+            grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.68fr);
+            gap: 64px;
+            align-items: center;
+        }
+
+        .assessment-hero h1 {
+            max-width: 760px;
+            margin: 18px 0 0;
+            font-size: clamp(2.45rem, 5vw, 4.55rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+
+        .assessment-hero h1 span {
+            color: var(--kalasag-teal);
+        }
+
+        .assessment-hero .hero-description {
+            max-width: 680px;
+            margin: 24px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.3vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .assessment-visual {
+            position: relative;
+            min-height: 350px;
+            display: grid;
+            place-items: center;
+        }
+
+        .score-orbit {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background:
+                conic-gradient(
+                    var(--kalasag-teal) 0 22%,
+                    var(--kalasag-gold) 22% 40%,
+                    var(--kalasag-blue) 40% 58%,
+                    var(--kalasag-purple) 58% 76%,
+                    var(--kalasag-coral) 76% 90%,
+                    var(--kalasag-green) 90% 100%
+                );
+            box-shadow: 0 28px 70px rgba(18, 50, 74, 0.18);
+        }
+
+        .score-orbit::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+        }
+
+        .score-core {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .score-core strong {
+            display: block;
+            color: var(--kalasag-navy);
+            font-size: 3.1rem;
+            letter-spacing: -0.06em;
+        }
+
+        .score-core span {
+            display: block;
+            max-width: 140px;
+            margin: 2px auto 0;
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .orbit-label {
+            position: absolute;
+            padding: 9px 13px;
+            border: 1px solid rgba(18, 50, 74, 0.1);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.96);
+            box-shadow: 0 12px 30px rgba(18, 50, 74, 0.10);
+            color: var(--kalasag-navy);
+            font-size: 0.76rem;
+            font-weight: 800;
+        }
+
+        .orbit-label.one { top: 18px; left: 0; }
+        .orbit-label.two { top: 75px; right: -8px; }
+        .orbit-label.three { bottom: 58px; right: 0; }
+        .orbit-label.four { bottom: 16px; left: 2px; }
+
+        .assessment-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 285px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .assessment-main,
+        .assessment-sidebar {
+            min-width: 0;
+        }
+
+        .assessment-sidebar {
+            position: sticky;
+            top: 96px;
+        }
+
+        .sidebar-card,
+        .assessment-card,
+        .result-card,
+        .reflection-card {
+            border: 1px solid var(--kalasag-border);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 12px 34px rgba(18, 50, 74, 0.055);
+        }
+
+        .sidebar-card {
+            padding: 24px;
+            margin-bottom: 18px;
+        }
+
+        .sidebar-card h3 {
+            margin: 0 0 12px;
+            font-size: 1.05rem;
+        }
+
+        .sidebar-card p,
+        .sidebar-card li {
+            color: var(--kalasag-muted);
+            font-size: 0.88rem;
+        }
+
+        .sidebar-card ul {
+            margin: 12px 0 0;
+            padding-left: 20px;
+        }
+
+        .assessment-progress-track {
+            height: 10px;
+            overflow: hidden;
+            margin-top: 12px;
+            border-radius: 999px;
+            background: #e6edef;
+        }
+
+        .assessment-progress-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--kalasag-teal), #58b7ae);
+            transition: width 0.3s ease;
+        }
+
+        .question-nav {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .question-dot {
+            min-height: 38px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 10px;
+            background: #ffffff;
+            color: var(--kalasag-muted);
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .question-dot.answered {
+            border-color: rgba(15,139,141,.45);
+            background: #eaf7f3;
+            color: var(--kalasag-teal);
+        }
+
+        .question-dot:hover,
+        .question-dot:focus {
+            border-color: var(--kalasag-teal);
+        }
+
+        .assessment-card {
+            padding: 32px;
+            margin-bottom: 22px;
+            scroll-margin-top: 100px;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(15,139,141,.11);
+            color: var(--kalasag-teal);
+            font-weight: 900;
+        }
+
+        .question-topic {
+            color: var(--kalasag-muted);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .assessment-card h3 {
+            margin: 0 0 22px;
+            color: var(--kalasag-navy);
+            font-size: 1.2rem;
+            line-height: 1.45;
+        }
+
+        .option-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            gap: 13px;
+            align-items: flex-start;
+            padding: 15px 17px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            color: var(--kalasag-navy);
+            font-weight: 650;
+            line-height: 1.5;
+            cursor: pointer;
+            transition: border-color .2s ease, background .2s ease, transform .2s ease;
+        }
+
+        .option-label:hover {
+            border-color: rgba(15,139,141,.45);
+            transform: translateY(-1px);
+        }
+
+        .option-label input {
+            flex: 0 0 auto;
+            margin-top: 4px;
+            transform: scale(1.18);
+            accent-color: var(--kalasag-teal);
+        }
+
+        .option-label.selected {
+            border-color: var(--kalasag-teal);
+            background: #f0faf8;
+        }
+
+        .option-label.correct-answer {
+            border-color: var(--kalasag-green);
+            background: var(--success-bg);
+        }
+
+        .option-label.wrong-answer {
+            border-color: var(--kalasag-coral);
+            background: var(--danger-bg);
+        }
+
+        .answer-explanation {
+            display: none;
+            margin-top: 18px;
+            padding: 16px 18px;
+            border-radius: 13px;
+            line-height: 1.6;
+        }
+
+        .answer-explanation.show {
+            display: block;
+        }
+
+        .answer-explanation.correct {
+            background: var(--success-bg);
+            color: #235d46;
+        }
+
+        .answer-explanation.incorrect {
+            background: var(--warning-bg);
+            color: #78591c;
+        }
+
+        .assessment-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .assessment-actions button[disabled] {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .result-card {
+            display: none;
+            padding: 38px;
+            margin-top: 32px;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        .result-layout {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 34px;
+            align-items: center;
+        }
+
+        .result-circle {
+            width: 175px;
+            height: 175px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--kalasag-teal) var(--score-angle, 0deg),
+                #e4ecef var(--score-angle, 0deg)
+            );
+        }
+
+        .result-circle::before {
+            content: "";
+            position: absolute;
+        }
+
+        .result-score-inner {
+            width: 140px;
+            height: 140px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .result-score-inner strong {
+            display: block;
+            color: var(--kalasag-navy);
+            font-size: 2.45rem;
+            line-height: 1;
+        }
+
+        .result-score-inner span {
+            color: var(--kalasag-muted);
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .result-card h2 {
+            margin: 0 0 10px;
+        }
+
+        .result-card p {
+            color: var(--kalasag-muted);
+        }
+
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .competency-item {
+            padding: 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 14px;
+            background: var(--kalasag-pale);
+        }
+
+        .competency-item strong {
+            display: block;
+            color: var(--kalasag-navy);
+            font-size: 0.88rem;
+        }
+
+        .competency-item span {
+            display: block;
+            margin-top: 5px;
+            color: var(--kalasag-muted);
+            font-size: 0.8rem;
+        }
+
+        .reflection-card {
+            padding: 32px;
+            margin-top: 26px;
+        }
+
+        .reflection-card textarea {
+            width: 100%;
+            min-height: 130px;
+            padding: 16px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 13px;
+            font: inherit;
+            resize: vertical;
+        }
+
+        .reflection-card textarea:focus {
+            outline: 3px solid rgba(15,139,141,.14);
+            border-color: var(--kalasag-teal);
+        }
+
+        .saved-message {
+            display: none;
+            margin-top: 12px;
+            color: var(--kalasag-green);
+            font-weight: 800;
+        }
+
+        .saved-message.show {
+            display: block;
+        }
+
+        .assessment-note {
+            padding: 22px;
+            border-left: 5px solid var(--kalasag-gold);
+            border-radius: 14px;
+            background: var(--warning-bg);
+            color: #6f541c;
+        }
+
+        @media (max-width: 980px) {
+            .assessment-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .assessment-sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .sidebar-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+
+            .assessment-hero .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .assessment-hero {
+                padding-top: 54px;
+            }
+
+            .assessment-hero .hero-grid,
+            .result-layout,
+            .sidebar-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .assessment-visual {
+                min-height: 315px;
+            }
+
+            .competency-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .assessment-card,
+            .result-card,
+            .reflection-card {
+                padding: 24px 20px;
+            }
+
+            .result-circle {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .competency-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .question-nav {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .question-dot {
+                min-height: 34px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html">KALASAG</a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="modules.html">Modules</a></li>
+            <li><a class="active" href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="assessment-hero">
+        <div class="container hero-grid">
+            <div>
+                <p class="eyebrow">KALASAG Final Assessment</p>
+
+                <h1>
+                    Put your digital safety
+                    <span>judgment to the test.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Complete 18 scenario-based questions covering personal data,
+                    account security, phishing, safer sharing, AI privacy, and
+                    incident response. A score of 80% or higher demonstrates
+                    satisfactory mastery.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button primary-button" href="#assessmentStart">
+                        Begin Assessment
+                    </a>
+
+                    <a class="button secondary-button" href="modules.html">
+                        Review the Modules
+                    </a>
+                </div>
+            </div>
+
+            <div class="assessment-visual" aria-label="Assessment competency wheel">
+                <div class="score-orbit">
+                    <div class="score-core">
+                        <strong>80%</strong>
+                        <span>Target mastery score</span>
+                    </div>
+                </div>
+
+                <span class="orbit-label one">Protect</span>
+                <span class="orbit-label two">Recognize</span>
+                <span class="orbit-label three">Respond</span>
+                <span class="orbit-label four">Recover</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="assessmentStart">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">Before You Begin</p>
+                <h2>Assessment instructions</h2>
+            </div>
+
+            <div class="assessment-note">
+                Select one answer for every question. Your responses remain in
+                this browser and are not sent to a server. Do not enter real
+                passwords, account details, or private information anywhere on
+                this page.
+            </div>
+
+            <div class="assessment-shell" style="margin-top:30px;">
+                <form class="assessment-main" id="assessmentForm" novalidate>
+                    <article class="assessment-card" id="question1" data-topic="Data and Identity">
+                        <div class="question-meta">
+                            <span class="question-number">1</span>
+                            <span class="question-topic">Module 1 • Your Data, Your Identity</span>
+                        </div>
+
+                        <h3>
+                            Which item should generally be treated as sensitive
+                            personal information?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="a">
+                                <span>A favorite movie genre</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="b">
+                                <span>A government identification number</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="c">
+                                <span>A publicly announced school event</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q1" value="d">
+                                <span>A fictional character name</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation1"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question2" data-topic="Data and Identity">
+                        <div class="question-meta">
+                            <span class="question-number">2</span>
+                            <span class="question-topic">Module 1 • Your Data, Your Identity</span>
+                        </div>
+
+                        <h3>
+                            A student registration form asks for a full home address
+                            even though only an email is needed to send a webinar
+                            link. What is the best privacy question to ask?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q2" value="a">
+                                <span>Can the form collect more information to look professional?</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q2" value="b">
+                                <span>Why is the address necessary for the stated purpose?</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q2" value="c">
+                                <span>Can the address be shared publicly afterward?</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q2" value="d">
+                                <span>Can another student complete the form instead?</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation2"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question3" data-topic="Data and Identity">
+                        <div class="question-meta">
+                            <span class="question-number">3</span>
+                            <span class="question-topic">Module 1 • Your Data, Your Identity</span>
+                        </div>
+
+                        <h3>
+                            Why should you review the audience before posting a photo
+                            online?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="a">
+                                <span>Because privacy depends partly on who can access and reuse the content</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="b">
+                                <span>Because every photo must be deleted after one day</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="c">
+                                <span>Because public posts cannot be copied</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q3" value="d">
+                                <span>Because privacy settings guarantee complete control forever</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation3"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question4" data-topic="Account Security">
+                        <div class="question-meta">
+                            <span class="question-number">4</span>
+                            <span class="question-topic">Module 2 • Lock It Down</span>
+                        </div>
+
+                        <h3>
+                            Which password practice provides the strongest protection?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="a">
+                                <span>Use one complex password for every account</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="b">
+                                <span>Use unique long passphrases and enable multi-factor authentication</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="c">
+                                <span>Use your birthday with a special character</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q4" value="d">
+                                <span>Change one letter in the same password for each account</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation4"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question5" data-topic="Account Security">
+                        <div class="question-meta">
+                            <span class="question-number">5</span>
+                            <span class="question-topic">Module 2 • Lock It Down</span>
+                        </div>
+
+                        <h3>
+                            You receive an unexpected MFA approval request. What
+                            should you do?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q5" value="a">
+                                <span>Approve it because MFA requests are always safe</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q5" value="b">
+                                <span>Deny it, review account activity, and secure the account if needed</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q5" value="c">
+                                <span>Send the approval code to a friend for checking</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q5" value="d">
+                                <span>Disable MFA permanently</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation5"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question6" data-topic="Account Security">
+                        <div class="question-meta">
+                            <span class="question-number">6</span>
+                            <span class="question-topic">Module 2 • Lock It Down</span>
+                        </div>
+
+                        <h3>
+                            Why is password reuse dangerous?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q6" value="a">
+                                <span>A leaked password may be tested on your other accounts</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q6" value="b">
+                                <span>It makes websites load more slowly</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q6" value="c">
+                                <span>It prevents password recovery</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q6" value="d">
+                                <span>It automatically shares your browsing history</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation6"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question7" data-topic="Phishing">
+                        <div class="question-meta">
+                            <span class="question-number">7</span>
+                            <span class="question-topic">Module 3 • Spot the Trap</span>
+                        </div>
+
+                        <h3>
+                            A message says, “Your school account will be deleted in
+                            ten minutes. Sign in here now.” What is the safest action?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q7" value="a">
+                                <span>Use the link quickly before the deadline</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q7" value="b">
+                                <span>Forward the message to classmates</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q7" value="c">
+                                <span>Open the official school service separately and verify the claim</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q7" value="d">
+                                <span>Reply with your username to ask for more time</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation7"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question8" data-topic="Phishing">
+                        <div class="question-meta">
+                            <span class="question-number">8</span>
+                            <span class="question-topic">Module 3 • Spot the Trap</span>
+                        </div>
+
+                        <h3>
+                            Which combination is a strong warning sign of social
+                            engineering?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q8" value="a">
+                                <span>Urgency, secrecy, and a request for credentials</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q8" value="b">
+                                <span>A normal announcement posted on an official page</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q8" value="c">
+                                <span>A message from a known teacher with no links</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q8" value="d">
+                                <span>A calendar reminder you created yourself</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation8"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question9" data-topic="Phishing">
+                        <div class="question-meta">
+                            <span class="question-number">9</span>
+                            <span class="question-topic">Module 3 • Spot the Trap</span>
+                        </div>
+
+                        <h3>
+                            A friend sends a QR code and asks you to log in to claim a
+                            prize. What should you do?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q9" value="a">
+                                <span>Scan it because the sender is a friend</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q9" value="b">
+                                <span>Verify with your friend using another channel and inspect the destination before signing in</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q9" value="c">
+                                <span>Post the code publicly to ask whether it is safe</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q9" value="d">
+                                <span>Enter a fake password first and then your real one</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation9"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question10" data-topic="Safer Sharing">
+                        <div class="question-meta">
+                            <span class="question-number">10</span>
+                            <span class="question-topic">Module 4 • Share with Care</span>
+                        </div>
+
+                        <h3>
+                            Which cloud-sharing setting is usually safest for a
+                            private school document?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q10" value="a">
+                                <span>Anyone with the link can edit</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q10" value="b">
+                                <span>Public on the web</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q10" value="c">
+                                <span>Only specifically authorized people can access it</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q10" value="d">
+                                <span>Anyone with the link can download</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation10"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question11" data-topic="Safer Sharing">
+                        <div class="question-meta">
+                            <span class="question-number">11</span>
+                            <span class="question-topic">Module 4 • Share with Care</span>
+                        </div>
+
+                        <h3>
+                            An app asks for continuous location access even though it
+                            only needs location once to show nearby services. What is
+                            the best response?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q11" value="a">
+                                <span>Allow continuous access because all permissions are required</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q11" value="b">
+                                <span>Select the least access needed, such as while using the app or one-time access</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q11" value="c">
+                                <span>Give the app access to contacts as well</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q11" value="d">
+                                <span>Post your location publicly instead</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation11"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question12" data-topic="Safer Sharing">
+                        <div class="question-meta">
+                            <span class="question-number">12</span>
+                            <span class="question-topic">Module 4 • Share with Care</span>
+                        </div>
+
+                        <h3>
+                            Before posting a group photo, what privacy practice is most
+                            appropriate?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q12" value="a">
+                                <span>Ask for consent and review visible names, locations, and documents</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q12" value="b">
+                                <span>Post first and ask later</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q12" value="c">
+                                <span>Tag everyone automatically</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q12" value="d">
+                                <span>Assume school events are always public</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation12"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question13" data-topic="AI Privacy">
+                        <div class="question-meta">
+                            <span class="question-number">13</span>
+                            <span class="question-topic">Module 5 • Privacy in the Age of AI</span>
+                        </div>
+
+                        <h3>
+                            You want an AI tool to improve a student incident report.
+                            What should you do before uploading the text?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q13" value="a">
+                                <span>Include full names so the AI understands the context</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q13" value="b">
+                                <span>Remove identifying and confidential information and follow school rules</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q13" value="c">
+                                <span>Upload screenshots of private conversations</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q13" value="d">
+                                <span>Use another person's account</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation13"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question14" data-topic="AI Privacy">
+                        <div class="question-meta">
+                            <span class="question-number">14</span>
+                            <span class="question-topic">Module 5 • Privacy in the Age of AI</span>
+                        </div>
+
+                        <h3>
+                            Which prompt follows data-minimization principles?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q14" value="a">
+                                <span>“Improve this paragraph about a fictional student’s study habits.”</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q14" value="b">
+                                <span>“Analyze this file containing student names, addresses, and medical notes.”</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q14" value="c">
+                                <span>“Store these account passwords for later.”</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q14" value="d">
+                                <span>“Identify this person using a private photograph.”</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation14"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question15" data-topic="AI Privacy">
+                        <div class="question-meta">
+                            <span class="question-number">15</span>
+                            <span class="question-topic">Module 5 • Privacy in the Age of AI</span>
+                        </div>
+
+                        <h3>
+                            Why should another person’s data not be uploaded to an AI
+                            tool without authorization?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q15" value="a">
+                                <span>Because the person may have privacy rights and may not have agreed to the processing</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q15" value="b">
+                                <span>Because AI tools only accept fictional names</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q15" value="c">
+                                <span>Because files cannot be deleted</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q15" value="d">
+                                <span>Because all AI use is prohibited</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation15"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question16" data-topic="Incident Response">
+                        <div class="question-meta">
+                            <span class="question-number">16</span>
+                            <span class="question-topic">Module 6 • Act Fast, Recover Smart</span>
+                        </div>
+
+                        <h3>
+                            You accidentally share a private file using a public link.
+                            What should you do first?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q16" value="a">
+                                <span>Disable the public link or revoke access</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q16" value="b">
+                                <span>Ask everyone not to open it but leave access active</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q16" value="c">
+                                <span>Delete your browser history</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q16" value="d">
+                                <span>Create another public copy</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation16"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question17" data-topic="Incident Response">
+                        <div class="question-meta">
+                            <span class="question-number">17</span>
+                            <span class="question-topic">Module 6 • Act Fast, Recover Smart</span>
+                        </div>
+
+                        <h3>
+                            What is the best response after discovering that a reused
+                            password was compromised?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q17" value="a">
+                                <span>Change only the account where the problem was noticed</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q17" value="b">
+                                <span>Change the password anywhere it was reused, review sessions, and enable MFA</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q17" value="c">
+                                <span>Wait for another account to be affected</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q17" value="d">
+                                <span>Share the old password with support staff through chat</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation17"></div>
+                    </article>
+
+                    <article class="assessment-card" id="question18" data-topic="Incident Response">
+                        <div class="question-meta">
+                            <span class="question-number">18</span>
+                            <span class="question-topic">Module 6 • Act Fast, Recover Smart</span>
+                        </div>
+
+                        <h3>
+                            Which sequence best describes a responsible incident
+                            response?
+                        </h3>
+
+                        <div class="option-list">
+                            <label class="option-label">
+                                <input type="radio" name="q18" value="a">
+                                <span>Hide, delete, deny, and wait</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q18" value="b">
+                                <span>Pause, protect, preserve, report, recover, and review</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q18" value="c">
+                                <span>Post, confront, accuse, and share</span>
+                            </label>
+
+                            <label class="option-label">
+                                <input type="radio" name="q18" value="d">
+                                <span>Ignore, restart, and continue</span>
+                            </label>
+                        </div>
+
+                        <div class="answer-explanation" id="explanation18"></div>
+                    </article>
+
+                    <div class="assessment-actions">
+                        <button
+                            class="button primary-button"
+                            id="submitAssessment"
+                            type="submit"
+                        >
+                            Submit Assessment
+                        </button>
+
+                        <button
+                            class="button secondary-button"
+                            id="resetAssessment"
+                            type="button"
+                        >
+                            Reset Answers
+                        </button>
+                    </div>
+
+                    <section class="result-card" id="resultCard" aria-live="polite">
+                        <div class="result-layout">
+                            <div
+                                class="result-circle"
+                                id="resultCircle"
+                                aria-label="Assessment score"
+                            >
+                                <div class="result-score-inner">
+                                    <div>
+                                        <strong id="scorePercent">0%</strong>
+                                        <span id="scoreFraction">0 of 18</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="eyebrow">Assessment Result</p>
+                                <h2 id="resultHeading">Your result</h2>
+                                <p id="resultMessage"></p>
+
+                                <div class="hero-actions">
+                                    <a class="button primary-button" href="modules.html">
+                                        Review Modules
+                                    </a>
+
+                                    <button
+                                        class="button secondary-button"
+                                        id="retakeAssessment"
+                                        type="button"
+                                    >
+                                        Retake Assessment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competency-grid" id="competencyGrid"></div>
+                    </section>
+
+                    <section class="reflection-card">
+                        <p class="eyebrow">Personal Action Plan</p>
+                        <h2>What will you improve after completing KALASAG?</h2>
+
+                        <p>
+                            Write three specific privacy or security actions you will
+                            take. This response is saved only in this browser.
+                        </p>
+
+                        <textarea
+                            id="actionPlan"
+                            placeholder="Example:
+1. Enable MFA on my main email account.
+2. Review active sessions and app permissions.
+3. Remove personal details before uploading content to an AI tool."
+                        ></textarea>
+
+                        <div class="assessment-actions" style="justify-content:flex-start;">
+                            <button
+                                class="button primary-button"
+                                id="saveActionPlan"
+                                type="button"
+                            >
+                                Save Action Plan
+                            </button>
+                        </div>
+
+                        <p class="saved-message" id="savedMessage">
+                            Your action plan has been saved on this browser and device.
+                        </p>
+                    </section>
+                </form>
+
+                <aside class="assessment-sidebar">
+                    <div class="sidebar-layout">
+                        <section class="sidebar-card">
+                            <h3>Your progress</h3>
+                            <p>
+                                <span id="answeredCount">0</span> of 18 questions answered
+                            </p>
+
+                            <div class="assessment-progress-track">
+                                <div
+                                    class="assessment-progress-bar"
+                                    id="assessmentProgressBar"
+                                ></div>
+                            </div>
+
+                            <div class="question-nav" id="questionNav"></div>
+                        </section>
+
+                        <section class="sidebar-card">
+                            <h3>Competencies assessed</h3>
+                            <ul>
+                                <li>Data classification and privacy</li>
+                                <li>Passwords and MFA</li>
+                                <li>Phishing recognition</li>
+                                <li>Safe sharing and permissions</li>
+                                <li>Privacy when using AI</li>
+                                <li>Incident response and recovery</li>
+                            </ul>
+                        </section>
+
+                        <section class="sidebar-card">
+                            <h3>Scoring guide</h3>
+                            <p>
+                                <strong>80–100%:</strong> Satisfactory mastery
+                            </p>
+                            <p>
+                                <strong>60–79%:</strong> Developing mastery
+                            </p>
+                            <p>
+                                <strong>Below 60%:</strong> Review recommended
+                            </p>
+                        </section>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+            <p>Keeping Accounts, Learner Data, and Security Awareness Guarded.</p>
+        </div>
+
+        <p>&copy; 2026 KALASAG</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+"use strict";
+
+const answerKey = {
+    q1: {
+        answer: "b",
+        explanation:
+            "A government identification number can be used to identify, verify, or impersonate a person and should be protected."
+    },
+    q2: {
+        answer: "b",
+        explanation:
+            "Data minimization means collecting only information that is necessary for a clearly stated purpose."
+    },
+    q3: {
+        answer: "a",
+        explanation:
+            "The audience affects who can view, copy, save, forward, or reuse the content. Privacy settings reduce risk but do not guarantee permanent control."
+    },
+    q4: {
+        answer: "b",
+        explanation:
+            "Unique long passphrases limit the damage from one breach, while multi-factor authentication adds another layer of protection."
+    },
+    q5: {
+        answer: "b",
+        explanation:
+            "An unexpected MFA request may indicate that someone already has your password. Deny it and review account activity."
+    },
+    q6: {
+        answer: "a",
+        explanation:
+            "Attackers may test a leaked username and password on other services. This is called credential stuffing."
+    },
+    q7: {
+        answer: "c",
+        explanation:
+            "Urgency and threats are common phishing tactics. Open the official service independently rather than using the message link."
+    },
+    q8: {
+        answer: "a",
+        explanation:
+            "Urgency, secrecy, and requests for credentials are common social-engineering warning signs."
+    },
+    q9: {
+        answer: "b",
+        explanation:
+            "A trusted person's account may be compromised. Verify through another channel and inspect the destination before signing in."
+    },
+    q10: {
+        answer: "c",
+        explanation:
+            "Private files should be limited to specifically authorized people using the least access necessary."
+    },
+    q11: {
+        answer: "b",
+        explanation:
+            "Grant only the permission and duration needed for the feature. Continuous access is not justified when one-time access is sufficient."
+    },
+    q12: {
+        answer: "a",
+        explanation:
+            "Consent and a review of visible information help protect the privacy of everyone shown in the photo."
+    },
+    q13: {
+        answer: "b",
+        explanation:
+            "Remove identifiers and confidential details before using an external AI tool, and follow school-approved practices."
+    },
+    q14: {
+        answer: "a",
+        explanation:
+            "The prompt uses a fictional person and includes only the information needed for the task."
+    },
+    q15: {
+        answer: "a",
+        explanation:
+            "Another person's information should not be processed or disclosed without a valid purpose, authority, and appropriate safeguards."
+    },
+    q16: {
+        answer: "a",
+        explanation:
+            "First remove or restrict access to stop further exposure. Then review access and report the incident when necessary."
+    },
+    q17: {
+        answer: "b",
+        explanation:
+            "A reused compromised password may threaten several accounts. Replace it everywhere, end unfamiliar sessions, and enable MFA."
+    },
+    q18: {
+        answer: "b",
+        explanation:
+            "A structured response helps stop harm, preserve useful information, restore control, and prevent recurrence."
+    }
+};
+
+const topicGroups = {
+    "Data and Identity": ["q1", "q2", "q3"],
+    "Account Security": ["q4", "q5", "q6"],
+    "Phishing": ["q7", "q8", "q9"],
+    "Safer Sharing": ["q10", "q11", "q12"],
+    "AI Privacy": ["q13", "q14", "q15"],
+    "Incident Response": ["q16", "q17", "q18"]
+};
+
+const form = document.getElementById("assessmentForm");
+const submitButton = document.getElementById("submitAssessment");
+const resetButton = document.getElementById("resetAssessment");
+const retakeButton = document.getElementById("retakeAssessment");
+const resultCard = document.getElementById("resultCard");
+const scorePercent = document.getElementById("scorePercent");
+const scoreFraction = document.getElementById("scoreFraction");
+const resultHeading = document.getElementById("resultHeading");
+const resultMessage = document.getElementById("resultMessage");
+const resultCircle = document.getElementById("resultCircle");
+const competencyGrid = document.getElementById("competencyGrid");
+const answeredCount = document.getElementById("answeredCount");
+const progressBar = document.getElementById("assessmentProgressBar");
+const questionNav = document.getElementById("questionNav");
+const actionPlan = document.getElementById("actionPlan");
+const saveActionPlan = document.getElementById("saveActionPlan");
+const savedMessage = document.getElementById("savedMessage");
+
+const totalQuestions = Object.keys(answerKey).length;
+
+function buildQuestionNavigation() {
+    questionNav.innerHTML = "";
+
+    for (let index = 1; index <= totalQuestions; index += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "question-dot";
+        button.textContent = String(index);
+        button.setAttribute("aria-label", `Go to question ${index}`);
+
+        button.addEventListener("click", () => {
+            document
+                .getElementById(`question${index}`)
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        questionNav.appendChild(button);
+    }
+}
+
+function getAnsweredQuestions() {
+    return Object.keys(answerKey).filter(name =>
+        form.querySelector(`input[name="${name}"]:checked`)
+    );
+}
+
+function updateProgress() {
+    const answered = getAnsweredQuestions();
+    const percentage = Math.round((answered.length / totalQuestions) * 100);
+
+    answeredCount.textContent = String(answered.length);
+    progressBar.style.width = `${percentage}%`;
+
+    [...questionNav.children].forEach((button, index) => {
+        const name = `q${index + 1}`;
+        button.classList.toggle("answered", answered.includes(name));
+    });
+
+    submitButton.disabled = answered.length !== totalQuestions;
+}
+
+function clearQuestionStyles() {
+    form.querySelectorAll(".option-label").forEach(label => {
+        label.classList.remove(
+            "selected",
+            "correct-answer",
+            "wrong-answer"
+        );
+    });
+
+    form.querySelectorAll(".answer-explanation").forEach(explanation => {
+        explanation.className = "answer-explanation";
+        explanation.textContent = "";
+    });
+}
+
+form.addEventListener("change", event => {
+    if (!event.target.matches('input[type="radio"]')) {
+        return;
+    }
+
+    const optionList = event.target.closest(".option-list");
+
+    optionList.querySelectorAll(".option-label").forEach(label => {
+        label.classList.remove("selected");
+    });
+
+    event.target.closest(".option-label").classList.add("selected");
+    updateProgress();
+});
+
+form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const answered = getAnsweredQuestions();
+
+    if (answered.length !== totalQuestions) {
+        const firstUnanswered = Object.keys(answerKey).find(name =>
+            !form.querySelector(`input[name="${name}"]:checked`)
+        );
+
+        if (firstUnanswered) {
+            const number = firstUnanswered.replace("q", "");
+            document
+                .getElementById(`question${number}`)
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        return;
+    }
+
+    let score = 0;
+    const topicScores = {};
+
+    Object.keys(topicGroups).forEach(topic => {
+        topicScores[topic] = { correct: 0, total: topicGroups[topic].length };
+    });
+
+    Object.entries(answerKey).forEach(([name, details]) => {
+        const selected = form.querySelector(`input[name="${name}"]:checked`);
+        const labels = form
+            .querySelectorAll(`input[name="${name}"]`);
+
+        labels.forEach(input => {
+            const label = input.closest(".option-label");
+
+            label.classList.remove(
+                "correct-answer",
+                "wrong-answer"
+            );
+
+            if (input.value === details.answer) {
+                label.classList.add("correct-answer");
+            }
+
+            if (input.checked && input.value !== details.answer) {
+                label.classList.add("wrong-answer");
+            }
+        });
+
+        const isCorrect = selected.value === details.answer;
+        const questionNumber = name.replace("q", "");
+        const explanation = document.getElementById(
+            `explanation${questionNumber}`
+        );
+
+        explanation.textContent = isCorrect
+            ? `Correct. ${details.explanation}`
+            : `Review: ${details.explanation}`;
+
+        explanation.className =
+            `answer-explanation show ${isCorrect ? "correct" : "incorrect"}`;
+
+        if (isCorrect) {
+            score += 1;
+        }
+
+        const topic = Object.keys(topicGroups).find(group =>
+            topicGroups[group].includes(name)
+        );
+
+        if (isCorrect && topic) {
+            topicScores[topic].correct += 1;
+        }
+    });
+
+    const percentage = Math.round((score / totalQuestions) * 100);
+    const angle = Math.round((percentage / 100) * 360);
+
+    scorePercent.textContent = `${percentage}%`;
+    scoreFraction.textContent = `${score} of ${totalQuestions}`;
+    resultCircle.style.setProperty("--score-angle", `${angle}deg`);
+
+    if (percentage >= 80) {
+        resultHeading.textContent = "Satisfactory mastery achieved";
+        resultMessage.textContent =
+            "You demonstrated strong judgment across the six KALASAG competency areas. Continue applying these habits in real digital situations.";
+    } else if (percentage >= 60) {
+        resultHeading.textContent = "Your mastery is developing";
+        resultMessage.textContent =
+            "You understand many important practices, but reviewing the lower-scoring competency areas will strengthen your decision-making.";
+    } else {
+        resultHeading.textContent = "Module review recommended";
+        resultMessage.textContent =
+            "Review the KALASAG modules and try the assessment again. Focus on understanding why each protective action is appropriate.";
+    }
+
+    competencyGrid.innerHTML = "";
+
+    Object.entries(topicScores).forEach(([topic, result]) => {
+        const competency = document.createElement("div");
+        competency.className = "competency-item";
+
+        const topicPercentage = Math.round(
+            (result.correct / result.total) * 100
+        );
+
+        competency.innerHTML = `
+            <strong>${topic}</strong>
+            <span>${result.correct} of ${result.total} correct · ${topicPercentage}%</span>
+        `;
+
+        competencyGrid.appendChild(competency);
+    });
+
+    const resultData = {
+        score,
+        total: totalQuestions,
+        percentage,
+        completedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(
+        "kalasagAssessmentResult",
+        JSON.stringify(resultData)
+    );
+
+    if (percentage >= 80) {
+        localStorage.setItem("kalasagAssessmentPassed", "true");
+    } else {
+        localStorage.removeItem("kalasagAssessmentPassed");
+    }
+
+    resultCard.classList.add("show");
+    submitButton.disabled = true;
+
+    resultCard.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+});
+
+function resetAssessment() {
+    form.reset();
+    clearQuestionStyles();
+
+    resultCard.classList.remove("show");
+    submitButton.disabled = true;
+
+    localStorage.removeItem("kalasagAssessmentResult");
+    localStorage.removeItem("kalasagAssessmentPassed");
+
+    updateProgress();
+
+    document
+        .getElementById("question1")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+resetButton.addEventListener("click", resetAssessment);
+retakeButton.addEventListener("click", resetAssessment);
+
+saveActionPlan.addEventListener("click", () => {
+    const value = actionPlan.value.trim();
+
+    if (!value) {
+        actionPlan.focus();
+        savedMessage.textContent =
+            "Write at least one specific action before saving.";
+        savedMessage.classList.add("show");
+        return;
+    }
+
+    localStorage.setItem("kalasagActionPlan", value);
+    savedMessage.textContent =
+        "Your action plan has been saved on this browser and device.";
+    savedMessage.classList.add("show");
+});
+
+function loadSavedActionPlan() {
+    const saved = localStorage.getItem("kalasagActionPlan");
+
+    if (saved) {
+        actionPlan.value = saved;
+    }
+}
+
+buildQuestionNavigation();
+loadSavedActionPlan();
+updateProgress();
+</script>
+</body>
+</html>
