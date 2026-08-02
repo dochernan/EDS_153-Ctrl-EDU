@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta
         name="description"
         content="KALASAG is a mobile-first learning website that helps senior high school students protect personal data, secure online accounts, recognize digital threats, and respond safely to privacy incidents."
@@ -13,22 +14,125 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* KALASAG minimalist homepage overrides */
+        :root {
+            --kalasag-navy: #12324a;
+            --kalasag-deep: #081f30;
+            --kalasag-teal: #0f8b8d;
+            --kalasag-aqua: #58d1c8;
+            --kalasag-blue: #527cc5;
+            --kalasag-gold: #f2b134;
+            --kalasag-coral: #d96b65;
+            --kalasag-pale: #f4f8f9;
+            --kalasag-border: #dfe8eb;
+            --kalasag-muted: #5d6d78;
+            --shadow-soft: 0 18px 50px rgba(18, 50, 74, .09);
+            --shadow-strong: 0 30px 80px rgba(18, 50, 74, .18);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* ---------- Global motion ---------- */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition:
+                opacity .75s cubic-bezier(.2,.8,.2,1),
+                transform .75s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: .08s; }
+        .reveal-delay-2 { transition-delay: .16s; }
+        .reveal-delay-3 { transition-delay: .24s; }
+
+        /* ---------- Header ---------- */
+
+        .site-header {
+            background: rgba(255,255,255,.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(18,50,74,.07);
+        }
+
+        .logo {
+            position: relative;
+            letter-spacing: .05em;
+        }
+
+        .logo::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--kalasag-teal), var(--kalasag-aqua));
+            transform: scaleX(.28);
+            transform-origin: left;
+            transition: transform .3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* ---------- Hero ---------- */
+
         .hero {
-            min-height: 78vh;
+            position: relative;
+            min-height: 88vh;
             display: grid;
             align-items: center;
-            padding: 72px 0 64px;
+            padding: 86px 0 72px;
+            isolation: isolate;
             overflow: hidden;
             background:
-                radial-gradient(circle at 84% 16%, rgba(15, 139, 141, 0.15), transparent 28%),
-                radial-gradient(circle at 16% 88%, rgba(18, 50, 74, 0.08), transparent 30%),
-                linear-gradient(180deg, #ffffff 0%, #f4f8f9 100%);
+                radial-gradient(circle at 82% 18%, rgba(15,139,141,.20), transparent 28%),
+                radial-gradient(circle at 8% 84%, rgba(82,124,197,.12), transparent 32%),
+                linear-gradient(180deg, #ffffff 0%, #f5fafb 100%);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            z-index: -2;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .32;
+            animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+
+        .hero::before {
+            top: -210px;
+            right: -120px;
+            background: var(--kalasag-aqua);
+        }
+
+        .hero::after {
+            bottom: -270px;
+            left: -170px;
+            background: var(--kalasag-blue);
+            animation-delay: -5s;
         }
 
         .hero-grid {
-            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.65fr);
-            gap: 72px;
+            grid-template-columns: minmax(0, 1.12fr) minmax(320px, .72fr);
+            gap: 76px;
+            align-items: center;
         }
 
         .hero-content {
@@ -38,50 +142,134 @@
         .hero .eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 18px;
-            padding: 7px 12px;
-            border: 1px solid rgba(15, 139, 141, 0.2);
+            padding: 8px 13px;
+            border: 1px solid rgba(15,139,141,.22);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.76);
-            backdrop-filter: blur(12px);
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
+            background: rgba(255,255,255,.72);
+            backdrop-filter: blur(14px);
+            color: var(--kalasag-teal);
+            font-size: .7rem;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            box-shadow: 0 10px 26px rgba(18,50,74,.05);
+        }
+
+        .hero .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--kalasag-aqua);
+            box-shadow: 0 0 0 0 rgba(88,209,200,.5);
+            animation: pulseDot 2s infinite;
         }
 
         .hero h1 {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0;
-            font-size: clamp(2.3rem, 4.8vw, 4.55rem);
-            line-height: 1.02;
-            letter-spacing: -0.055em;
+            font-size: clamp(2.65rem, 5.4vw, 5.15rem);
+            line-height: .98;
+            letter-spacing: -.06em;
             text-wrap: balance;
         }
 
         .hero h1 .hero-accent {
-            color: #0f8b8d;
+            display: inline-block;
+            color: transparent;
+            background: linear-gradient(110deg, var(--kalasag-teal), var(--kalasag-blue), var(--kalasag-teal));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: textShimmer 6s linear infinite;
         }
 
         .hero-description {
-            max-width: 650px;
-            margin: 24px 0 0;
-            font-size: clamp(1rem, 1.25vw, 1.12rem);
-            line-height: 1.75;
+            max-width: 660px;
+            margin: 26px 0 0;
+            color: var(--kalasag-muted);
+            font-size: clamp(1rem, 1.35vw, 1.16rem);
+            line-height: 1.78;
         }
 
         .hero-actions {
-            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 32px;
         }
+
+        .hero-actions .button {
+            position: relative;
+            overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .hero-actions .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(18,50,74,.13);
+        }
+
+        .hero-actions .primary-button::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.35), transparent 80%);
+            transform: translateX(-130%);
+            transition: transform .7s ease;
+        }
+
+        .hero-actions .primary-button:hover::after {
+            transform: translateX(130%);
+        }
+
+        .hero-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 34px;
+        }
+
+        .hero-metric strong {
+            display: block;
+            color: var(--kalasag-navy);
+            font-size: 1.45rem;
+            letter-spacing: -.04em;
+        }
+
+        .hero-metric span {
+            display: block;
+            margin-top: 3px;
+            color: var(--kalasag-muted);
+            font-size: .78rem;
+            font-weight: 750;
+        }
+
+        /* ---------- Shield visual ---------- */
 
         .hero-card.kalasag-visual {
             position: relative;
-            min-height: 390px;
+            min-height: 460px;
             display: grid;
             place-items: center;
             padding: 30px;
             border: 0;
             background: transparent;
             box-shadow: none;
+            perspective: 900px;
+        }
+
+        .visual-grid {
+            position: absolute;
+            inset: 0;
+            opacity: .32;
+            background-image:
+                linear-gradient(rgba(15,139,141,.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15,139,141,.08) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: radial-gradient(circle at center, #000 24%, transparent 72%);
         }
 
         .shield-ring,
@@ -93,109 +281,412 @@
         }
 
         .shield-ring {
-            width: 320px;
-            height: 320px;
-            border: 1px solid rgba(15, 139, 141, 0.2);
-            box-shadow: 0 0 80px rgba(15, 139, 141, 0.08);
+            width: 360px;
+            height: 360px;
+            border: 1px solid rgba(15,139,141,.22);
+            box-shadow:
+                0 0 90px rgba(15,139,141,.12),
+                inset 0 0 60px rgba(15,139,141,.04);
+            animation: slowSpin 20s linear infinite;
         }
 
         .shield-ring::before {
-            inset: 44px;
-            border: 1px dashed rgba(18, 50, 74, 0.16);
+            inset: 42px;
+            border: 1px dashed rgba(18,50,74,.18);
+            animation: reverseSpin 14s linear infinite;
         }
 
         .shield-ring::after {
             inset: 92px;
-            background: rgba(15, 139, 141, 0.07);
+            border: 1px solid rgba(88,209,200,.20);
+            background: rgba(15,139,141,.06);
         }
+
+        .orbit-dot {
+            position: absolute;
+            z-index: 1;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--kalasag-aqua);
+            box-shadow: 0 0 22px var(--kalasag-aqua);
+        }
+
+        .orbit-dot.one { transform: translate(172px, -30px); }
+        .orbit-dot.two { transform: translate(-152px, 92px); background: var(--kalasag-blue); }
+        .orbit-dot.three { transform: translate(72px, 164px); background: var(--kalasag-gold); }
 
         .shield-mark {
             position: relative;
             z-index: 2;
-            width: 190px;
-            height: 220px;
+            width: 206px;
+            height: 238px;
             display: grid;
             place-items: center;
             text-align: center;
             color: #ffffff;
-            background: linear-gradient(150deg, #12324a 0%, #0f8b8d 100%);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.14), transparent 35%),
+                linear-gradient(150deg, var(--kalasag-navy) 0%, var(--kalasag-teal) 100%);
             clip-path: polygon(50% 0%, 91% 16%, 84% 67%, 50% 100%, 16% 67%, 9% 16%);
-            filter: drop-shadow(0 28px 38px rgba(18, 50, 74, 0.28));
+            filter: drop-shadow(0 30px 42px rgba(18,50,74,.30));
+            transition: transform .18s ease-out;
+            animation: shieldFloat 5s ease-in-out infinite;
+        }
+
+        .shield-mark::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255,255,255,.18);
+            clip-path: inherit;
         }
 
         .shield-mark strong {
+            position: relative;
             display: block;
             margin-top: 8px;
             font-size: 2.15rem;
             line-height: 1;
-            letter-spacing: -0.06em;
+            letter-spacing: -.06em;
         }
 
         .shield-mark span {
+            position: relative;
             display: block;
-            margin-top: 8px;
-            font-size: 0.64rem;
-            letter-spacing: 0.16em;
+            margin-top: 9px;
+            font-size: .62rem;
+            letter-spacing: .16em;
             text-transform: uppercase;
-            opacity: 0.88;
+            opacity: .88;
         }
 
         .security-chip {
             position: absolute;
             z-index: 3;
-            padding: 9px 13px;
-            border: 1px solid rgba(15, 139, 141, 0.16);
+            padding: 10px 14px;
+            border: 1px solid rgba(15,139,141,.18);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 12px 32px rgba(18, 50, 74, 0.08);
-            font-size: 0.78rem;
-            font-weight: 700;
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.88);
+            box-shadow: 0 14px 34px rgba(18,50,74,.10);
+            color: var(--kalasag-navy);
+            font-size: .78rem;
+            font-weight: 800;
+            backdrop-filter: blur(14px);
+            animation: chipFloat 4.5s ease-in-out infinite;
         }
 
-        .security-chip.one { top: 42px; right: 8px; }
-        .security-chip.two { bottom: 70px; left: 0; }
-        .security-chip.three { bottom: 22px; right: 22px; }
+        .security-chip.one { top: 56px; right: 0; }
+        .security-chip.two { bottom: 92px; left: -6px; animation-delay: -1.4s; }
+        .security-chip.three { bottom: 30px; right: 22px; animation-delay: -2.5s; }
+
+        /* ---------- Moving trust strip ---------- */
+
+        .trust-strip {
+            overflow: hidden;
+            border-top: 1px solid var(--kalasag-border);
+            border-bottom: 1px solid var(--kalasag-border);
+            background: #ffffff;
+        }
+
+        .trust-track {
+            width: max-content;
+            display: flex;
+            gap: 46px;
+            padding: 15px 0;
+            animation: marquee 24s linear infinite;
+        }
+
+        .trust-track span {
+            color: var(--kalasag-muted);
+            font-size: .78rem;
+            font-weight: 850;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .trust-track span::before {
+            content: "◆";
+            margin-right: 12px;
+            color: var(--kalasag-teal);
+            font-size: .56rem;
+        }
+
+        /* ---------- Impact ---------- */
 
         .impact-strip {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
-            margin-top: 30px;
+            margin-top: 32px;
         }
 
         .impact-item {
-            padding: 22px;
-            border: 1px solid var(--border, #dfe5ee);
-            border-radius: 16px;
-            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            padding: 26px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 18px;
+            background: rgba(255,255,255,.92);
+            box-shadow: var(--shadow-soft);
+            transition: transform .25s ease, border-color .25s ease;
+        }
+
+        .impact-item::after {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            right: -45px;
+            bottom: -45px;
+            border-radius: 50%;
+            background: rgba(15,139,141,.08);
+            transition: transform .35s ease;
+        }
+
+        .impact-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(15,139,141,.32);
+        }
+
+        .impact-item:hover::after {
+            transform: scale(1.35);
         }
 
         .impact-item strong {
             display: block;
-            margin-bottom: 6px;
-            color: #0f8b8d;
-            font-size: 1.35rem;
+            margin-bottom: 7px;
+            color: var(--kalasag-teal);
+            font-size: 1.45rem;
         }
 
         .impact-item span {
-            color: var(--text-muted, #526079);
-            font-size: 0.92rem;
+            color: var(--kalasag-muted);
+            font-size: .93rem;
+            line-height: 1.55;
         }
 
-        .privacy-banner {
+        /* ---------- Benefit and module cards ---------- */
+
+        .benefit-card,
+        .module-preview {
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition:
+                transform .18s ease-out,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .benefit-card::before,
+        .module-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            background:
+                radial-gradient(
+                    420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    rgba(88,209,200,.16),
+                    transparent 42%
+                );
+            transition: opacity .25s ease;
+        }
+
+        .benefit-card:hover::before,
+        .module-preview:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:hover,
+        .module-preview:hover {
+            border-color: rgba(15,139,141,.34);
+            box-shadow: 0 26px 58px rgba(18,50,74,.12);
+        }
+
+        .benefit-card > *,
+        .module-preview > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-preview a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap .22s ease;
+        }
+
+        .module-preview a:hover {
+            gap: 13px;
+        }
+
+        /* ---------- Interactive scanner ---------- */
+
+        .scanner-wrap {
+            position: relative;
+            overflow: hidden;
             display: grid;
-            grid-template-columns: 0.7fr 1.3fr;
-            gap: 36px;
+            grid-template-columns: .82fr 1.18fr;
+            gap: 38px;
             align-items: center;
             padding: 42px;
-            border-radius: 22px;
-            background: linear-gradient(135deg, #12324a, #0f8b8d);
+            border-radius: 26px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(88,209,200,.20), transparent 31%),
+                linear-gradient(135deg, var(--kalasag-deep), var(--kalasag-navy));
+            color: #ffffff;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .scanner-copy h2 {
+            margin-top: 10px;
+            color: #ffffff;
+        }
+
+        .scanner-copy p {
+            color: rgba(255,255,255,.78);
+        }
+
+        .scanner-copy .eyebrow {
+            color: #bceced;
+        }
+
+        .scanner-panel {
+            position: relative;
+            padding: 26px;
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 20px;
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(14px);
+        }
+
+        .scanner-panel::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -2px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--kalasag-aqua), transparent);
+            animation: scannerLine 2.8s linear infinite;
+        }
+
+        .message-card {
+            padding: 20px;
+            border-radius: 14px;
+            background: #ffffff;
+            color: var(--kalasag-navy);
+            box-shadow: 0 18px 36px rgba(0,0,0,.16);
+        }
+
+        .message-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 11px;
+            color: var(--kalasag-muted);
+            font-size: .75rem;
+            font-weight: 800;
+        }
+
+        .message-card strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .scanner-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .scanner-button {
+            min-height: 46px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 12px;
+            background: rgba(255,255,255,.08);
+            color: #ffffff;
+            font: inherit;
+            font-weight: 850;
+            cursor: pointer;
+            transition: transform .2s ease, background .2s ease;
+        }
+
+        .scanner-button:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,.14);
+        }
+
+        .scanner-feedback {
+            min-height: 72px;
+            margin-top: 14px;
+            padding: 15px 17px;
+            border-radius: 12px;
+            background: rgba(255,255,255,.08);
+            color: rgba(255,255,255,.88);
+            line-height: 1.5;
+        }
+
+        .scanner-feedback.good {
+            background: rgba(88,209,200,.18);
+            color: #d8fffa;
+        }
+
+        .scanner-feedback.alert {
+            background: rgba(217,107,101,.18);
+            color: #ffe4e1;
+        }
+
+        /* ---------- Comparison ---------- */
+
+        .comparison-card {
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ---------- Privacy banner ---------- */
+
+        .privacy-banner {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: .72fr 1.28fr;
+            gap: 38px;
+            align-items: center;
+            padding: 44px;
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(255,255,255,.12), transparent 30%),
+                linear-gradient(135deg, var(--kalasag-navy), var(--kalasag-teal));
+            color: #ffffff;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .privacy-banner::after {
+            content: "";
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            right: -100px;
+            bottom: -120px;
+            border: 1px solid rgba(255,255,255,.16);
+            border-radius: 50%;
+        }
+
+        .privacy-banner h2 {
             color: #ffffff;
         }
 
         .privacy-banner p {
-            color: rgba(255,255,255,0.82);
+            color: rgba(255,255,255,.82);
         }
 
         .privacy-banner .eyebrow {
@@ -203,6 +694,8 @@
         }
 
         .privacy-list {
+            position: relative;
+            z-index: 2;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px;
@@ -212,358 +705,818 @@
         }
 
         .privacy-list li {
-            padding: 14px 16px;
-            border: 1px solid rgba(255,255,255,0.16);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.08);
+            padding: 15px 16px;
+            border: 1px solid rgba(255,255,255,.16);
+            border-radius: 13px;
+            background: rgba(255,255,255,.08);
+            transition: transform .22s ease, background .22s ease;
         }
 
-        @media (max-width: 900px) {
-            .hero { min-height: auto; padding: 64px 0; }
-            .hero-grid { grid-template-columns: 1fr; gap: 38px; }
-            .hero-card.kalasag-visual { min-height: 320px; }
-            .shield-ring { width: 270px; height: 270px; }
-            .shield-mark { width: 165px; height: 190px; }
-            .impact-strip { grid-template-columns: 1fr; }
-            .privacy-banner { grid-template-columns: 1fr; }
+        .privacy-list li:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,.13);
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: clamp(2.15rem, 12vw, 3.15rem); }
-            .hero-description { font-size: 1rem; }
-            .hero-actions { gap: 10px; }
-            .hero-actions .button { width: 100%; text-align: center; }
-            .hero-card.kalasag-visual { min-height: 285px; }
-            .security-chip { font-size: 0.7rem; }
-            .privacy-list { grid-template-columns: 1fr; }
-            .privacy-banner { padding: 30px 22px; }
+        /* ---------- CTA ---------- */
+
+        .call-to-action {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .call-to-action::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(88,209,200,.14), transparent 28%),
+                radial-gradient(circle at 80% 70%, rgba(82,124,197,.18), transparent 32%);
+        }
+
+        .call-to-action-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------- Keyframes ---------- */
+
+        @keyframes floatBlob {
+            from { transform: translate3d(-20px, -8px, 0) scale(.96); }
+            to { transform: translate3d(34px, 22px, 0) scale(1.06); }
+        }
+
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(88,209,200,.45); }
+            70% { box-shadow: 0 0 0 9px rgba(88,209,200,0); }
+            100% { box-shadow: 0 0 0 0 rgba(88,209,200,0); }
+        }
+
+        @keyframes textShimmer {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes slowSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes reverseSpin {
+            to { transform: rotate(-360deg); }
+        }
+
+        @keyframes shieldFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes chipFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @keyframes marquee {
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes scannerLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ---------- Responsive ---------- */
+
+        @media (max-width: 960px) {
+            .hero {
+                min-height: auto;
+                padding: 68px 0;
+            }
+
+            .hero-grid,
+            .scanner-wrap {
+                grid-template-columns: 1fr;
+                gap: 42px;
+            }
+
+            .hero-card.kalasag-visual {
+                min-height: 390px;
+            }
+
+            .privacy-banner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .hero h1 {
+                font-size: clamp(2.5rem, 13vw, 4rem);
+            }
+
+            .hero-metrics {
+                gap: 18px;
+            }
+
+            .impact-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .scanner-wrap {
+                padding: 30px 22px;
+            }
+
+            .privacy-list {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-banner {
+                padding: 32px 22px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .hero {
+                padding-top: 54px;
+            }
+
+            .hero-actions .button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-card.kalasag-visual {
+                min-height: 320px;
+            }
+
+            .shield-ring {
+                width: 280px;
+                height: 280px;
+            }
+
+            .shield-mark {
+                width: 172px;
+                height: 198px;
+            }
+
+            .security-chip {
+                font-size: .68rem;
+            }
+
+            .security-chip.one { top: 38px; right: 0; }
+            .security-chip.two { bottom: 72px; left: 0; }
+            .security-chip.three { bottom: 24px; right: 2px; }
+
+            .scanner-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header class="site-header">
-        <nav class="container navigation">
-            <a class="logo" href="index.html" aria-label="KALASAG home">
-                KALASAG
-            </a>
+<header class="site-header">
+    <nav class="container navigation">
+        <a class="logo" href="index.html" aria-label="KALASAG home">
+            KALASAG
+        </a>
 
-            <button
-                class="menu-button"
-                id="menuButton"
-                type="button"
-                aria-label="Open navigation menu"
-                aria-expanded="false"
-                aria-controls="navLinks"
-            >
-                ☰
-            </button>
+        <button
+            class="menu-button"
+            id="menuButton"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            ☰
+        </button>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="modules.html">Modules</a></li>
-                <li><a href="assessment.html">Assessment</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
-    </header>
+        <ul class="nav-links" id="navLinks">
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="modules.html">Modules</a></li>
+            <li><a href="assessment.html">Assessment</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <p class="eyebrow">
-                        Data Privacy • Account Security • Digital Safety
-                    </p>
+<main>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content reveal is-visible">
+                <p class="eyebrow">
+                    Data Privacy • Account Security • Digital Safety
+                </p>
 
-                    <h1>
-                        Protect your data.
-                        <span class="hero-accent">Secure your digital life.</span>
-                    </h1>
+                <h1>
+                    Protect your data.
+                    <span class="hero-accent">Secure your digital life.</span>
+                </h1>
 
-                    <p class="hero-description">
-                        <strong>KALASAG</strong> helps senior high school students protect personal information,
-                        secure online accounts, recognize digital threats, and respond confidently when something goes wrong.
-                    </p>
+                <p class="hero-description">
+                    <strong>KALASAG</strong> helps senior high school students protect
+                    personal information, secure online accounts, recognize digital
+                    threats, and respond confidently when something goes wrong.
+                </p>
 
-                    <div class="hero-actions">
-                        <a class="button primary-button" href="module1.html">
-                            Start Learning
-                        </a>
+                <div class="hero-actions">
+                    <a class="button primary-button" href="module1.html">
+                        Start Learning
+                    </a>
 
-                        <a class="button secondary-button" href="#why-kalasag">
-                            Explore KALASAG
-                        </a>
-                    </div>
-                </div>
-
-                <div class="hero-card kalasag-visual" aria-label="KALASAG digital protection framework">
-                    <div class="shield-ring"></div>
-                    <div class="shield-mark">
-                        <div>
-                            <strong>KALASAG</strong>
-                            <span>Digital Protection</span>
-                        </div>
-                    </div>
-                    <span class="security-chip one">Protect Data</span>
-                    <span class="security-chip two">Secure Accounts</span>
-                    <span class="security-chip three">Spot Threats</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- What KALASAG Means -->
-        <section class="section alternate-section" id="why-kalasag">
-            <div class="container">
-                <div class="section-heading centered-heading">
-                    <p class="eyebrow">What KALASAG Stands For</p>
-
-                    <h2>
-                        Keeping Accounts, Learner Data, and Security Awareness Guarded.
-                    </h2>
-
-                    <p>
-                        KALASAG is built around one practical goal: helping learners make safer choices whenever they sign in, share, upload, click, or communicate online.
-                    </p>
-                </div>
-
-                <div class="impact-strip">
-                    <article class="impact-item">
-                        <strong>Protect</strong>
-                        <span>Know which information is personal, sensitive, or confidential.</span>
-                    </article>
-
-                    <article class="impact-item">
-                        <strong>Prevent</strong>
-                        <span>Use stronger account habits and recognize suspicious digital activity.</span>
-                    </article>
-
-                    <article class="impact-item">
-                        <strong>Respond</strong>
-                        <span>Take calm, timely action when an account or private information is at risk.</span>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Why It Matters -->
-        <section class="section">
-            <div class="container">
-                <div class="section-heading centered-heading">
-                    <p class="eyebrow">Why Digital Protection Matters</p>
-
-                    <h2>
-                        Every click, upload, login, and message can reveal something about you.
-                    </h2>
-
-                    <p>
-                        Digital safety is not only about avoiding hackers. It is also about controlling what you share, understanding where your data goes, and knowing how to act when a digital situation feels unsafe.
-                    </p>
-                </div>
-
-                <div class="card-grid">
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">01</div>
-                        <h3>Know Your Data</h3>
-                        <p>Identify personal, sensitive, confidential, and publicly shareable information.</p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">02</div>
-                        <h3>Lock Down Accounts</h3>
-                        <p>Use passphrases, multi-factor authentication, secure recovery options, and device protection.</p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">03</div>
-                        <h3>Spot the Trap</h3>
-                        <p>Recognize phishing, fake links, impersonation, urgent requests, and social engineering.</p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">04</div>
-                        <h3>Share with Care</h3>
-                        <p>Make smarter choices about posts, images, locations, files, app permissions, and cloud access.</p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">05</div>
-                        <h3>Protect Data in AI</h3>
-                        <p>Remove identifiers and avoid uploading private or confidential information to AI platforms.</p>
-                    </article>
-
-                    <article class="benefit-card">
-                        <div class="card-icon" aria-hidden="true">06</div>
-                        <h3>Recover Smart</h3>
-                        <p>Know what to do after a suspicious message, account compromise, or privacy incident.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Safe vs Risky Choices -->
-        <section class="section alternate-section">
-            <div class="container">
-                <div class="section-heading centered-heading">
-                    <p class="eyebrow">Choose the Safer Action</p>
-
-                    <h2>
-                        Good digital security is built through everyday decisions.
-                    </h2>
-                </div>
-
-                <div class="comparison-grid">
-                    <article class="comparison-card responsible-card">
-                        <h3>Safer Digital Habits</h3>
-                        <ul>
-                            <li>Use unique passphrases for important accounts.</li>
-                            <li>Turn on multi-factor authentication.</li>
-                            <li>Check the sender and link before clicking.</li>
-                            <li>Review app permissions and privacy settings.</li>
-                            <li>Remove personal details before sharing files or prompts.</li>
-                        </ul>
-                    </article>
-
-                    <article class="comparison-card irresponsible-card">
-                        <h3>Risky Digital Habits</h3>
-                        <ul>
-                            <li>Reuse one password across several accounts.</li>
-                            <li>Respond immediately to urgent or threatening messages.</li>
-                            <li>Post private information publicly.</li>
-                            <li>Allow every app permission without checking.</li>
-                            <li>Upload confidential documents to unfamiliar platforms.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Learning Journey Preview -->
-        <section class="section">
-            <div class="container">
-                <div class="section-heading centered-heading">
-                    <p class="eyebrow">The KALASAG Learning Journey</p>
-
-                    <h2>
-                        Six focused modules for safer digital participation.
-                    </h2>
-                </div>
-
-                <div class="module-preview-grid">
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">01</div>
-                        <span class="module-number">Module 1</span>
-                        <h3>Your Data, Your Identity</h3>
-                        <p>Understand personal information, consent, data collection, and digital footprints.</p>
-                        <a href="module1.html">Open Module 1 →</a>
-                    </article>
-
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">02</div>
-                        <span class="module-number">Module 2</span>
-                        <h3>Lock It Down</h3>
-                        <p>Strengthen passwords, authentication, recovery options, and device security.</p>
-                        <a href="module2.html">Open Module 2 →</a>
-                    </article>
-
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">03</div>
-                        <span class="module-number">Module 3</span>
-                        <h3>Spot the Trap</h3>
-                        <p>Analyze phishing, scams, suspicious links, impersonation, and social engineering.</p>
-                        <a href="module3.html">Open Module 3 →</a>
-                    </article>
-
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">04</div>
-                        <span class="module-number">Module 4</span>
-                        <h3>Share with Care</h3>
-                        <p>Manage social media, app permissions, location sharing, images, and cloud files.</p>
-                        <a href="module4.html">Open Module 4 →</a>
-                    </article>
-
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">05</div>
-                        <span class="module-number">Module 5</span>
-                        <h3>Privacy in the Age of AI</h3>
-                        <p>Use AI tools without exposing personal, school, family, or third-party information.</p>
-                        <a href="module5.html">Open Module 5 →</a>
-                    </article>
-
-                    <article class="module-preview">
-                        <div class="card-icon" aria-hidden="true">06</div>
-                        <span class="module-number">Module 6</span>
-                        <h3>Act Fast, Recover Smart</h3>
-                        <p>Respond to compromised accounts, suspicious activity, and unauthorized disclosure.</p>
-                        <a href="module6.html">Open Module 6 →</a>
-                    </article>
-                </div>
-
-                <div class="centered-action">
-                    <a class="button primary-button" href="modules.html">
-                        Explore All Modules
+                    <a class="button secondary-button" href="#threat-scanner">
+                        Try the Threat Scanner
                     </a>
                 </div>
-            </div>
-        </section>
 
-        <!-- Privacy Promise -->
-        <section class="section alternate-section">
-            <div class="container">
-                <div class="privacy-banner">
-                    <div>
-                        <p class="eyebrow">KALASAG Privacy Promise</p>
-                        <h2>Learn safely without giving away sensitive information.</h2>
-                        <p>
-                            KALASAG uses fictional scenarios and does not ask learners to submit real passwords, identification numbers, private files, or confidential account information.
-                        </p>
+                <div class="hero-metrics" aria-label="KALASAG learning experience highlights">
+                    <div class="hero-metric">
+                        <strong class="counter" data-target="6">0</strong>
+                        <span>Focused modules</span>
                     </div>
 
-                    <ul class="privacy-list">
-                        <li>No real passwords</li>
-                        <li>No private documents</li>
-                        <li>No unnecessary personal data</li>
-                        <li>No public sharing of learner responses</li>
-                    </ul>
+                    <div class="hero-metric">
+                        <strong class="counter" data-target="18">0</strong>
+                        <span>Assessment scenarios</span>
+                    </div>
+
+                    <div class="hero-metric">
+                        <strong><span class="counter" data-target="80">0</span>%</strong>
+                        <span>Mastery target</span>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Call to Action -->
-        <section class="call-to-action">
-            <div class="container call-to-action-content">
-                <p class="eyebrow">Build Your Digital Shield</p>
+            <div
+                class="hero-card kalasag-visual reveal reveal-delay-1 is-visible"
+                id="shieldVisual"
+                aria-label="KALASAG digital protection framework"
+            >
+                <div class="visual-grid"></div>
+                <div class="shield-ring"></div>
+
+                <span class="orbit-dot one"></span>
+                <span class="orbit-dot two"></span>
+                <span class="orbit-dot three"></span>
+
+                <div class="shield-mark" id="shieldMark">
+                    <div>
+                        <strong>KALASAG</strong>
+                        <span>Digital Protection</span>
+                    </div>
+                </div>
+
+                <span class="security-chip one">Protect Data</span>
+                <span class="security-chip two">Secure Accounts</span>
+                <span class="security-chip three">Spot Threats</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="trust-strip" aria-hidden="true">
+        <div class="trust-track">
+            <span>Think before you click</span>
+            <span>Protect personal data</span>
+            <span>Use stronger passphrases</span>
+            <span>Verify before sharing</span>
+            <span>Secure your accounts</span>
+            <span>Act fast when something goes wrong</span>
+            <span>Think before you click</span>
+            <span>Protect personal data</span>
+            <span>Use stronger passphrases</span>
+            <span>Verify before sharing</span>
+            <span>Secure your accounts</span>
+            <span>Act fast when something goes wrong</span>
+        </div>
+    </div>
+
+    <section class="section alternate-section" id="why-kalasag">
+        <div class="container">
+            <div class="section-heading centered-heading reveal">
+                <p class="eyebrow">What KALASAG Stands For</p>
 
                 <h2>
-                    Small security habits can protect what matters most.
+                    Keeping Accounts, Learner Data, and Security Awareness Guarded.
                 </h2>
 
                 <p>
-                    Begin with the initial assessment, discover your current habits, and start strengthening your personal KALASAG.
+                    KALASAG is built around one practical goal: helping learners
+                    make safer choices whenever they sign in, share, upload, click,
+                    or communicate online.
                 </p>
+            </div>
 
+            <div class="impact-strip">
+                <article class="impact-item reveal">
+                    <strong>Protect</strong>
+                    <span>
+                        Know which information is personal, sensitive, or confidential.
+                    </span>
+                </article>
+
+                <article class="impact-item reveal reveal-delay-1">
+                    <strong>Prevent</strong>
+                    <span>
+                        Use stronger account habits and recognize suspicious digital activity.
+                    </span>
+                </article>
+
+                <article class="impact-item reveal reveal-delay-2">
+                    <strong>Respond</strong>
+                    <span>
+                        Take calm, timely action when an account or private information is at risk.
+                    </span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading centered-heading reveal">
+                <p class="eyebrow">Why Digital Protection Matters</p>
+
+                <h2>
+                    Every click, upload, login, and message can reveal something about you.
+                </h2>
+
+                <p>
+                    Digital safety is not only about avoiding hackers. It is also
+                    about controlling what you share, understanding where your data
+                    goes, and knowing how to act when a digital situation feels unsafe.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <article class="benefit-card reveal tilt-card">
+                    <div class="card-icon" aria-hidden="true">01</div>
+                    <h3>Know Your Data</h3>
+                    <p>
+                        Identify personal, sensitive, confidential, and publicly
+                        shareable information.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal reveal-delay-1 tilt-card">
+                    <div class="card-icon" aria-hidden="true">02</div>
+                    <h3>Lock Down Accounts</h3>
+                    <p>
+                        Use passphrases, multi-factor authentication, secure recovery
+                        options, and device protection.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal reveal-delay-2 tilt-card">
+                    <div class="card-icon" aria-hidden="true">03</div>
+                    <h3>Spot the Trap</h3>
+                    <p>
+                        Recognize phishing, fake links, impersonation, urgent requests,
+                        and social engineering.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal tilt-card">
+                    <div class="card-icon" aria-hidden="true">04</div>
+                    <h3>Share with Care</h3>
+                    <p>
+                        Make smarter choices about posts, images, locations, files,
+                        app permissions, and cloud access.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal reveal-delay-1 tilt-card">
+                    <div class="card-icon" aria-hidden="true">05</div>
+                    <h3>Protect Data in AI</h3>
+                    <p>
+                        Remove identifiers and avoid uploading private or confidential
+                        information to AI platforms.
+                    </p>
+                </article>
+
+                <article class="benefit-card reveal reveal-delay-2 tilt-card">
+                    <div class="card-icon" aria-hidden="true">06</div>
+                    <h3>Recover Smart</h3>
+                    <p>
+                        Know what to do after a suspicious message, account compromise,
+                        or privacy incident.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section" id="threat-scanner">
+        <div class="container">
+            <div class="scanner-wrap reveal">
+                <div class="scanner-copy">
+                    <p class="eyebrow">Interactive Preview</p>
+
+                    <h2>Run a quick threat scan.</h2>
+
+                    <p>
+                        Read the message and decide whether it is safe or suspicious.
+                        This is the kind of real-world decision you will practice
+                        throughout KALASAG.
+                    </p>
+
+                    <a
+                        class="button light-button"
+                        href="module3.html"
+                        style="margin-top:10px;"
+                    >
+                        Learn More in Module 3
+                    </a>
+                </div>
+
+                <div class="scanner-panel">
+                    <div class="message-card">
+                        <div class="message-meta">
+                            <span>From: school-support.verify@gmail.com</span>
+                            <span>10:42 AM</span>
+                        </div>
+
+                        <strong>URGENT: Your school account will be deleted.</strong>
+
+                        <p style="margin:0;color:var(--kalasag-muted);">
+                            Sign in within 10 minutes using the link below to keep
+                            your account active.
+                        </p>
+                    </div>
+
+                    <div class="scanner-actions">
+                        <button class="scanner-button" type="button" data-scan="safe">
+                            Looks Safe
+                        </button>
+
+                        <button class="scanner-button" type="button" data-scan="suspicious">
+                            Looks Suspicious
+                        </button>
+                    </div>
+
+                    <div
+                        class="scanner-feedback"
+                        id="scannerFeedback"
+                        aria-live="polite"
+                    >
+                        Choose an answer to reveal the warning signs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-heading centered-heading reveal">
+                <p class="eyebrow">The KALASAG Learning Journey</p>
+
+                <h2>
+                    Six focused modules for safer digital participation.
+                </h2>
+            </div>
+
+            <div class="module-preview-grid">
+                <article class="module-preview reveal tilt-card">
+                    <div class="card-icon" aria-hidden="true">01</div>
+                    <span class="module-number">Module 1</span>
+                    <h3>Your Data, Your Identity</h3>
+                    <p>
+                        Understand personal information, consent, data collection,
+                        and digital footprints.
+                    </p>
+                    <a href="module1.html">Open Module 1 →</a>
+                </article>
+
+                <article class="module-preview reveal reveal-delay-1 tilt-card">
+                    <div class="card-icon" aria-hidden="true">02</div>
+                    <span class="module-number">Module 2</span>
+                    <h3>Lock It Down</h3>
+                    <p>
+                        Strengthen passwords, authentication, recovery options,
+                        and device security.
+                    </p>
+                    <a href="module2.html">Open Module 2 →</a>
+                </article>
+
+                <article class="module-preview reveal reveal-delay-2 tilt-card">
+                    <div class="card-icon" aria-hidden="true">03</div>
+                    <span class="module-number">Module 3</span>
+                    <h3>Spot the Trap</h3>
+                    <p>
+                        Analyze phishing, scams, suspicious links, impersonation,
+                        and social engineering.
+                    </p>
+                    <a href="module3.html">Open Module 3 →</a>
+                </article>
+
+                <article class="module-preview reveal tilt-card">
+                    <div class="card-icon" aria-hidden="true">04</div>
+                    <span class="module-number">Module 4</span>
+                    <h3>Share with Care</h3>
+                    <p>
+                        Manage social media, app permissions, location sharing,
+                        images, and cloud files.
+                    </p>
+                    <a href="module4.html">Open Module 4 →</a>
+                </article>
+
+                <article class="module-preview reveal reveal-delay-1 tilt-card">
+                    <div class="card-icon" aria-hidden="true">05</div>
+                    <span class="module-number">Module 5</span>
+                    <h3>Privacy in the Age of AI</h3>
+                    <p>
+                        Use AI tools without exposing personal, school, family,
+                        or third-party information.
+                    </p>
+                    <a href="module5.html">Open Module 5 →</a>
+                </article>
+
+                <article class="module-preview reveal reveal-delay-2 tilt-card">
+                    <div class="card-icon" aria-hidden="true">06</div>
+                    <span class="module-number">Module 6</span>
+                    <h3>Act Fast, Recover Smart</h3>
+                    <p>
+                        Respond to compromised accounts, suspicious activity,
+                        and unauthorized disclosure.
+                    </p>
+                    <a href="module6.html">Open Module 6 →</a>
+                </article>
+            </div>
+
+            <div class="centered-action reveal">
+                <a class="button primary-button" href="modules.html">
+                    Explore All Modules
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alternate-section">
+        <div class="container">
+            <div class="section-heading centered-heading reveal">
+                <p class="eyebrow">Choose the Safer Action</p>
+
+                <h2>
+                    Good digital security is built through everyday decisions.
+                </h2>
+            </div>
+
+            <div class="comparison-grid">
+                <article class="comparison-card responsible-card reveal">
+                    <h3>Safer Digital Habits</h3>
+                    <ul>
+                        <li>Use unique passphrases for important accounts.</li>
+                        <li>Turn on multi-factor authentication.</li>
+                        <li>Check the sender and link before clicking.</li>
+                        <li>Review app permissions and privacy settings.</li>
+                        <li>Remove personal details before sharing files or prompts.</li>
+                    </ul>
+                </article>
+
+                <article class="comparison-card irresponsible-card reveal reveal-delay-1">
+                    <h3>Risky Digital Habits</h3>
+                    <ul>
+                        <li>Reuse one password across several accounts.</li>
+                        <li>Respond immediately to urgent or threatening messages.</li>
+                        <li>Post private information publicly.</li>
+                        <li>Allow every app permission without checking.</li>
+                        <li>Upload confidential documents to unfamiliar platforms.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="privacy-banner reveal">
+                <div>
+                    <p class="eyebrow">KALASAG Privacy Promise</p>
+
+                    <h2>
+                        Learn safely without giving away sensitive information.
+                    </h2>
+
+                    <p>
+                        KALASAG uses fictional scenarios and does not ask learners
+                        to submit real passwords, identification numbers, private
+                        files, or confidential account information.
+                    </p>
+                </div>
+
+                <ul class="privacy-list">
+                    <li>No real passwords</li>
+                    <li>No private documents</li>
+                    <li>No unnecessary personal data</li>
+                    <li>No public sharing of learner responses</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container call-to-action-content reveal">
+            <p class="eyebrow">Build Your Digital Shield</p>
+
+            <h2>
+                Small security habits can protect what matters most.
+            </h2>
+
+            <p>
+                Start the first module, explore the learning journey, and complete
+                the final assessment when you are ready.
+            </p>
+
+            <div class="hero-actions" style="justify-content:center;">
                 <a class="button light-button" href="module1.html">
                     Begin Module 1
                 </a>
-            </div>
-        </section>
-    </main>
 
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <div>
-                <strong>KALASAG</strong>
-                <p>
-                    Keeping Accounts, Learner Data, and Security Awareness Guarded.
-                </p>
+                <a
+                    class="button secondary-button"
+                    href="assessment.html"
+                    style="border-color:rgba(255,255,255,.62);color:#fff;"
+                >
+                    View Assessment
+                </a>
             </div>
-
-            <p>&copy; 2026 KALASAG by Ctrl+EDU</p>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script src="js/script.js"></script>
+<footer class="site-footer">
+    <div class="container footer-content">
+        <div>
+            <strong>KALASAG</strong>
+
+            <p>
+                Keeping Accounts, Learner Data, and Security Awareness Guarded.
+            </p>
+        </div>
+
+        <p>&copy; 2026 KALASAG by Ctrl+EDU</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+"use strict";
+
+const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+/* Scroll reveal */
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window && !reducedMotion) {
+    const revealObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.12 }
+    );
+
+    revealElements.forEach(element => {
+        if (!element.classList.contains("is-visible")) {
+            revealObserver.observe(element);
+        }
+    });
+} else {
+    revealElements.forEach(element => element.classList.add("is-visible"));
+}
+
+/* Animated counters */
+const counters = document.querySelectorAll(".counter");
+
+function animateCounter(element) {
+    const target = Number(element.dataset.target);
+    const duration = 1000;
+    const start = performance.now();
+
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        element.textContent = String(Math.round(target * eased));
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+if ("IntersectionObserver" in window && !reducedMotion) {
+    const counterObserver = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.6 }
+    );
+
+    counters.forEach(counter => counterObserver.observe(counter));
+} else {
+    counters.forEach(counter => {
+        counter.textContent = counter.dataset.target;
+    });
+}
+
+/* Shield parallax */
+const shieldVisual = document.getElementById("shieldVisual");
+const shieldMark = document.getElementById("shieldMark");
+
+if (shieldVisual && shieldMark && !reducedMotion) {
+    shieldVisual.addEventListener("pointermove", event => {
+        const rect = shieldVisual.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+
+        shieldMark.style.transform =
+            `rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-5px)`;
+    });
+
+    shieldVisual.addEventListener("pointerleave", () => {
+        shieldMark.style.transform = "";
+    });
+}
+
+/* Card tilt and glow */
+document.querySelectorAll(".tilt-card").forEach(card => {
+    if (reducedMotion) {
+        return;
+    }
+
+    card.addEventListener("pointermove", event => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - .5) * 6;
+        const rotateX = ((y / rect.height) - .5) * -6;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+        card.style.transform =
+            `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+    });
+});
+
+/* Interactive threat scanner */
+const scannerButtons = document.querySelectorAll("[data-scan]");
+const scannerFeedback = document.getElementById("scannerFeedback");
+
+scannerButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const choice = button.dataset.scan;
+
+        scannerButtons.forEach(item => {
+            item.setAttribute("aria-pressed", String(item === button));
+        });
+
+        if (choice === "suspicious") {
+            scannerFeedback.className = "scanner-feedback good";
+            scannerFeedback.innerHTML =
+                "<strong>Correct.</strong> The sender uses a public email address, creates extreme urgency, threatens account loss, and asks you to sign in through an unverified link.";
+        } else {
+            scannerFeedback.className = "scanner-feedback alert";
+            scannerFeedback.innerHTML =
+                "<strong>Look again.</strong> The urgency, threatening language, unusual sender address, and login request are strong phishing warning signs.";
+        }
+    });
+});
+</script>
 </body>
 </html>
