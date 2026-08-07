@@ -763,6 +763,185 @@
             .scroll-reveal { opacity:1; transform:none; }
         }
 
+
+
+        /* ---------- Embedded learning videos ---------- */
+        .concept-video {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: minmax(0, 1.18fr) minmax(260px, .82fr);
+            gap: 0;
+            margin: 30px 0 34px;
+            border: 1px solid var(--kalasag-border);
+            border-radius: 22px;
+            background: #ffffff;
+            box-shadow: 0 18px 46px rgba(18,50,74,.08);
+        }
+
+        .concept-video::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            width: 190px;
+            height: 190px;
+            right: -85px;
+            top: -90px;
+            border-radius: 50%;
+            background: rgba(15,139,141,.08);
+            animation: videoGlow 5s ease-in-out infinite alternate;
+        }
+
+        .video-frame-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+            background: #071d2b;
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #071d2b;
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: inset 0 0 36px rgba(0,0,0,.16);
+        }
+
+        .video-copy {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        .video-kicker {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(15,139,141,.09);
+            color: var(--kalasag-teal);
+            font-size: .7rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .video-kicker::before {
+            content: "▶";
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--kalasag-teal);
+            color: #ffffff;
+            font-size: .62rem;
+            box-shadow: 0 0 0 0 rgba(15,139,141,.28);
+            animation: videoPulse 2.2s infinite;
+        }
+
+        .video-copy h3 {
+            margin: 0 0 10px;
+            color: var(--kalasag-navy);
+            font-size: clamp(1.25rem, 2vw, 1.65rem);
+            letter-spacing: -.025em;
+        }
+
+        .video-copy > p {
+            margin: 0;
+            color: var(--kalasag-muted);
+            line-height: 1.65;
+        }
+
+        .watch-for {
+            margin-top: 18px;
+            padding: 15px 16px;
+            border-left: 4px solid var(--kalasag-teal);
+            border-radius: 11px;
+            background: var(--kalasag-pale);
+        }
+
+        .watch-for strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--kalasag-navy);
+            font-size: .82rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .watch-for p {
+            margin: 0;
+            color: var(--kalasag-muted);
+            font-size: .9rem;
+            line-height: 1.55;
+        }
+
+        .video-source-link {
+            display: inline-flex;
+            margin-top: 16px;
+            color: var(--kalasag-teal);
+            font-size: .82rem;
+            font-weight: 850;
+            text-decoration: none;
+        }
+
+        .video-source-link:hover,
+        .video-source-link:focus {
+            text-decoration: underline;
+        }
+
+        @keyframes videoPulse {
+            0% { box-shadow: 0 0 0 0 rgba(15,139,141,.28); }
+            70% { box-shadow: 0 0 0 9px rgba(15,139,141,0); }
+            100% { box-shadow: 0 0 0 0 rgba(15,139,141,0); }
+        }
+
+        @keyframes videoGlow {
+            from { transform: scale(.92); opacity: .55; }
+            to { transform: scale(1.12); opacity: 1; }
+        }
+
+        @media (max-width: 820px) {
+            .concept-video {
+                grid-template-columns: 1fr;
+            }
+
+            .video-copy {
+                padding: 24px 22px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .concept-video::before,
+            .video-kicker::before {
+                animation: none !important;
+            }
+        }
+
     </style>
 </head>
 
@@ -985,6 +1164,44 @@
                 <p>The same detail can be harmless in one setting and risky in another. Before sharing, consider the information, the audience, the purpose, and what could happen if it were copied or misused.</p>
             </div>
 
+
+
+            <article class="concept-video scroll-reveal" aria-labelledby="video-classify-title">
+                <div class="video-frame-wrap">
+                    <div class="video-frame">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/omHI6FH3YrY?rel=0"
+                            title="Classify information learning video"
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-copy">
+                    <span class="video-kicker">Watch • Learning Goal 1</span>
+                    <h3 id="video-classify-title">Classify information before you share it.</h3>
+                    <p>
+                        Start this section by watching the video, then use the four categories below
+                        to decide how carefully different kinds of information should be handled.
+                    </p>
+
+                    <div class="watch-for">
+                        <strong>Watch for</strong>
+                        <p>
+                            What makes one piece of information more sensitive than another?
+                            Think about identity, possible harm, context, and who is allowed to see it.
+                        </p>
+                    </div>
+
+                    <a class="video-source-link" href="https://www.youtube.com/watch?v=omHI6FH3YrY" target="_blank" rel="noopener noreferrer">
+                        Open video on YouTube ↗
+                    </a>
+                </div>
+            </article>
+
             <div class="data-category-grid">
                 <article class="data-card public">
                     <div class="number">A</div>
@@ -1081,6 +1298,44 @@
                 <p>Information can move through several systems. Even when a form looks simple, your data may be stored, analyzed, shared, copied, or retained.</p>
             </div>
 
+
+
+            <article class="concept-video scroll-reveal" aria-labelledby="video-collection-title">
+                <div class="video-frame-wrap">
+                    <div class="video-frame">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/FADj7QsIjpw?rel=0"
+                            title="Understand data collection learning video"
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-copy">
+                    <span class="video-kicker">Watch • Learning Goal 2</span>
+                    <h3 id="video-collection-title">Understand what happens when data is collected.</h3>
+                    <p>
+                        Watch this before following the data lifecycle. As you watch, connect the ideas
+                        to everyday actions such as filling out a form, installing an app, or allowing a permission.
+                    </p>
+
+                    <div class="watch-for">
+                        <strong>Watch for</strong>
+                        <p>
+                            Notice the different ways data can be gathered and ask: Who collects it,
+                            why do they need it, where might it be stored, and what could happen next?
+                        </p>
+                    </div>
+
+                    <a class="video-source-link" href="https://www.youtube.com/watch?v=FADj7QsIjpw" target="_blank" rel="noopener noreferrer">
+                        Open video on YouTube ↗
+                    </a>
+                </div>
+            </article>
+
             <div class="data-flow" aria-label="Data lifecycle">
                 <div class="flow-step"><strong>1. Collected</strong><span>You enter, upload, click, or allow access.</span></div>
                 <div class="flow-step"><strong>2. Stored</strong><span>The service keeps information on a device or server.</span></div>
@@ -1127,6 +1382,44 @@
                 <h2>Your digital footprint is built from more than posts.</h2>
                 <p>Some traces are visible to you and other users. Others are collected in the background through settings, devices, and services.</p>
             </div>
+
+
+
+            <article class="concept-video scroll-reveal" aria-labelledby="video-identity-title">
+                <div class="video-frame-wrap">
+                    <div class="video-frame">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/yiKeLOKc1tw?rel=0"
+                            title="Protect your digital identity learning video"
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="video-copy">
+                    <span class="video-kicker">Watch • Learning Goal 3</span>
+                    <h3 id="video-identity-title">Protect the identity you build online.</h3>
+                    <p>
+                        Your digital identity is shaped by more than what you intentionally post.
+                        Watch the video, then examine the footprint categories below to see what can reveal information about you.
+                    </p>
+
+                    <div class="watch-for">
+                        <strong>Watch for</strong>
+                        <p>
+                            Which actions can strengthen or weaken your digital identity?
+                            Consider posts, profiles, tags, permissions, accounts, and information shared by other people.
+                        </p>
+                    </div>
+
+                    <a class="video-source-link" href="https://youtu.be/yiKeLOKc1tw?si=2wrmLTHz6XM61uVu" target="_blank" rel="noopener noreferrer">
+                        Open video on YouTube ↗
+                    </a>
+                </div>
+            </article>
 
             <div class="digital-footprint">
                 <article class="footprint-item"><span>01</span><h3>What you share</h3><p>Posts, comments, photos, videos, forms, and files.</p></article>
